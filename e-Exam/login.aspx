@@ -20,7 +20,7 @@
             margin:150px auto;
             width:25%;
         }
-        .auto-style5 {
+        .auto-style5 {  
             height: 50px;
             width:40%;
             text-align: center;
@@ -57,7 +57,7 @@
 
         <tr>
             <td class="auto-style5">
-                <asp:Label ID="uname" runat="server" Text="User Name:"></asp:Label>
+                <asp:Label ID="uname" runat="server" Text="User Name :" ForeColor="White"></asp:Label>
             </td>
             <td class="auto-style1">
                 <asp:TextBox ID="u_input" runat="server"></asp:TextBox>
@@ -65,7 +65,7 @@
         </tr>
         <tr>
             <td class="auto-style5">
-                <asp:Label ID="pswd" runat="server" Text="Password:"></asp:Label>
+                <asp:Label ID="pswd" runat="server" Text="Password :" ForeColor="White"></asp:Label>
             </td>
             <td class="auto-style1">
                 <asp:TextBox ID="p_input" runat="server" TextMode="Password" ></asp:TextBox>
