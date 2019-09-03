@@ -37,10 +37,7 @@
             width:50%;
             text-align: center;
         }
-        .auto-style9 {
-            height: 1058px;
-        }
-    </style>
+        </style>
 </head>
 <body>
     <form id="form1" runat="server">
