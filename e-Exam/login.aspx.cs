@@ -40,7 +40,7 @@ namespace e_Exam
 
             if(dt.Rows.Count > 0)
             {
-                valid.Text = dt.Rows[0][0].ToString();
+                valid.Text = "LogIn Sucssesfully";
             }
             else
             {

@@ -22,15 +22,6 @@ namespace e_Exam {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// s_login control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label s_login;
-        
-        /// <summary>
         /// uname control.
         /// </summary>
         /// <remarks>
@@ -76,6 +67,15 @@ namespace e_Exam {
         protected global::System.Web.UI.WebControls.Button btn_login;
         
         /// <summary>
+        /// valid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label valid;
+        
+        /// <summary>
         /// register control.
         /// </summary>
         /// <remarks>
@@ -92,14 +92,5 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink forgot_pswd;
-        
-        /// <summary>
-        /// valid control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label valid;
     }
 }

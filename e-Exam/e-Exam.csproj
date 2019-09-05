@@ -75,7 +75,10 @@
     </Content>
     <Content Include="App_LocalResources\backgroung.jpg" />
     <Content Include="App_LocalResources\flower.png" />
-    <Content Include="backgroung.jpg" />
+    <Content Include="bg1.png" />
+    <Content Include="bg3.jpg" />
+    <Content Include="bg4.jpg" />
+    <Content Include="bg5.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -84,6 +87,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Forgot_Password.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="lg1.jpg" />
     <Content Include="Registration.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -120,6 +124,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="style.css" />
+    <Content Include="style1.css" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="Scripts\umd\popper.min.js.map" />

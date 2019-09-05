@@ -1,0 +1,92 @@
+﻿body {
+    background-image: url('bg4.jpg');
+    background-size: cover;
+}
+#form1 {
+    margin-left:300px;
+    margin-right:300px;
+    
+    height:850px;
+    width:600px;
+    padding-right:150px;
+    padding-top:30px;
+    padding-bottom:60px;
+    background-color:white;
+    opacity:0.5;
+
+}
+#name_label, #roll_no_label, #mobile_label, #email_label, #dob_label, #qualification_label, #standard_label,
+#department_label, #current_year_label, #address_label, #pswd_label, #confirm_pswd_label {
+    font-weight: bolder;
+    font-family: sans-serif;
+    color: black;
+    font-size: large;
+ 
+}
+#name_input, #roll_no_input, #mobile_input, #email_input, #dob_input, #standard_input, #address_input, #pswd_input,
+#confirm_pswd_input, #standard_drop_down, #Qualification_drop_down, #standard_drop_down, #be_drop_down, #bsc_drop_down,
+#year_drop_down {
+    border: 2px solid black;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    border-color: dodgerblue;
+    height:30px;
+    font-size:20px;
+    box-shadow:0 2px 20px dodgerblue
+}
+
+#submit_btn {
+   
+    border: 2px solid rgba(0,255,0,1);
+    color: green;
+    border-radius: 15px;
+    font-weight: bolder;
+}
+    #submit_btn:hover {
+        box-shadow: 0px 0px 5px rgba(0,255,0,0.5),0px 0px 10px rgba(0,255,0,1);
+        background-color: rgba(0,255,0,0.5);
+    }
+    
+    #cancel_btn {
+        font-weight: bolder;
+        border: 2px solid rgba(255,30,50,1);
+        color: red;
+        border-radius: 15px;
+    }
+        #cancel_btn:hover {
+            box-shadow: 0px 0px 5px rgba(255,30,50,0.5),0px 0px 10px rgba(255,30,50,1);
+            background-color: rgba(255,30,50,0.5);
+        }
+
+    .auto-style6 {
+        width: 643px;
+        margin-left: 238px;
+        margin-right: 0px;
+    }
+
+.auto-style1 {
+    width: auto;
+    height:auto;
+   
+}
+
+.auto-style2 {
+    width: 44%;
+    height: 40px;
+    padding-left: 200px;
+    text-align: left;
+}
+
+.auto-style3 {
+    padding-left: 5px;
+    height: 40px;
+    text-align: left;
+}
+
+.auto-style5 {
+ 
+    text-align: center;
+    height: 40px;
+}
+      
