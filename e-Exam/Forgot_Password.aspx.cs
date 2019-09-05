@@ -38,20 +38,22 @@ namespace e_Exam
 
             if (dt.Rows.Count > 0)
             {
+                username = dt.Rows[0][0].ToString();
+                password = dt.Rows[0][1].ToString();
                 try
                 {
                     MailMessage msg = new MailMessage();
-                    msg.From = new MailAddress("");//Your Email ID  
+                    msg.From = new MailAddress("help.eexam@gmail.com");//Your Email ID  
                     msg.To.Add(email_input.Text);
                     msg.Subject = " Recover your Password";
-                    msg.Body = ("Your Username is:" + username + "<br/><br/>" + "Your Password is:" + password);
+                    msg.Body = ("Your Username is: " + username + "<br/><br/>" + "Your Password is: " + password);
                     msg.IsBodyHtml = true;
 
                     SmtpClient smt = new SmtpClient();
                     smt.Host = "smtp.gmail.com";
                     System.Net.NetworkCredential ntwd = new NetworkCredential();
-                    ntwd.UserName = ""; //Your Email ID  
-                    ntwd.Password = ""; // Your Password  
+                    ntwd.UserName = "help.eexam@gmail.com"; //Your Email ID  
+                    ntwd.Password = "exam@123"; // Your Password  
                     smt.UseDefaultCredentials = true;
                     smt.Credentials = ntwd;
                     smt.Port = 587;
