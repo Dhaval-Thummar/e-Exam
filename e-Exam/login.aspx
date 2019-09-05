@@ -24,23 +24,23 @@
 
          <br />
 
-         <asp:TextBox ID="u_input" runat="server" ></asp:TextBox>
+         <asp:TextBox ID="u_input" runat="server" Height="40px" ></asp:TextBox>
 
          &nbsp;<asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
 
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <br />
 
-         <asp:TextBox ID="p_input" runat="server" TextMode="Password"  ></asp:TextBox>
+         <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="26px"  ></asp:TextBox>
 
          <br />
          <br />
          <br />
+
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
          <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" class="btn btn-primary" CssClass="btnsubmit"/>
 
-         <br />
-             
          <asp:Label ID="valid" runat="server"></asp:Label>
         
 

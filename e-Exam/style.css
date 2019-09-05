@@ -2,20 +2,20 @@
 body {
     margin: 0;
     padding: 0;
-    background-image: url('bg3.jpg');
+    background-image: url('bg4.jpg');
     background-size: cover;
     font-family: sans-serif;
 }
 .loginbox{
     position:absolute;
     top:50%;
-    left:30%;
+    left:50%;
     transform:translate(-50%,-50%);
     width:450px;
     height:550px;
     padding:80px 40px;
     box-sizing:border-box;
-    background:rgba(255, 255, 255,0.5);
+    background:rgba(128, 128, 128,.5)
 }
 
 .user {
@@ -64,6 +64,7 @@ margin-bottom:20px;
     border:none;
     outline:none;
     height:40px;
+    width:200px;
     font-size:16px;
     color:#fff;
     font-weight:bolder;
