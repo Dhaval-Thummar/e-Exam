@@ -73,8 +73,6 @@
     <Content Include="App_Data\exam_log.ldf">
       <DependentUpon>exam.mdf</DependentUpon>
     </Content>
-    <Content Include="App_LocalResources\backgroung.jpg" />
-    <Content Include="App_LocalResources\flower.png" />
     <Content Include="bg1.png" />
     <Content Include="bg3.jpg" />
     <Content Include="bg4.jpg" />
@@ -182,6 +180,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_LocalResources\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
