@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_login.aspx" />
     <Content Include="App_Data\exam.mdf" />
     <Content Include="App_Data\exam_log.ldf">
@@ -122,6 +123,7 @@
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="student_dashboard.aspx" />
     <Content Include="style.css" />
+    <Content Include="style2.css" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -135,6 +137,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_dashboard.aspx.cs">
+      <DependentUpon>admin_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_dashboard.aspx.designer.cs">
+      <DependentUpon>admin_dashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="admin_login.aspx.cs">
       <DependentUpon>admin_login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
