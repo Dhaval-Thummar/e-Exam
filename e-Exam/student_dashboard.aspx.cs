@@ -11,12 +11,19 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            user_name_label.Text = Request.QueryString["name"];
+          // string n=((TextBox)PreviousPage.FindControl("u_input")).Text;
+            //user_name_label.Text = n;
         }
 
         protected void history_button_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void logout_button_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/login.aspx");
         }
     }
 }

@@ -39,13 +39,13 @@
         <table class="auto-style1">
             <tr>
                 <td class="auto-style2" colspan="2">
-                    <asp:Label ID="top_label" runat="server" Text="E-exam" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                    <asp:Label ID="top_label" runat="server" Text="e-Exam" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style3" >&nbsp;</td>
                 <td class="auto-style7">
-                    <asp:Button ID="logout_button" runat="server" Text="Logout" />
+                    <asp:Button ID="logout_button" runat="server" Text="Logout" OnClick="logout_button_Click" />
                 </td>
             </tr>
             <tr>

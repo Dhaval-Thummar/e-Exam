@@ -75,7 +75,7 @@
             <td colspan="2" class="auto-style7">
                 <br />
                 <asp:Button ID="btn_login" runat="server" Text="Login" Height="35px" Width="75px" OnClick="btn_login_Click" class="btn btn-primary"/>
-                <br />
+               
                 <br />
                 <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Registration for new user?</asp:HyperLink>
                 <br />

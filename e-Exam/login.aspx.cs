@@ -41,6 +41,7 @@ namespace e_Exam
             if(dt.Rows.Count > 0)
             {
                 valid.Text = dt.Rows[0][0].ToString();
+                Response.Redirect("~/student_dashboard.aspx?name="+u_input.Text);
             }
             else
             {
