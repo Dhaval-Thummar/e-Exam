@@ -15,8 +15,9 @@
             width: 40%;
             text-align:center;
             margin: 150px auto;
-            background-color:darkgray;
             border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+           
         }
         .auto-style2 {
             height: 74px;
@@ -32,7 +33,11 @@
         .auto-style4 {
             height: 50px;
         }
-
+        .auto-style5 {
+            text-align:center;
+            height: 60px;
+        }
+       
     </style>
 </head>
 <body>
@@ -57,8 +62,9 @@
                         </td>
                     </tr>
                     <tr>
-                        <td> 
+                        <td class="auto-style5"> 
                              <asp:Button ID="Button1" runat="server" Text="Reset My Password" class="btn btn-primary" OnClick="Button1_Click"  />
+                             <br />
                         </td>
                     </tr>
                     <tr>

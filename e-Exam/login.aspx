@@ -5,51 +5,133 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Student Login</title>
-    <link href="style.css" rel="stylesheet" />
-  
+    <link href="style_login.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <style type="text/css">
+
+        .Initial
+        {
+            display: block;
+            padding: 4px 18px 4px 18px;
+            float: left;
+            color: Black;
+            font-weight: bold;
+        }
+        .Initial:hover
+        {
+            color: White;
+        }
+        .Clicked
+        {
+            float: left;
+            display: block;
+            padding: 4px 18px 4px 18px;
+            color: Black;
+            font-weight: bold;
+            color: White;
+        }
+        .auto-style1 {
+            width:30%;
+            margin :150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+        }
+        .auto-style2 {
+            text-align:center;
+            height: 67px;
+        }
+        .auto-style3 {
+            text-align:left;
+            padding:10px;
+        }
+        .auto-style4 {
+            padding:0px 15px 0px 15px;
+        }
+         .auto-style5 {
+            text-align:center;
+        }
+        .auto-style6 {
+            text-align: center;
+            height: 50px;
+        }
+        .auto-style7 {
+            text-align: center;
+            height: 23px;
+        }
+    </style>
+
 </head>
 <body>
-    <div class="loginbox">
-        <img src="bg5.png" alt="Alternate Text" class="user"/>
-        <h2>Student LogIn</h2>
+    <div>
+       
+
 
     <form id="form1" runat="server" >
         
-         <br />
-         <br />
- 
-         <asp:Label ID="uname" runat="server" Text="User Name" ></asp:Label>
-
-         <br />
-
-         <asp:TextBox ID="u_input" runat="server" Height="40px" ></asp:TextBox>
-
-        <asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
-  
-         <br />
-
-         <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="40px"  ></asp:TextBox>
-
-         <br />
-         <br />
-         <br />
-
-         <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" CssClass="btn btn-primary"/>
-
-         <asp:Label ID="valid" runat="server"></asp:Label>
-        
-         <br />
-         <br />
-
-         <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn't Have Account </asp:HyperLink>
-              
-         <br />
-         <br />
-              
-         <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forget Password</asp:HyperLink>
-             
-         <br />
-        
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2">
+                    <asp:Button ID="student_tab" runat="server" Text="Student Login" Width="50%" BorderStyle="None" Height="90%" class="btn btn-light" OnClick="Button1_Click" Font-Bold="True" Font-Overline="False" Font-Strikeout="False" Font-Underline="True" />
+                    <asp:Button ID="teacher_tab" runat="server" Text="Teacher Login" Width="50%" BorderStyle="None" Height="90%" class="btn btn-dark" OnClick="teacher_tab_Click" Font-Bold="True" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style7">
+                     &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">
+                     <asp:Label ID="uname" runat="server" Text="User Name" ></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">
+                     <asp:TextBox ID="u_input" runat="server" Height="20px" Width="100%" ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style3">
+                    <asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">
+                     <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="20px" Width="100%"  ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style6">
+                      &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style6">
+                      <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" CssClass="btn btn-primary"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      <asp:Label ID="valid" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn&#39;t Have Account?</asp:HyperLink>
+                    <br />
+                     <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forget Password</asp:HyperLink>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      &nbsp;</td>
+            </tr>
+        </table>  
     </form>  
         </div>
 </body>

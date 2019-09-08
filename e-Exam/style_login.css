@@ -1,21 +1,10 @@
 ﻿
+
+
 body {
-    margin: auto;
     background-image: url('bg4.jpg');
     background-size: cover;
     font-family: sans-serif;
-}
-
-
-#pswd, #uname{
-    font-weight: bold;
-    color: black;
-}
-
-    #btn_login,#u_input,#p_input{
-   
-width:100%;
-margin-bottom:20px;
 }
 
 #u_input, #p_input {
@@ -26,12 +15,33 @@ margin-bottom:20px;
     font-size: 16px;
     background-color: transparent;
 }
+#register {
+    font-size: 16px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+}
+
+#forgot_pswd {
+    font-size: 16px;
+    font-weight: bolder;
+    text-decoration: none;
+    color: black;
+}
+
+    #forgot_pswd:hover {
+        text-decoration: underline;
+    }
+
+#register:hover {
+    text-decoration: underline;
+}
 #btn_login {
     border: none;
     outline: none;
     height: 40px;
-    width: 100%;
-    text-align: center ;
+    width: 30%;
+    text-align: center;
     font-size: 16px;
     color: #fff;
     font-weight: bolder;
@@ -40,14 +50,20 @@ margin-bottom:20px;
     border-radius: 15px;
     transition: .3s ease-in-out;
 }
+
     #btn_login:hover {
         background-color: green;
     }
 
-
 #valid {
     font-weight: bold;
     color: red;
-    padding-left:30%;
-    text-align: center;
+}
+#student_tab, #teacher_tab{
+    float: left;
+    padding: 0;
+}
+#pswd, #uname {
+    font-weight: bold;
+    color: black;
 }
