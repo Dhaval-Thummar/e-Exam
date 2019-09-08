@@ -16,35 +16,28 @@
     <form id="form1" runat="server" >
         
          <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <br />
-         <br />
-        
+ 
          <asp:Label ID="uname" runat="server" Text="User Name" ></asp:Label>
 
          <br />
 
          <asp:TextBox ID="u_input" runat="server" Height="40px" ></asp:TextBox>
 
-         &nbsp;<asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
-
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
+  
          <br />
 
-         <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="26px"  ></asp:TextBox>
+         <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="40px"  ></asp:TextBox>
 
          <br />
          <br />
          <br />
 
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-         <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" class="btn btn-primary" CssClass="btnsubmit"/>
+         <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" CssClass="btn btn-primary"/>
 
          <asp:Label ID="valid" runat="server"></asp:Label>
         
-
-      
          <br />
          <br />
 
@@ -57,8 +50,6 @@
              
          <br />
         
-
-      
     </form>  
         </div>
 </body>

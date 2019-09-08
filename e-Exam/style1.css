@@ -6,13 +6,13 @@
     margin-left:300px;
     margin-right:300px;
     
-    height:850px;
-    width:600px;
+    height:auto;
+    width:auto;
     padding-right:150px;
     padding-top:30px;
     padding-bottom:60px;
     background-color:white;
-    opacity:0.5;
+    opacity:0.7;
 
 }
 #name_label, #roll_no_label, #mobile_label, #email_label, #dob_label, #qualification_label, #standard_label,
