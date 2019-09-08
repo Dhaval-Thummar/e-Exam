@@ -58,8 +58,14 @@
             </tr>
             <tr>
                 <td class="auto-style6" colspan="2">
-                    <asp:Button ID="Button1" runat="server" Text="Login" />
+                    <asp:Button ID="Button1" runat="server" Text="Login" OnClick="Button1_Click" />
+                    <br />
+                    <asp:Label ID="valid1" runat="server"></asp:Label>
                 </td>
+            </tr>
+            <tr>
+                <td class="auto-style6" colspan="2">
+                    &nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style6" colspan="2">
