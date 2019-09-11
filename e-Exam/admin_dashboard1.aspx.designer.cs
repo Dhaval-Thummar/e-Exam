@@ -11,7 +11,7 @@ namespace e_Exam
 {
 
 
-    public partial class student_dashboard
+    public partial class admin_dashboard1
     {
     }
 }

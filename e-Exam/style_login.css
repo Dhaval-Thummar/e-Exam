@@ -2,18 +2,18 @@
 
 
 body {
-    background-image: url('bg4.jpg');
+    background-image: url("bg4.jpg");
     background-size: cover;
     font-family: sans-serif;
 }
 
 #u_input, #p_input {
     border: none;
-    border-bottom: 3px solid black;
+    border-bottom: 3px ridge black;
     outline: none;
     color: black;
-    font-size: 16px;
     background-color: transparent;
+    
 }
 #register {
     font-size: 16px;

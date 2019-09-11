@@ -27,15 +27,24 @@
     background-size: cover;
         }
 
-        .auto-style3 {
-            height: 50px;
-        }
         .auto-style4 {
             height: 50px;
         }
         .auto-style5 {
             text-align:center;
             height: 60px;
+        }
+        #email_input{
+            border: none;
+            border-bottom: 3px ridge black;
+            outline: none;
+            color: black;
+            background-color: transparent;
+    
+        }
+       
+        .auto-style6 {
+            height: 29px;
         }
        
     </style>
@@ -45,20 +54,23 @@
        <form id="form1" runat="server">
       <table class="auto-style1">
                     <tr>
-                        <td class="auto-style2"> 
-                            <br />
-                            <asp:Label ID="Label3" runat="server" Text="Forgot Password" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
+                        <td class="auto-style6"> 
                         </td>
                         
                     </tr>
+                   
                     <tr>
-                        <td class="auto-style3"> 
-                            <asp:Label ID="Label4" runat="server" Text="enter email to reset your password "></asp:Label>
-                         </td>
+                        <td class="auto-style2"> 
+                            <br />
+                            <asp:Label ID="Label3" runat="server" Text="Forgot Password" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
+                            <br />
+                        </td>
+                        
                     </tr>
+                   
                     <tr>
                         <td class="auto-style4"> 
-                              <asp:TextBox ID="email_input" runat="server" Width="50%"></asp:TextBox>
+                              <asp:TextBox ID="email_input" runat="server" Width="50%" placeholder="enter email to reset your password" Font-Size="Large" Font-Strikeout="False"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
@@ -69,8 +81,12 @@
                     </tr>
                     <tr>
                         <td>  
-                            <asp:Label ID="Label5" runat="server"></asp:Label>
+                            <asp:Label ID="Label5" runat="server" Font-Bold="True" Font-Size="Medium"></asp:Label>
                         </td>
+                    </tr>
+                    <tr>
+                        <td>  
+                            &nbsp;</td>
                     </tr>
                 </table>
     </form>

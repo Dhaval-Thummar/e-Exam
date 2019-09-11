@@ -34,7 +34,7 @@
             color: White;
         }
         .auto-style1 {
-            width:30%;
+            width:25%;
             margin :150px auto;
             border-radius: 10px;
             background: rgba(169,169,169,0.7);
@@ -49,6 +49,7 @@
         }
         .auto-style4 {
             padding:0px 15px 0px 15px;
+            height:40px;
         }
          .auto-style5 {
             text-align:center;
@@ -89,17 +90,17 @@
             </tr>
             <tr>
                 <td class="auto-style4">
-                     <asp:TextBox ID="u_input" runat="server" Height="20px" Width="100%" ></asp:TextBox>
+                     <asp:TextBox ID="u_input" runat="server" Width="100%" Font-Size="X-Large" ></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style3">
-                    <asp:Label ID="pswd" runat="server" Text="Password" ></asp:Label>
+                    <asp:Label ID="pswd" runat="server" Text="Password"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style4">
-                     <asp:TextBox ID="p_input" runat="server" TextMode="Password" Height="20px" Width="100%"  ></asp:TextBox>
+                     <asp:TextBox ID="p_input" runat="server" TextMode="Password" Width="100%" Font-Size="X-Large" ></asp:TextBox>
                 </td>
             </tr>
             <tr>

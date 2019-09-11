@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace e_Exam
 {
-    public partial class student_dashboard : System.Web.UI.Page
+    public partial class teacher_list : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

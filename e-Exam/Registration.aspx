@@ -18,6 +18,12 @@
         .auto-style8 {
             margin-left: 0px;
         }
+        .auto-style9 {
+            padding-left: 5px;
+            height: 40px;
+            text-align: left;
+            width: 358px;
+        }
     </style>
 
 </head>
@@ -32,7 +38,7 @@
             <td class="auto-style2">
                 <asp:Label ID="name_label" runat="server" Text="Name"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="name_input" runat="server" Width="300px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat ="server" ControlToValidate="name_input" ErrorMessage="*" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
@@ -41,7 +47,7 @@
             <td class="auto-style2">
                 <asp:Label ID="roll_no_label" runat="server" Text="Roll No."></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="roll_no_input" runat="server" Width="300px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="roll_no_input" Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="roll_no_input" ErrorMessage="Numbers only" Font-Bold="True" ForeColor="Red" ValidationExpression="\d+"></asp:RegularExpressionValidator>
@@ -51,7 +57,7 @@
             <td class="auto-style2">
                 <asp:Label ID="mobile_label" runat="server" Text="Mobile Number"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="mobile_input" runat="server" Width="300px"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="mobile_input" Display="Dynamic" ErrorMessage="Invalid Mobile Number" Font-Bold="True" ForeColor="Red" ValidationExpression="[0-9]{10}"></asp:RegularExpressionValidator>
             </td>
@@ -60,7 +66,7 @@
             <td class="auto-style2">
                 <asp:Label ID="email_label" runat="server" Text="Email ID"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="email_input" runat="server" Width="300px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="email_input" Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="email_input" Display="Dynamic" ErrorMessage="Invalid Email ID" Font-Bold="True" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
@@ -70,7 +76,7 @@
             <td class="auto-style2">
                 <asp:Label ID="dob_label" runat="server" Text="Date of Birth"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="dob_input" runat="server" TextMode="Date" Width="300px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="dob_input" ErrorMessage="*" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
             </td>
@@ -79,7 +85,7 @@
             <td class="auto-style2">
                 <asp:Label ID="qualification_label" runat="server" Text="Qualification"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:DropDownList ID="Qualification_drop_down" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True" Height="30px" Width="195px">
                     <asp:ListItem Selected="True">Select </asp:ListItem>
                     <asp:ListItem>Primary</asp:ListItem>
@@ -95,7 +101,7 @@
             <td class="auto-style2">
                 <asp:Label ID="standard_label" runat="server" Text="Standard"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="standard_input" runat="server" Width="300px"></asp:TextBox>
                 <asp:DropDownList ID="standard_drop_down" runat="server" Visible="False" AutoPostBack="True" OnSelectedIndexChanged="standard_drop_down_SelectedIndexChanged" Height="30px" Width="195px">
                     <asp:ListItem Selected="True">Select</asp:ListItem>
@@ -111,7 +117,7 @@
             <td class="auto-style2">
                 <asp:Label ID="department_label" runat="server" Text="Department"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:DropDownList ID="be_drop_down" runat="server" AutoPostBack="True" Enabled="False" Height="30px" Width="195px">
                     <asp:ListItem Selected="True">Select</asp:ListItem>
                     <asp:ListItem>Computer Science and Engineering</asp:ListItem>
@@ -134,7 +140,7 @@
             <td class="auto-style2">
                 <asp:Label ID="current_year_label" runat="server" Text="Current Year"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:DropDownList ID="year_drop_down" runat="server" Enabled="False" Width="100px">
                     <asp:ListItem>1</asp:ListItem>
                     <asp:ListItem>2</asp:ListItem>
@@ -147,8 +153,17 @@
             <td class="auto-style2">
                 <asp:Label ID="address_label" runat="server" Text="Address"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="address_input" runat="server" Height="74px" TextMode="MultiLine" Width="320px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style2">
+                <asp:Label ID="photo_label" runat="server" Text="Upload photo"></asp:Label>
+            </td>
+            <td class="auto-style9">
+                <asp:FileUpload ID="photo_upload" runat="server" OnClick="upload_btn_Click"/>
+                <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>
             </td>
         </tr>
         <tr>
@@ -159,7 +174,7 @@
             <td class="auto-style2">
                 <asp:Label ID="pswd_label" runat="server" Text="Password "></asp:Label>
             &nbsp;</td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="pswd_input" runat="server" TextMode="Password" Width="300px"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="pswd_input" Display="Dynamic" ErrorMessage="*" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="pswd_input" ErrorMessage="Password length must be between 5 to 16 characters" ForeColor="Red" ValidationExpression="^[a-zA-Z0-9'@&amp;#.\s]{5,16}$"></asp:RegularExpressionValidator>
@@ -169,7 +184,7 @@
             <td class="auto-style2">
                 <asp:Label ID="confirm_pswd_label" runat="server" Text="Confirm Password"></asp:Label>
             </td>
-            <td class="auto-style3">
+            <td class="auto-style9">
                 <asp:TextBox ID="confirm_pswd_input" runat="server" TextMode="Password" Width="300px"></asp:TextBox>
                 <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToCompare="pswd_input" ControlToValidate="confirm_pswd_input" Display="Dynamic" ErrorMessage="Password doesn't match" Font-Bold="True" ForeColor="Red"></asp:CompareValidator>
             </td>
@@ -180,9 +195,8 @@
         </tr>
         <tr>    
             <td class="auto-style5" colspan="2">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
                 <asp:Button ID="submit_btn" runat="server" Text="Submit" OnClick="submit_btn_Click" CssClass="auto-style8" Height="40px" Width="217px" />
-                &nbsp;
                 <asp:Button ID="cancel_btn" runat="server" Text="Cancel" OnClick="cancel_btn_Click" OnClientClick="return confirm('Are you sure you wish to Cancel?');" CssClass="auto-style8" Height="40px" Width="217px"/>
                 <br />
                 <br />
