@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="e_Exam.Registration" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registration.aspx.cs" Inherits="e_Exam.Registration2" %>
 
 <!DOCTYPE html>
 
@@ -29,7 +29,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        
         <div class="auto-style8">
            
             &nbsp;<img src="lg1.jpg" class="auto-style7" /></div> 
@@ -204,7 +203,5 @@
         </tr>
     </table>
     </form>
-    
-
-    </body>
+</body>
 </html>

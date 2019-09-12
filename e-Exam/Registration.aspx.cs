@@ -11,16 +11,15 @@ using System.IO;
 
 namespace e_Exam
 {
-    public partial class Registration : System.Web.UI.Page
+    public partial class Registration2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             Label1.Visible = false;
         }
-
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           if(Qualification_drop_down.SelectedValue == "Secondary" || Qualification_drop_down.SelectedValue == "Primary" || Qualification_drop_down.SelectedValue == "Higher Secondary")
+            if (Qualification_drop_down.SelectedValue == "Secondary" || Qualification_drop_down.SelectedValue == "Primary" || Qualification_drop_down.SelectedValue == "Higher Secondary")
             {
                 standard_label.Text = "Standard";
                 standard_input.Visible = true;
@@ -38,7 +37,7 @@ namespace e_Exam
                 year_drop_down.Enabled = true;
                 year_drop_down.Items[3].Enabled = false;
             }
-            else if(Qualification_drop_down.SelectedValue == "Under Graduate")
+            else if (Qualification_drop_down.SelectedValue == "Under Graduate")
             {
                 standard_label.Text = "Degree";
                 standard_drop_down.Visible = true;
@@ -54,12 +53,12 @@ namespace e_Exam
                 standard_input.Visible = true;
                 standard_drop_down.SelectedIndex = 0;
             }
-           
+
         }
 
         protected void standard_drop_down_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(standard_drop_down.SelectedValue == "B.E/B.Tech")
+            if (standard_drop_down.SelectedValue == "B.E/B.Tech")
             {
                 year_drop_down.Items[3].Enabled = true;
                 be_drop_down.Visible = true;
@@ -67,8 +66,8 @@ namespace e_Exam
                 be_drop_down.Enabled = true;
                 year_drop_down.Enabled = true;
             }
-           
-            else if(standard_drop_down.SelectedValue =="B.Sc")
+
+            else if (standard_drop_down.SelectedValue == "B.Sc")
             {
                 year_drop_down.Items[3].Enabled = false;
                 bsc_drop_down.Visible = true;
@@ -97,13 +96,13 @@ namespace e_Exam
             be_drop_down.SelectedIndex = 0;
             bsc_drop_down.SelectedIndex = 0;
             year_drop_down.SelectedIndex = 0;
-            address_input.Text="";
+            address_input.Text = "";
         }
 
         protected void submit_btn_Click(object sender, EventArgs e)
         {
-            String std = "",dept="",year="";
-            if(standard_drop_down.Visible == true)
+            String std = "", dept = "", year = "";
+            if (standard_drop_down.Visible == true)
             {
                 std = standard_drop_down.SelectedValue;
             }
@@ -111,15 +110,15 @@ namespace e_Exam
             {
                 std = standard_input.Text;
             }
-            if(be_drop_down.Visible == true && be_drop_down.Enabled == true)
+            if (be_drop_down.Visible == true && be_drop_down.Enabled == true)
             {
                 dept = be_drop_down.SelectedValue;
             }
-            if(bsc_drop_down.Visible == true && bsc_drop_down.Enabled == true)
+            if (bsc_drop_down.Visible == true && bsc_drop_down.Enabled == true)
             {
                 dept = bsc_drop_down.SelectedValue;
             }
-            if(year_drop_down.Enabled == true)
+            if (year_drop_down.Enabled == true)
             {
                 year = year_drop_down.SelectedValue;
             }
@@ -158,7 +157,7 @@ namespace e_Exam
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('User already registered');window.location ='registration.aspx';", true);
             }
 
-            
+
         }
 
         protected void upload_btn_Click(object sender, EventArgs e)
@@ -212,7 +211,5 @@ namespace e_Exam
 
             return userstatus;
         }
-
-
     }
 }
