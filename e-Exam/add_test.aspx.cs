@@ -30,6 +30,7 @@ namespace e_Exam
                 sub_list.DataBind();
                 sub_list.Items.Add(new ListItem("Other", "-1"));
                 sub_list.Items.Insert(0, new ListItem("-Select--", "0"));
+                Session["section_no"] = 1;
             }
         }
 
@@ -49,6 +50,11 @@ namespace e_Exam
         protected void test_next_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/add_question.aspx");
+        }
+
+        protected void section_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Session["section_no"] = section_list.SelectedValue;
         }
     }
 }

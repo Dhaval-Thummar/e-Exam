@@ -85,6 +85,24 @@ namespace e_Exam {
         protected global::System.Web.UI.WebControls.TextBox duration;
         
         /// <summary>
+        /// section_label control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label section_label;
+        
+        /// <summary>
+        /// section_list control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList section_list;
+        
+        /// <summary>
         /// description control.
         /// </summary>
         /// <remarks>

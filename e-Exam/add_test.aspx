@@ -23,59 +23,111 @@
             text-align:left;
             padding-left:25px;
         }
-        .auto-style4 {
-            width: 280px;
-        }
-    </style>
+            .auto-style4 {
+                width: 25%;
+                height: 54px;
+                text-align: left;
+                padding-left: 25px;
+            }
+            .auto-style5 {
+                height: 54px;
+                width: 75%;
+                padding-left: 35px;
+            }
+            .auto-style6 {
+                width: 25%;
+                height: 50px;
+                text-align: left;
+                padding-left: 25px;
+            }
+            .auto-style7 {
+                height: 50px;
+                width: 75%;
+                padding-left: 35px;
+            }
+            .auto-style8 {
+                width: 25%;
+                height: 25px;
+                text-align: left;
+                padding-left: 25px;
+            }
+            .auto-style9 {
+                height: 25px;
+                width: 75%;
+                padding-left: 35px;
+            }
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
         <div class="div1">
         <table class="table1">
         <tr>
-            <td class="auto-style3">
+            <td class="auto-style4">
                 <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
             </td>
-            <td class="auto-style1">
-                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+            <td class="auto-style5">
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
             </td>
         </tr>   
          <tr>
-             <td class="auto-style3">
+             <td class="auto-style4">
                  <asp:Label ID="Subject" runat="server" Text="Subject"></asp:Label>
              </td>
-             <td class="auto-style1">
-                 <asp:DropDownList ID="sub_list" runat="server">
+             <td class="auto-style5">
+                 <asp:DropDownList ID="sub_list" runat="server" CssClass="form-control">
                  </asp:DropDownList>
              </td>
          </tr>
             <tr>
-                <td class="auto-style3">
+                <td class="auto-style6">
                     <asp:Label ID="Label2" runat="server" Text="Test Duration"></asp:Label>
                 </td>
-                <td class="auto-style1">
+                <td class="auto-style7">
                     <asp:CheckBox ID="CheckBox1" runat="server" OnCheckedChanged="CheckBox1_CheckedChanged" AutoPostBack="True" />
                     <asp:Label ID="Label3" runat="server" Text="check if you want to add test duration"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td class="auto-style3">
+                <td class="auto-style4">
 
                 </td>
-                <td class="auto-style1">
-                    <asp:TextBox ID="duration" runat="server" TextMode="Number" placeholder="in minute" Enabled="False"></asp:TextBox>
+                <td class="auto-style5">
+                    <asp:TextBox ID="duration" runat="server" TextMode="Number" placeholder="in minute" Enabled="False" CssClass="form-control"></asp:TextBox>
                 </td>
             </tr>
+            <tr>
+                <td class="auto-style4">
+                    <asp:Label ID="section_label" runat="server" Text="No. of sections"></asp:Label>
+                </td>
+                <td class="auto-style5">
+                    <asp:DropDownList ID="section_list" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="section_list_SelectedIndexChanged" >
+                        <asp:ListItem>1</asp:ListItem>
+                        <asp:ListItem>2</asp:ListItem>
+                        <asp:ListItem>3</asp:ListItem>
+                        <asp:ListItem>4</asp:ListItem>
+                    </asp:DropDownList>
+                </td>
+            </tr>
+     
             <tr>
                 <td class="auto-style3">
                     <asp:Label ID="description" runat="server" Text="Description"></asp:Label>
                 </td>
                 <td class="auto-style1">
-                    <asp:TextBox ID="test_desc" runat="server" TextMode="MultiLine" Height="70px" Width="280px"></asp:TextBox>
+                    <asp:TextBox ID="test_desc" runat="server" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                </td>
+            </tr>
+     
+            <tr>
+                <td class="auto-style8">
+                </td>
+                <td class="auto-style9">
                 </td>
             </tr>
             <tr>
-               <td colspan="2" class="auto-style2">
-                   &nbsp;</td>
+               <td>
+
+               </td>
             </tr>
             <tr>
                <td colspan="2" class="auto-style2">
