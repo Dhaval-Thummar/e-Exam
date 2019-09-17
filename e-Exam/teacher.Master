@@ -31,8 +31,8 @@
             display:block;
         }
         .main {
-            margin-left: 250px;
-            padding :20px 10px;
+            margin-left: 260px;
+            margin-top: 55px;
         }
 
     </style>
@@ -49,9 +49,9 @@
              <asp:Image ID="Image1" runat="server" Height="175px" ImageUrl="~/Images/bg1.png" Width="144px" />
              <br />
              <br />
-             <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/teacher_dashboard.aspx" CssClass="auto1" ForeColor="Black">Home</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/teacher/teacher_dashboard.aspx" CssClass="auto1" ForeColor="Black">Home</asp:HyperLink>
              <br />
-             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/add_test.aspx">Add Test</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/teacher/add_test.aspx">Add Test</asp:HyperLink>
              <br />
              <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black">View Test</asp:HyperLink>
              <br />

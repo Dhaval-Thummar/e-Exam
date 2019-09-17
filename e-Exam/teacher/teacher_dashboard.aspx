@@ -3,4 +3,9 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-</asp:Content>
+    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+    <br />
+    <asp:Image ID="Image2" runat="server" Width="500px" Height="500px" />
+    <br />
+    <asp:Button ID="Button1" runat="server" Text="Button" />
+    </asp:Content>

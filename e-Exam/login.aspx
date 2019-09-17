@@ -75,7 +75,7 @@
         <table class="auto-style1">
             <tr>
                 <td class="auto-style2">
-                    <asp:Button ID="student_tab" runat="server" Text="Student Login" Width="50%" BorderStyle="None" Height="90%" class="btn btn-light" OnClick="Button1_Click" Font-Bold="True" Font-Overline="False" Font-Strikeout="False" Font-Underline="True" />
+                    <asp:Button ID="student_tab" runat="server" Text="Student Login" Width="50%" BackColor="#C3C3C3" BorderStyle="None" Height="90%" class="btn btn-light" OnClick="Button1_Click" Font-Bold="True" Font-Overline="False" Font-Strikeout="False" Font-Underline="True" />
                     <asp:Button ID="teacher_tab" runat="server" Text="Teacher Login" Width="50%" BorderStyle="None" Height="90%" class="btn btn-dark" OnClick="teacher_tab_Click" Font-Bold="True" />
                 </td>
             </tr>
@@ -123,7 +123,7 @@
             </tr>
             <tr>
                 <td class="auto-style5">
-                      <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn&#39;t Have Account?</asp:HyperLink>
+                      <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn't Have Account?</asp:HyperLink>
                     <br />
                      <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forget Password</asp:HyperLink>
                 </td>

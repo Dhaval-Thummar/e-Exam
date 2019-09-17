@@ -64,17 +64,21 @@
         <tr>
             <td class="auto-style4">
                 <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
+                
             </td>
             <td class="auto-style5">
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="80%"></asp:TextBox>
+                
             </td>
         </tr>   
          <tr>
              <td class="auto-style4">
                  <asp:Label ID="Subject" runat="server" Text="Subject"></asp:Label>
+                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="sub_list" ErrorMessage="*" Font-Bold="True" ForeColor="Red" InitialValue="none"></asp:RequiredFieldValidator>
              </td>
              <td class="auto-style5">
-                 <asp:DropDownList ID="sub_list" runat="server" CssClass="form-control">
+                 <asp:DropDownList ID="sub_list" runat="server" CssClass="form-control" OnSelectedIndexChanged="sub_list_SelectedIndexChanged" Width="80%">
                  </asp:DropDownList>
              </td>
          </tr>
@@ -92,7 +96,8 @@
 
                 </td>
                 <td class="auto-style5">
-                    <asp:TextBox ID="duration" runat="server" TextMode="Number" placeholder="in minute" Enabled="False" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="duration" runat="server" TextMode="Number" placeholder="in minute" Enabled="False" CssClass="form-control" Width="80%"></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="duration" Display="Dynamic" ErrorMessage="Invalid Duration" ForeColor="Red" ValidationExpression="\d+"></asp:RegularExpressionValidator>
                 </td>
             </tr>
             <tr>
@@ -100,7 +105,7 @@
                     <asp:Label ID="section_label" runat="server" Text="No. of sections"></asp:Label>
                 </td>
                 <td class="auto-style5">
-                    <asp:DropDownList ID="section_list" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="section_list_SelectedIndexChanged" >
+                    <asp:DropDownList ID="section_list" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="section_list_SelectedIndexChanged" Width="80%" >
                         <asp:ListItem>1</asp:ListItem>
                         <asp:ListItem>2</asp:ListItem>
                         <asp:ListItem>3</asp:ListItem>
@@ -114,7 +119,7 @@
                     <asp:Label ID="description" runat="server" Text="Description"></asp:Label>
                 </td>
                 <td class="auto-style1">
-                    <asp:TextBox ID="test_desc" runat="server" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
+                    <asp:TextBox ID="test_desc" runat="server" TextMode="MultiLine" CssClass="form-control" Width="80%"></asp:TextBox>
                 </td>
             </tr>
      

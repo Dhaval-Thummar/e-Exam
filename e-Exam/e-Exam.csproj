@@ -69,8 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="add_question.aspx" />
-    <Content Include="add_test.aspx" />
+    <Content Include="teacher\add_question.aspx" />
+    <Content Include="teacher\add_test.aspx" />
     <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_dashboard1.aspx" />
     <Content Include="admin_login.aspx" />
@@ -133,13 +133,13 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="student_dashboard.aspx" />
+    <Content Include="student\student_dashboard.aspx" />
     <Content Include="student_list.aspx" />
     <Content Include="style.css" />
     <Content Include="style1.css" />
     <Content Include="Style2.css" />
     <Content Include="style_login.css" />
-    <Content Include="teacher_dashboard.aspx" />
+    <Content Include="teacher\teacher_dashboard.aspx" />
     <Content Include="teacher_list.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
@@ -154,18 +154,18 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="add_question.aspx.cs">
+    <Compile Include="teacher\add_question.aspx.cs">
       <DependentUpon>add_question.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="add_question.aspx.designer.cs">
+    <Compile Include="teacher\add_question.aspx.designer.cs">
       <DependentUpon>add_question.aspx</DependentUpon>
     </Compile>
-    <Compile Include="add_test.aspx.cs">
+    <Compile Include="teacher\add_test.aspx.cs">
       <DependentUpon>add_test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="add_test.aspx.designer.cs">
+    <Compile Include="teacher\add_test.aspx.designer.cs">
       <DependentUpon>add_test.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin.Master.cs">
@@ -228,11 +228,11 @@
     <Compile Include="student.Master.designer.cs">
       <DependentUpon>student.Master</DependentUpon>
     </Compile>
-    <Compile Include="student_dashboard.aspx.cs">
+    <Compile Include="student\student_dashboard.aspx.cs">
       <DependentUpon>student_dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="student_dashboard.aspx.designer.cs">
+    <Compile Include="student\student_dashboard.aspx.designer.cs">
       <DependentUpon>student_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="student_list.aspx.cs">
@@ -249,11 +249,11 @@
     <Compile Include="teacher.Master.designer.cs">
       <DependentUpon>teacher.Master</DependentUpon>
     </Compile>
-    <Compile Include="teacher_dashboard.aspx.cs">
+    <Compile Include="teacher\teacher_dashboard.aspx.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="teacher_dashboard.aspx.designer.cs">
+    <Compile Include="teacher\teacher_dashboard.aspx.designer.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="teacher_list.aspx.cs">
@@ -263,6 +263,7 @@
     <Compile Include="teacher_list.aspx.designer.cs">
       <DependentUpon>teacher_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

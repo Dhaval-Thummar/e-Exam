@@ -37,6 +37,13 @@
             margin-right: 1px;
 
         }
+        .auto-style6 {
+            width:50%;
+            padding-left:100px;
+        }
+        .auto-style7 {
+            padding-left:20px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -77,13 +84,11 @@
                         <asp:Label ID="Label3" runat="server" Text="Negative Marks" CssClass="form-control-plaintext"></asp:Label>
                     </td>
                     <td class="auto-style3">
-                        <asp:DropDownList ID="negative_list" runat="server" CssClass="form-control" Width="35%">
-                            <asp:ListItem>0</asp:ListItem>
-                            <asp:ListItem>-1/4</asp:ListItem>
-                            <asp:ListItem>-1/3</asp:ListItem>
-                            <asp:ListItem>-1/2</asp:ListItem>
-                            <asp:ListItem>-1</asp:ListItem>
-                            <asp:ListItem>-2</asp:ListItem>
+                        <asp:DropDownList ID="negative_list" runat="server" CssClass="form-control" Width="35%" AutoPostBack="True">
+                            <asp:ListItem Text="0" Selected="True"></asp:ListItem>
+                            <asp:ListItem Text="-1/4" Value="-0.25"></asp:ListItem>
+                            <asp:ListItem Text="-1/3" Value="-0.33"></asp:ListItem>
+                            <asp:ListItem Text="-1/2" Value="-0.5"></asp:ListItem>
                         </asp:DropDownList>
                     </td>
                 </tr>
@@ -111,7 +116,8 @@
                 <asp:TextBox ID="question" runat="server" TextMode="MultiLine" CssClass="form-control" Height="150px"></asp:TextBox>
                 <asp:CheckBox ID="q_image_checkbox" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="image_upload_check" />
                 <asp:RequiredFieldValidator ID="question_require" runat="server" ErrorMessage="Enter Question" ControlToValidate="question" ForeColor="#FF3300"></asp:RequiredFieldValidator>
-                <asp:FileUpload ID="image_upload" runat="server" Visible="False" />
+                <asp:FileUpload ID="q_image_upload" runat="server" Visible="False" />
+                <asp:Label ID="image_errror_lbl" runat="server" ForeColor="Red"></asp:Label>
             </div>
      </div>   
             <div class="row form-group">
@@ -133,6 +139,7 @@
                         <asp:CheckBox ID="optACheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optACheck_CheckedChanged" />
                         <asp:FileUpload ID="optAimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op1" runat="server" ErrorMessage="Enter option one" ControlToValidate="txt_optionone" ForeColor="red"></asp:RequiredFieldValidator>
+                        <asp:Label ID="image_errror_lbl0" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -142,6 +149,7 @@
                         <asp:CheckBox ID="optBCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optBCheck_CheckedChanged" />
                         <asp:FileUpload ID="optBimg" runat="server" Visible="False" />                        
                         <asp:RequiredFieldValidator ID="require_op2" runat="server" ErrorMessage="Enter option two" ControlToValidate="txt_optiontwo" ForeColor="red"></asp:RequiredFieldValidator>
+                        <asp:Label ID="image_errror_lbl1" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -151,6 +159,7 @@
                         <asp:CheckBox ID="optCCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optCCheck_CheckedChanged" />
                         <asp:FileUpload ID="optCimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op3" runat="server" ErrorMessage="Enter option three" ControlToValidate="txt_optionthree" ForeColor="red"></asp:RequiredFieldValidator>
+                        <asp:Label ID="image_errror_lbl2" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -160,6 +169,7 @@
                         <asp:CheckBox ID="optDCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optDCheck_CheckedChanged" />
                         <asp:FileUpload ID="optDimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op4" runat="server" ErrorMessage="Enter option four" ControlToValidate="txt_optionfour" ForeColor="red"></asp:RequiredFieldValidator>
+                        <asp:Label ID="image_errror_lbl3" runat="server" ForeColor="Red" Visible="False"></asp:Label>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -187,10 +197,72 @@
         </asp:MultiView>
     </div>
     <div class="div2">
-        <asp:Button ID="next_question_btn" runat="server" Text="Add next Question" class="btn btn-info" OnClick="next_question_btn_Click"/>
+        <asp:Label ID="Label1" runat="server" ForeColor="#33CC33" Visible="False"></asp:Label>
+        <br />
+        <asp:Button ID="next_question_btn" runat="server" Text="Add Question" class="btn btn-info" OnClick="next_question_btn_Click"/>
         <asp:Button ID="next_section_btn" runat="server" Text="Next Section" class="btn btn-warning"  OnClientClick="return confirm('Are you sure?');" OnClick="next_section_btn_Click"/>
-        <asp:Button ID="test_submit_btn" runat="server" Text="Submit" class="btn btn-success" OnClick="test_submit_btn_Click"/>
+        <asp:Button ID="test_submit_btn" runat="server" Text="Submit" class="btn btn-success" OnClientClick="return confirm('Are you sure to submit test?');" OnClick="test_submit_btn_Click"/>
+        <br />
+        <br />
     </div>
+        </asp:View>
+        <asp:View ID="View3" runat="server">
+            <div class="div2">
+                <asp:Label ID="Label4" runat="server" Text="New test added successfully" ForeColor="#00CC00" Font-Size="X-Large"></asp:Label>
+            </div>
+            <table class="table1 table table-bordered">
+                <tr>
+                    <td>
+                        <asp:Label ID="Label5" runat="server" Text="Test Id"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="test_id_lbl" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                        <asp:Label ID="Label7" runat="server" Text="Test Name"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="test_name_lbl" runat="server" ></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                        <asp:Label ID="Label9" runat="server" Text="No. of question"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="no_of_q_lbl" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                        <asp:Label ID="Label11" runat="server" Text="Total marks"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="total_marks_lbl" runat="server"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                        <asp:Label ID="Label13" runat="server" Text="Test Duration"></asp:Label>
+                    </td>
+                    <td>
+                        <asp:Label ID="duration_lbl" runat="server" Text="Null"></asp:Label>
+                    </td>
+                </tr>
+                <tr>
+                  <td class="auto-style6">
+                        <asp:Label ID="Label15" runat="server" Text="Test Description"></asp:Label>
+                    </td>
+                    <td class="auto-style7">
+                        <asp:Label ID="desc_lbl" runat="server"></asp:Label>
+                    </td>
+                </tr>
+            </table>
+            <div class="div2">
+                <asp:Button ID="Button1" runat="server" Text="Home Page" class="btn btn-primary" OnClick="Button1_Click"/>
+            </div>
         </asp:View>
     </asp:MultiView>
 </asp:Content>

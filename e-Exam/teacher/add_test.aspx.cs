@@ -29,7 +29,7 @@ namespace e_Exam
                 sub_list.DataSource = dt.Tables[0];
                 sub_list.DataBind();
                 sub_list.Items.Add(new ListItem("Other", "-1"));
-                sub_list.Items.Insert(0, new ListItem("-Select--", "0"));
+                sub_list.Items.Insert(0, new ListItem("--Select--", "none"));
                 Session["section_no"] = 1;
             }
         }
@@ -49,12 +49,42 @@ namespace e_Exam
 
         protected void test_next_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/add_question.aspx");
+            Test t1 = new Test();
+            t1.name = TextBox1.Text;
+            t1.subject = sub_list.Text;
+            t1.has_duration = CheckBox1.Checked;
+            if(t1.has_duration)
+            {
+                t1.duration = Int32.Parse(duration.Text);
+            }
+            t1.sections = Int32.Parse(section_list.Text);
+            t1.descripetion = test_desc.Text;
+            if(Session["teacherID"]==null)
+            {
+                Response.Redirect("~/login.aspx");
+            }
+            t1.teacher_id = Int32.Parse(Session["teacherID"].ToString());
+            Session["test"] = t1;
+            TextBox1.Text = " " + t1.teacher_id;
+            Server.Transfer("~/teacher/add_question.aspx");
         }
 
         protected void section_list_SelectedIndexChanged(object sender, EventArgs e)
         {
             Session["section_no"] = section_list.SelectedValue;
+        }
+
+        protected void sub_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            string qry = "select sub_id from Subject where sub_name = '" + sub_list.SelectedItem.ToString() + "'";
+            SqlCommand cmd = new SqlCommand(qry, con);
+            con.Open();
+            object result = cmd.ExecuteScalar();
+            con.Close();
+            result = (result == DBNull.Value) ? null : result;
+            Session["subject_id"] = Convert.ToInt32(result);
         }
     }
 }
