@@ -13,26 +13,61 @@ namespace e_Exam
 {
     public partial class teacher_dashboard : System.Web.UI.Page
     {
+        static int teacher_id = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if(Session["teacherID"] != null)
             {
-                Label1.Text = Session["teacherID"].ToString();
+                teacher_id = Convert.ToInt32(Session["teacherID"].ToString());
             }
             else
             {
-                Response.Redirect("~/login.aspx");
+               // Response.Redirect("~/login.aspx");
             }
-            SqlConnection con = new SqlConnection();
-            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            SqlCommand cmd = new SqlCommand("select image from question_image where q_id = 2", con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            byte[] bytes = (byte[])cmd.ExecuteScalar();
-            con.Close();
+            gettotalexam();
+            gettotalquestion();
+        }
 
-            string str = Convert.ToBase64String(bytes);
-            Image2.ImageUrl = "data:Image/png;base64," + str;
+        String s = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+        //method for getting all the exam 
+        public void gettotalexam()
+        {
+            using (SqlConnection con = new SqlConnection(s))
+            {
+                SqlCommand cmd = new SqlCommand("select count(test_id) from Test where teacher_id ="+teacher_id, con);
+                try
+                {
+                    con.Open();
+                    int i = Convert.ToInt32(cmd.ExecuteScalar());
+                    lbltotalexam.Text = i.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    panel_index_warning.Visible = true;
+                    lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
+                }
+            }
+        }
+        //method for getting all the question 
+        public void gettotalquestion()
+        {
+            using (SqlConnection con = new SqlConnection(s))
+            {
+                SqlCommand cmd = new SqlCommand("select count(q_id) from Question where test_id in (select test_id from Test where teacher_id =" + teacher_id + ")", con);
+                try
+                {
+                    con.Open();
+                    int i = Convert.ToInt32(cmd.ExecuteScalar());
+                    lbltotalquestion.Text = i.ToString();
+
+                }
+                catch (Exception ex)
+                {
+                    panel_index_warning.Visible = true;
+                    lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
+                }
+            }
         }
     }
 }

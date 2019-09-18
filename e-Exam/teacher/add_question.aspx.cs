@@ -274,7 +274,6 @@ namespace e_Exam
                     con.Close();
                 }
             }
-
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -293,10 +292,33 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //mcq_image
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                {
+                    //Set the database table name
+                    sqlBulkCopy.DestinationTableName = "dbo.mcq_image";
+
+                    //[OPTIONAL]: Map the DataTable columns with that of the database table
+
+                    sqlBulkCopy.ColumnMappings.Add("test_id", "test_id");
+                    sqlBulkCopy.ColumnMappings.Add("section_no", "section_no");
+                    sqlBulkCopy.ColumnMappings.Add("q_id", "q_id");
+                    sqlBulkCopy.ColumnMappings.Add("a_image", "a_image");
+                    sqlBulkCopy.ColumnMappings.Add("b_image", "b_image");
+                    sqlBulkCopy.ColumnMappings.Add("c_image", "c_image");
+                    sqlBulkCopy.ColumnMappings.Add("d_image", "d_image");
+                    con.Open();
+                    sqlBulkCopy.WriteToServer(mcq_image);
+                    con.Close();
+                }
+            }
             qtable.Rows.Clear();
             mcq_table.Clear();
             fill_blank.Clear();
             q_image.Clear();
+            mcq_image.Clear();
             Label1.Visible = false;
         }
 
@@ -333,53 +355,114 @@ namespace e_Exam
                     image_errror_lbl.Visible = true;
                     image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded " + fileextension.ToLower();
                     image_errror_lbl.ForeColor = System.Drawing.Color.Red;
+                    return;
                 }
             }
             
             //mcq_image
-            if (optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
+            if(optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
             {
-                HttpPostedFile a_img = optAimg.PostedFile;
-                HttpPostedFile b_img = optBimg.PostedFile;
-                HttpPostedFile c_img = optCimg.PostedFile;
-                HttpPostedFile d_img = optDimg.PostedFile;
+                //new row to q_image table
+                DataRow i1 = mcq_image.NewRow();
+                i1["test_id"] = test_id;
+                i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                i1["q_id"] = q_no;
+                i1["a_image"] = null;
+                i1["b_image"] = null;
+                i1["c_image"] = null;
+                i1["d_image"] = null;
 
-                string a_filename = Path.GetFileName(a_img.FileName);
-                string a_fileextension = Path.GetExtension(a_filename);
-                int a_filesize = a_img.ContentLength;
-
-                string b_filename = Path.GetFileName(b_img.FileName);
-                string b_fileextension = Path.GetExtension(b_filename);
-                int b_filesize = b_img.ContentLength;
-
-                string c_filename = Path.GetFileName(c_img.FileName);
-                string c_fileextension = Path.GetExtension(c_filename);
-                int c_filesize = c_img.ContentLength;
-
-                string d_filename = Path.GetFileName(d_img.FileName);
-                string d_fileextension = Path.GetExtension(d_filename);
-                int d_filesize = d_img.ContentLength;
-
-                if (a_fileextension.ToLower() == ".jpg" || a_fileextension.ToLower() == ".bmp" || a_fileextension.ToLower() == ".gif" || a_fileextension.ToLower() == ".png" || a_fileextension.ToLower() == ".jpeg")
+                if (optACheck.Checked)
                 {
-                    Stream stream = a_img.InputStream;
-                    BinaryReader binaryReader = new BinaryReader(stream);
-                    byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
 
-                    //new row to q_image table
-                    DataRow i1 = mcq_image.NewRow();
-                    i1["test_id"] = test_id;
-                    i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
-                    i1["q_id"] = q_no;
-                    i1["image"] = bytes;
-                    mcq_image.Rows.Add(i1);
+                    HttpPostedFile a_img = optAimg.PostedFile;
+
+                    string a_filename = Path.GetFileName(a_img.FileName);
+                    string a_fileextension = Path.GetExtension(a_filename);
+                    int a_filesize = a_img.ContentLength;
+
+                    if (a_fileextension.ToLower() == ".jpg" || a_fileextension.ToLower() == ".bmp" || a_fileextension.ToLower() == ".gif" || a_fileextension.ToLower() == ".png" || a_fileextension.ToLower() == ".jpeg")
+                    {
+                        Stream stream = a_img.InputStream;
+                        BinaryReader binaryReader = new BinaryReader(stream);
+                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                        i1["a_image"] = bytes;
+                    }
+                    else
+                    {
+                        image_errror_lbl0.Visible = true;
+                        image_errror_lbl0.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                        image_errror_lbl0.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
                 }
-                else
+                if (optBCheck.Checked)
                 {
-                    image_errror_lbl.Visible = true;
-                    image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                    image_errror_lbl.ForeColor = System.Drawing.Color.Red;
+                    HttpPostedFile b_img = optBimg.PostedFile;
+
+                    string b_filename = Path.GetFileName(b_img.FileName);
+                    string b_fileextension = Path.GetExtension(b_filename);
+                    int b_filesize = b_img.ContentLength;
+                    if (b_fileextension.ToLower() == ".jpg" || b_fileextension.ToLower() == ".bmp" || b_fileextension.ToLower() == ".gif" || b_fileextension.ToLower() == ".png" || b_fileextension.ToLower() == ".jpeg")
+                    {
+                        Stream stream = b_img.InputStream;
+                        BinaryReader binaryReader = new BinaryReader(stream);
+                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                        i1["b_image"] = bytes;
+                    }
+                    else
+                    {
+                        image_errror_lbl1.Visible = true;
+                        image_errror_lbl1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                        image_errror_lbl1.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
                 }
+                if (optCCheck.Checked)
+                {
+                    HttpPostedFile c_img = optCimg.PostedFile;
+
+                    string c_filename = Path.GetFileName(c_img.FileName);
+                    string c_fileextension = Path.GetExtension(c_filename);
+                    int c_filesize = c_img.ContentLength;
+                    if (c_fileextension.ToLower() == ".jpg" || c_fileextension.ToLower() == ".bmp" || c_fileextension.ToLower() == ".gif" || c_fileextension.ToLower() == ".png" || c_fileextension.ToLower() == ".jpeg")
+                    {
+                        Stream stream = c_img.InputStream;
+                        BinaryReader binaryReader = new BinaryReader(stream);
+                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                        i1["c_image"] = bytes;
+                    }
+                    else
+                    {
+                        image_errror_lbl2.Visible = true;
+                        image_errror_lbl2.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                        image_errror_lbl2.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
+                }
+                if (optDCheck.Checked)
+                {
+                    HttpPostedFile d_img = optDimg.PostedFile;
+
+                    string d_filename = Path.GetFileName(d_img.FileName);
+                    string d_fileextension = Path.GetExtension(d_filename);
+                    int d_filesize = d_img.ContentLength;
+                    if (d_fileextension.ToLower() == ".jpg" || d_fileextension.ToLower() == ".bmp" || d_fileextension.ToLower() == ".gif" || d_fileextension.ToLower() == ".png" || d_fileextension.ToLower() == ".jpeg")
+                    {
+                        Stream stream = d_img.InputStream;
+                        BinaryReader binaryReader = new BinaryReader(stream);
+                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                        i1["d_image"] = bytes;
+                    }
+                    else
+                    {
+                        image_errror_lbl3.Visible = true;
+                        image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                        image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
+                }
+                mcq_image.Rows.Add(i1);
             }
             //set question to datatable
 
@@ -457,6 +540,7 @@ namespace e_Exam
             test_section.Rows.Add(ts1);
 
             string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            //question
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -477,6 +561,7 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //mcq
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -500,6 +585,7 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //fill_in_blank
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -518,6 +604,7 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //test
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -542,6 +629,7 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //test_section
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -560,6 +648,7 @@ namespace e_Exam
                     con.Close();
                 }
             }
+            //question_image
             using (SqlConnection con = new SqlConnection(consString))
             {
                 using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
@@ -575,6 +664,28 @@ namespace e_Exam
                     sqlBulkCopy.ColumnMappings.Add("image", "image");
                     con.Open();
                     sqlBulkCopy.WriteToServer(q_image);
+                    con.Close();
+                }
+            }
+            //mcq_image
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                {
+                    //Set the database table name
+                    sqlBulkCopy.DestinationTableName = "dbo.mcq_image";
+
+                    //[OPTIONAL]: Map the DataTable columns with that of the database table
+
+                    sqlBulkCopy.ColumnMappings.Add("test_id", "test_id");
+                    sqlBulkCopy.ColumnMappings.Add("section_no", "section_no");
+                    sqlBulkCopy.ColumnMappings.Add("q_id", "q_id");
+                    sqlBulkCopy.ColumnMappings.Add("a_image", "a_image");
+                    sqlBulkCopy.ColumnMappings.Add("b_image", "b_image");
+                    sqlBulkCopy.ColumnMappings.Add("c_image", "c_image");
+                    sqlBulkCopy.ColumnMappings.Add("d_image", "d_image");
+                    con.Open();
+                    sqlBulkCopy.WriteToServer(mcq_image);
                     con.Close();
                 }
             }

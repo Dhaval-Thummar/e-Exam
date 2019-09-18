@@ -69,6 +69,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="custom.css" />
+    <Content Include="font-awesome.min.css" />
     <Content Include="teacher\add_question.aspx" />
     <Content Include="teacher\add_test.aspx" />
     <Content Include="admin_dashboard.aspx" />
@@ -141,6 +143,7 @@
     <Content Include="style_login.css" />
     <Content Include="teacher\teacher_dashboard.aspx" />
     <Content Include="teacher_list.aspx" />
+    <Content Include="teacher\view_test.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -264,6 +267,13 @@
       <DependentUpon>teacher_list.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test.cs" />
+    <Compile Include="teacher\view_test.aspx.cs">
+      <DependentUpon>view_test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\view_test.aspx.designer.cs">
+      <DependentUpon>view_test.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
