@@ -10,52 +10,42 @@
 namespace e_Exam {
     
     
-    public partial class Forgot_Password {
+    public partial class teacher_dashboard {
         
         /// <summary>
-        /// form1 control.
+        /// lbltotalexam control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Label lbltotalexam;
         
         /// <summary>
-        /// Label3 control.
+        /// lbltotalquestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label lbltotalquestion;
         
         /// <summary>
-
-        /// email_input control.
+        /// panel_index_warning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email_input;
+        protected global::System.Web.UI.WebControls.Panel panel_index_warning;
         
         /// <summary>
-        /// Button1 control.
+        /// lbl_indexwarning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
-        
-        /// <summary>
-        /// Label5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lbl_indexwarning;
     }
 }

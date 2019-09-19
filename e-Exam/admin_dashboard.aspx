@@ -1,4 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin_dashboard.aspx.cs" Inherits="e_Exam.admin_dashboard" %>
+
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin_dashboard.aspx.cs" Inherits="e_Exam.admin_dashboard" %>
+
 
 <!DOCTYPE html>
 
