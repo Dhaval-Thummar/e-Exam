@@ -69,16 +69,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="custom.css" />
+    <Content Include="font-awesome.min.css" />
+    <Content Include="teacher\add_question.aspx" />
+    <Content Include="teacher\add_test.aspx" />
+    <Content Include="admin_dashboard.aspx" />
+    <Content Include="admin_dashboard1.aspx" />
+    <Content Include="admin_login.aspx" />
     <Content Include="App_Data\exam.mdf" />
     <Content Include="App_Data\exam_log.ldf">
       <DependentUpon>exam.mdf</DependentUpon>
     </Content>
-    <Content Include="App_LocalResources\backgroung.jpg" />
-    <Content Include="App_LocalResources\flower.png" />
-    <Content Include="bg1.png" />
-    <Content Include="bg3.jpg" />
+    <Content Include="App_LocalResources\bg4.jpg" />
+    <Content Include="App_LocalResources\bg5.png" />
+    <Content Include="App_LocalResources\lg1.jpg" />
     <Content Include="bg4.jpg" />
-    <Content Include="bg5.png" />
+    <Content Include="Images\bg1.png" />
+    <Content Include="Images\bg3.jpg" />
+    <Content Include="Images\bg4.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -87,6 +95,8 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Forgot_Password.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Images\bg5.png" />
+    <Content Include="Images\lg1.jpg" />
     <Content Include="lg1.jpg" />
     <Content Include="Registration.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -111,6 +121,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="admin.Master" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -124,8 +135,15 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="student\student_dashboard.aspx" />
+    <Content Include="student_list.aspx" />
     <Content Include="style.css" />
     <Content Include="style1.css" />
+    <Content Include="Style2.css" />
+    <Content Include="style_login.css" />
+    <Content Include="teacher\teacher_dashboard.aspx" />
+    <Content Include="teacher_list.aspx" />
+    <Content Include="teacher\view_test.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -139,6 +157,48 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="teacher\add_question.aspx.cs">
+      <DependentUpon>add_question.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\add_question.aspx.designer.cs">
+      <DependentUpon>add_question.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher\add_test.aspx.cs">
+      <DependentUpon>add_test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\add_test.aspx.designer.cs">
+      <DependentUpon>add_test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin_dashboard.aspx.cs">
+      <DependentUpon>admin_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_dashboard.aspx.designer.cs">
+      <DependentUpon>admin_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin_dashboard1.aspx.cs">
+      <DependentUpon>admin_dashboard1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_dashboard1.aspx.designer.cs">
+      <DependentUpon>admin_dashboard1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin_login.aspx.cs">
+      <DependentUpon>admin_login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_login.aspx.designer.cs">
+      <DependentUpon>admin_login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Forgot_Password.aspx.cs">
       <DependentUpon>Forgot_Password.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -164,11 +224,63 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
+    <Compile Include="student.Master.cs">
+      <DependentUpon>student.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student.Master.designer.cs">
+      <DependentUpon>student.Master</DependentUpon>
+    </Compile>
+    <Compile Include="student\student_dashboard.aspx.cs">
+      <DependentUpon>student_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student\student_dashboard.aspx.designer.cs">
+      <DependentUpon>student_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student_list.aspx.cs">
+      <DependentUpon>student_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student_list.aspx.designer.cs">
+      <DependentUpon>student_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher.Master.cs">
+      <DependentUpon>teacher.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher.Master.designer.cs">
+      <DependentUpon>teacher.Master</DependentUpon>
+    </Compile>
+    <Compile Include="teacher\teacher_dashboard.aspx.cs">
+      <DependentUpon>teacher_dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\teacher_dashboard.aspx.designer.cs">
+      <DependentUpon>teacher_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher_list.aspx.cs">
+      <DependentUpon>teacher_list.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher_list.aspx.designer.cs">
+      <DependentUpon>teacher_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs" />
+    <Compile Include="teacher\view_test.aspx.cs">
+      <DependentUpon>view_test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\view_test.aspx.designer.cs">
+      <DependentUpon>view_test.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="student.Master" />
+    <Content Include="teacher.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -181,6 +293,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
