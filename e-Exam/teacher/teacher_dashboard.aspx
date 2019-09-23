@@ -19,7 +19,7 @@
                 <div class="card-body-icon">
                     <i class="fa fa-fw fa-comments"></i>
                 </div>
-                <div class="mr-5">You have added <asp:Label ID="lbltotalexam" runat="server"></asp:Label> Tests</div>
+                <div class="mr-5 ">You have added <asp:Label ID="lbltotalexam" runat="server"></asp:Label> Tests</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="exam.aspx">
                 <span class="float-left">View Details</span>

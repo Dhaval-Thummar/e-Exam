@@ -10,11 +10,11 @@ using System.Configuration;
 using System.IO;
 namespace e_Exam
 {
-    public partial class add_question : System.Web.UI.Page
+    public partial class add_question  : System.Web.UI.Page
     {
-        static private int q_no = 1,total_q=0;
+        static private int q_no = 1, total_q = 0;
         static int test_id, marks = 0;
-        static float nmarks=0;
+        static float nmarks = 0;
         static DataTable qtable = new DataTable();
         static DataTable mcq_table = new DataTable();
         static DataTable fill_blank = new DataTable();
@@ -25,101 +25,101 @@ namespace e_Exam
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-              {
-                  q_no = 1;
-                  if (Session["section_no"]==null)
-                  {
-                      Server.Transfer("~/teacher/add_test.aspx");
-                  }
-                  MultiView2.ActiveViewIndex = 0; 
-                  Session["section"] = 1;
-                  if (Session["section"].ToString().Equals(Session["section_no"].ToString()))
-                  {
-                      next_section_btn.Enabled = false;
-                      next_section_btn.CssClass="btn btn-warning disabled";
-                  }
-                  if (Session["test"] != null)
-                  {
-                      Test t1 = (Test)Session["test"];
-                      test_id = t1.test_id;
-                  }
-                  //question_table
-                  qtable.Columns.Add(new DataColumn("test_id",typeof(int)));
-                  qtable.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("subject_id", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("question", typeof(string)));
-                  qtable.Columns.Add(new DataColumn("type", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("has_image", typeof(int)));
+            {
+                q_no = 1;
+                if (Session["section_no"] == null)
+                {
+                    Server.Transfer("~/teacher/add_test.aspx");
+                }
+                MultiView2.ActiveViewIndex = 0;
+                Session["section"] = 1;
+                if (Session["section"].ToString().Equals(Session["section_no"].ToString()))
+                {
+                    next_section_btn.Enabled = false;
+                    next_section_btn.CssClass = "btn btn-warning disabled";
+                }
+                if (Session["test"] != null)
+                {
+                    Test t1 = (Test)Session["test"];
+                    test_id = t1.test_id;
+                }
+                //question_table
+                qtable.Columns.Add(new DataColumn("test_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("section_no", typeof(int)));
+                qtable.Columns.Add(new DataColumn("q_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("subject_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("question", typeof(string)));
+                qtable.Columns.Add(new DataColumn("type", typeof(int)));
+                qtable.Columns.Add(new DataColumn("has_image", typeof(int)));
 
-                  //mcq_table
-                  mcq_table.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("A", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("B", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("C", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("D", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("answer", typeof(char)));
-                  mcq_table.Columns.Add(new DataColumn("has_image", typeof(int)));
+                //mcq_table
+                mcq_table.Columns.Add(new DataColumn("test_id", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("section_no", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("q_id", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("A", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("B", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("C", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("D", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("answer", typeof(char)));
+                mcq_table.Columns.Add(new DataColumn("has_image", typeof(int)));
 
-                  //fill_in_blank_table
-                  fill_blank.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("answer", typeof(string)));
+                //fill_in_blank_table
+                fill_blank.Columns.Add(new DataColumn("test_id", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("section_no", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("q_id", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("answer", typeof(string)));
 
-                  //q_image
-                  q_image.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("image", typeof(byte[])));
+                //q_image
+                q_image.Columns.Add(new DataColumn("test_id", typeof(int)));
+                q_image.Columns.Add(new DataColumn("section_no", typeof(int)));
+                q_image.Columns.Add(new DataColumn("q_id", typeof(int)));
+                q_image.Columns.Add(new DataColumn("image", typeof(byte[])));
 
-                  //mcq_image
-                  mcq_image.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("a_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("b_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("c_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("d_image", typeof(byte[])));
+                //mcq_image
+                mcq_image.Columns.Add(new DataColumn("test_id", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("section_no", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("q_id", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("a_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("b_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("c_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("d_image", typeof(byte[])));
 
-                  //test_table
-                  test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  test_table.Columns.Add(new DataColumn("name",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("subject",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("duration",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("sections",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("total_marks",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("-ve marks",typeof(float)));
-                  test_table.Columns.Add(new DataColumn("added_date",typeof(DateTime)));
-                  test_table.Columns.Add(new DataColumn("description",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("teacher_id",typeof(int)));
+                //test_table
+                test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
+                test_table.Columns.Add(new DataColumn("name", typeof(string)));
+                test_table.Columns.Add(new DataColumn("subject", typeof(string)));
+                test_table.Columns.Add(new DataColumn("duration", typeof(int)));
+                test_table.Columns.Add(new DataColumn("sections", typeof(int)));
+                test_table.Columns.Add(new DataColumn("total_marks", typeof(int)));
+                test_table.Columns.Add(new DataColumn("-ve marks", typeof(float)));
+                test_table.Columns.Add(new DataColumn("added_date", typeof(DateTime)));
+                test_table.Columns.Add(new DataColumn("description", typeof(string)));
+                test_table.Columns.Add(new DataColumn("teacher_id", typeof(int)));
 
                 //test_section
-                 test_section.Columns.Add(new DataColumn("test_id", typeof(int)));
+                test_section.Columns.Add(new DataColumn("test_id", typeof(int)));
                 test_section.Columns.Add(new DataColumn("section_no", typeof(int)));
                 test_section.Columns.Add(new DataColumn("marks_per_q", typeof(int)));
                 test_section.Columns.Add(new DataColumn("nmarks", typeof(float)));
-                
+
             }
         }
 
         protected void qtype_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(qtype.SelectedItem.Value == "1")
+            if (qtype.SelectedItem.Value == "1")
             {
                 MultiView1.ActiveViewIndex = 0;
             }
-            else if(qtype.SelectedItem.Value=="2")
+            else if (qtype.SelectedItem.Value == "2")
             {
-                MultiView1.ActiveViewIndex = 1; 
+                MultiView1.ActiveViewIndex = 1;
             }
         }
 
         protected void image_upload_check(object sender, EventArgs e)
         {
-            if(q_image_checkbox.Checked==true)
+            if (q_image_checkbox.Checked == true)
             {
                 q_image_upload.Visible = true;
             }
@@ -188,8 +188,8 @@ namespace e_Exam
         protected void next_section_btn_Click(object sender, EventArgs e)
         {
             int a = Convert.ToInt32(marks_input.Text);
-            marks = marks + a*(q_no-1);
-            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value)*(q_no-1)*a;
+            marks = marks + a * (q_no - 1);
+            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no - 1) * a;
             q_no = 1;
             question_no_label.Text = "Question " + q_no;
 
@@ -198,7 +198,7 @@ namespace e_Exam
             DataRow ts1 = test_section.NewRow();
             ts1["test_id"] = test_id;
             ts1["section_no"] = int.Parse(Session["section"].ToString());
-            ts1["marks_per_q"]= Convert.ToInt32(marks_input.Text);
+            ts1["marks_per_q"] = Convert.ToInt32(marks_input.Text);
             ts1["nmarks"] = float.Parse(negative_list.SelectedItem.Value);
             test_section.Rows.Add(ts1);
 
@@ -329,7 +329,7 @@ namespace e_Exam
 
         protected void next_question_btn_Click(object sender, EventArgs e)
         {
-            if(q_image_checkbox.Checked)
+            if (q_image_checkbox.Checked)
             {
                 HttpPostedFile httpPostedFile = q_image_upload.PostedFile;
                 string filename = Path.GetFileName(httpPostedFile.FileName);
@@ -353,14 +353,14 @@ namespace e_Exam
                 else
                 {
                     image_errror_lbl.Visible = true;
-                    image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded " + fileextension.ToLower();
+                    image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
                     image_errror_lbl.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
             }
-            
+
             //mcq_image
-            if(optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
+            if (optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
             {
                 //new row to q_image table
                 DataRow i1 = mcq_image.NewRow();
@@ -473,11 +473,11 @@ namespace e_Exam
             q1["q_id"] = q_no;
             q1["subject_id"] = Convert.ToInt32(Session["subject_id"].ToString()); ;
             q1["question"] = question.Text;
-            q1["type"] = (qtype.SelectedItem.Text == "MCQ")?0:1;
-            q1["has_image"] = q_image_checkbox.Checked?1:0;
+            q1["type"] = (qtype.SelectedItem.Text == "MCQ") ? 0 : 1;
+            q1["has_image"] = q_image_checkbox.Checked ? 1 : 0;
             qtable.Rows.Add(q1);
-            
-            if(qtype.SelectedItem.Value.Equals("1"))
+
+            if (qtype.SelectedItem.Value.Equals("1"))
             {
                 //mcq
                 DataRow m1 = mcq_table.NewRow();
@@ -514,8 +514,8 @@ namespace e_Exam
         {
             //submit test
             int a = Convert.ToInt32(marks_input.Text);
-            marks = marks + a * (q_no-1);
-            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no-1) * a;
+            marks = marks + a * (q_no - 1);
+            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no - 1) * a;
             Test test = (Test)Session["test"];
 
             DataRow t1 = test_table.NewRow();
@@ -691,11 +691,11 @@ namespace e_Exam
             }
             //test summary
             MultiView2.ActiveViewIndex = 2;
-            test_id_lbl.Text = test_id+"";
+            test_id_lbl.Text = test_id.ToString();
             test_name_lbl.Text = test.name;
-            no_of_q_lbl.Text = total_q + "";
-            total_marks_lbl.Text = marks+"";
-            duration_lbl.Text = test.duration+"";
+            no_of_q_lbl.Text = total_q.ToString();
+            total_marks_lbl.Text = marks.ToString();
+            duration_lbl.Text = test.duration.ToString();
             desc_lbl.Text = test.descripetion;
         }
     }

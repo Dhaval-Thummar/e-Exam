@@ -15,6 +15,10 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if(Session["teacherID"]==null)
+            {
+                Response.Redirect("~/login.aspx");
+            }
             if(!IsPostBack)
             {
                 SqlConnection con = new SqlConnection();
