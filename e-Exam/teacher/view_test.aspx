@@ -37,7 +37,7 @@
     <div class="div1">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-sm" DataKeyNames="test_id" DataSourceID="SqlDataSource1" AllowSorting="True">
             <Columns>
-                <asp:BoundField DataField="test_id" HeaderText="test_id" ReadOnly="True" SortExpression="test_id" ItemStyle-Width="5%">
+                <asp:BoundField DataField="test_id" HeaderText="Test ID" ReadOnly="True" SortExpression="test_id" ItemStyle-Width="5%">
                     <ItemStyle Width="5%"></ItemStyle>
                 </asp:BoundField>
                 <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />

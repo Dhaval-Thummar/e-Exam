@@ -122,7 +122,7 @@
                     <asp:LinkButton ID="btn_edit" runat="server" OnClick="OnEdit">Edit</asp:LinkButton>
                     <asp:LinkButton ID="btn_update" runat="server" OnClick="OnUpdate" Visible="False">Update</asp:LinkButton>
                     <asp:LinkButton ID="btn_cancel" runat="server" OnClick="OnCancel" Visible="False">Cancel</asp:LinkButton>
-                    <asp:LinkButton ID="btn_delete" runat="server" OnClientClick="return confirm('Do you want to delete this row?');">Delete</asp:LinkButton>
+                    <asp:LinkButton ID="btn_delete" runat="server" OnClick="OnDelete" OnClientClick="return confirm('Do you want to delete this row?');">Delete</asp:LinkButton>
                     <hr />
                 </ItemTemplate>
             </asp:Repeater>
@@ -130,7 +130,7 @@
         <asp:View ID="View2" runat="server">
             <br />
             <div class="alert alert-danger" role="alert">
-                <asp:Label ID="no_details" runat="server" Text="No details found!" Visible="False"></asp:Label>
+                <asp:Label ID="no_details" runat="server" Text="No details found!"></asp:Label>
             </div>
         </asp:View>
     </asp:MultiView>

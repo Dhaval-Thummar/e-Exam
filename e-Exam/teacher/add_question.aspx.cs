@@ -503,6 +503,13 @@ namespace e_Exam
                 fill_blank.Rows.Add(f1);
             }
 
+            question.Text = "";
+            txt_optionone.Text = "";
+            txt_optiontwo.Text = "";
+            txt_optionthree.Text = "";
+            txt_optionfour.Text = "";
+            blank_ans.Text = "";
+            rdo_correctanswer.ClearSelection();
             Label1.Text = "Question no. " + q_no + " added...";
             q_no++;
             question_no_label.Text = "Question " + q_no;

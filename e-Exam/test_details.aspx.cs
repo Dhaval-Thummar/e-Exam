@@ -13,12 +13,26 @@ namespace e_Exam
     public partial class test_details : System.Web.UI.Page
     {
         static int a = 1, count = 0,check=0;
+        static Teacher_test t1;
         protected void Page_Load(object sender, EventArgs e)
         {
             a = 1;
             count = 0;
-            
-            if (!IsPostBack)
+            if(!IsPostBack)
+            {
+                int tid = Convert.ToInt32(Session["teacherID"].ToString());
+                t1 = new Teacher_test(tid);
+                if (!t1.test_list.Contains(Convert.ToInt32(Request.QueryString["tid"])))
+                {
+                    MultiView1.ActiveViewIndex = 2;
+                }
+                else
+                {
+                    getTestData();
+                    MultiView1.ActiveViewIndex = 0;
+                }
+            }
+            /*if (!IsPostBack)
             {
                 MultiView1.ActiveViewIndex = 0;
                 if (Request.QueryString["tid"] != null)
@@ -30,7 +44,7 @@ namespace e_Exam
                 {
                     Label1.Text = "No test found";
                 }
-            }
+            }*/
             if(check==1)
             {
                 MultiView1.ActiveViewIndex = 1;
@@ -300,10 +314,8 @@ namespace e_Exam
                     }
                 }
             }
-            //Response.Write("<script type='text/javascript'> setTimeout('location.reload(true); ', timeout);</script>");
             check = 1;
             Response.Redirect(Request.RawUrl);
-            //this.getQuestion(Convert.ToInt32(Request.QueryString["tid"]));
         }
 
         protected void OnCancel(object sender, EventArgs e)
@@ -312,6 +324,57 @@ namespace e_Exam
             RepeaterItem item = (sender as LinkButton).Parent as RepeaterItem;
             this.ToggleElements(item, false);
             MultiView1.ActiveViewIndex = 1;
+        }
+        protected void OnDelete(object sender, EventArgs e)
+        {
+            //Find the reference of the Repeater Item.
+            RepeaterItem item = (sender as LinkButton).Parent as RepeaterItem;
+
+            int tid = Convert.ToInt32(Request.QueryString["tid"]);
+            int section = Convert.ToInt32((item.FindControl("hidden_section") as HiddenField).Value.ToString());
+            int qid = Convert.ToInt32((item.FindControl("hidden_qid") as HiddenField).Value.ToString());
+
+            int type = Convert.ToInt32((item.FindControl("q_type") as HiddenField).Value.ToString());
+            string constr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            
+            if(type == 0)
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Question_edit"))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@action", "del_mcq");
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.Parameters.AddWithValue("@section", section);
+                        cmd.Parameters.AddWithValue("@qid", qid);
+                        cmd.Connection = con;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+            }
+            else
+            {
+                using (SqlConnection con = new SqlConnection(constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand("Question_edit"))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@action", "del_fill");
+                        cmd.Parameters.AddWithValue("@tid", tid);
+                        cmd.Parameters.AddWithValue("@section", section);
+                        cmd.Parameters.AddWithValue("@qid", qid);
+                        cmd.Connection = con;
+                        con.Open();
+                        cmd.ExecuteNonQuery();
+                        con.Close();
+                    }
+                }
+            }
+            check = 1;
+            Response.Redirect(Request.RawUrl);
         }
     }
 }
