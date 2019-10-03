@@ -5,92 +5,135 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Student Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="style_login.css" rel="stylesheet" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="Scripts/bootstrap.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/jquery-3.0.0.min.js"></script>
     <style type="text/css">
-        body {
-            background: url('https://www.pixelstalk.net/wp-content/uploads/2016/08/Free-Chalkboard-Backgrounds.jpg');
-            background-size: cover;
+
+        .Initial
+        {
+            display: block;
+            padding: 4px 18px 4px 18px;
+            float: left;
+            color: Black;
+            font-weight: bold;
+        }
+        .Initial:hover
+        {
+            color: White;
+        }
+        .Clicked
+        {
+            float: left;
+            display: block;
+            padding: 4px 18px 4px 18px;
+            color: Black;
+            font-weight: bold;
+            color: White;
         }
         .auto-style1 {
-            height: 50px;
-            width:60%;
-            text-align: left;
+            width:25%;
+            margin :150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
         }
         .auto-style2 {
-            margin:150px auto;
-            width:25%;
+            text-align:center;
+            height: 67px;
         }
-        .auto-style5 {  
-            height: 50px;
-            width:40%;
+        .auto-style3 {
+            text-align:left;
+            padding:10px;
+        }
+        .auto-style4 {
+            padding:0px 15px 0px 15px;
+            height:40px;
+        }
+         .auto-style5 {
+            text-align:center;
+        }
+        .auto-style6 {
             text-align: center;
-            padding-right:5px;
-
+            height: 50px;
         }
         .auto-style7 {
-            height: 100px;
-            width:50%;
             text-align: center;
+            height: 23px;
         }
-        .auto-style8 {
-            height: 75px;
-            width:50%;
-            text-align: center;
-        }
-        </style>
+    </style>
+
 </head>
 <body>
-    <form id="form1" runat="server">
-    <table class="auto-style2" style=" filter: alpha(opacity=40); opacity: 0.95;border:5px orange solid;">
-        <tr>
-            <td colspan="2" class="auto-style8">
-                <br />
-                <br />
-                <asp:Label ID="s_login" runat="server" Text="Student Login" Font-Bold="True" Font-Overline="False" Font-Size="X-Large" ForeColor="#0099FF"></asp:Label>
-                <br />
-                <br />
-            </td>
-        </tr>
+    <div>
+       
 
-        <tr>
-            <td class="auto-style5">
-                <asp:Label ID="uname" runat="server" Text="User Name :" ForeColor="White"></asp:Label>
-            </td>
-            <td class="auto-style1">
-                <asp:TextBox ID="u_input" runat="server"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style5">
-                <asp:Label ID="pswd" runat="server" Text="Password :" ForeColor="White"></asp:Label>
-            </td>
-            <td class="auto-style1">
-                <asp:TextBox ID="p_input" runat="server" TextMode="Password" ></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" class="auto-style7">
-                <br />
-                <asp:Button ID="btn_login" runat="server" Text="Login" Height="35px" Width="75px" OnClick="btn_login_Click" class="btn btn-primary"/>
-                <br />
-                <br />
-                <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Registration for new user?</asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forgot Password</asp:HyperLink>
-                <br />
-                <br />
-                <asp:Label ID="valid" runat="server" Font-Bold="True" Font-Size="Larger" ForeColor="Red"></asp:Label>
-            </td>
-        </tr>
+
+    <form id="form1" runat="server" >
         
-    </table>
-    </form>
-    <p>
-        &nbsp;</p>
-    <p>
-        &nbsp;</p>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2">
+                    <asp:Button ID="student_tab" runat="server" Text="Student Login" Width="50%" BackColor="#C3C3C3" BorderStyle="None" Height="90%" class="btn btn-light" OnClick="Button1_Click" Font-Bold="True" Font-Overline="False" Font-Strikeout="False" Font-Underline="True" />
+                    <asp:Button ID="teacher_tab" runat="server" Text="Teacher Login" Width="50%" BorderStyle="None" Height="90%" class="btn btn-dark" OnClick="teacher_tab_Click" Font-Bold="True" />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style7">
+                     &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style3">
+                     <asp:Label ID="uname" runat="server" Text="User Name" ></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">
+                     <asp:TextBox ID="u_input" runat="server" Width="100%" Font-Size="X-Large" ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style3">
+                    <asp:Label ID="pswd" runat="server" Text="Password"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style4">
+                     <asp:TextBox ID="p_input" runat="server" TextMode="Password" Width="100%" Font-Size="X-Large" ></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style6">
+                      &nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style6">
+                      <asp:Button ID="btn_login" runat="server" Text="Log In"  OnClick="btn_login_Click" CssClass="btn btn-primary"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      <asp:Label ID="valid" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn't Have Account?</asp:HyperLink>
+                    <br />
+                     <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forget Password</asp:HyperLink>
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5">
+                      &nbsp;</td>
+            </tr>
+        </table>  
+    </form>  
+        </div>
 </body>
 </html>

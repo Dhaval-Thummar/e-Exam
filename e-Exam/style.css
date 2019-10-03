@@ -1,0 +1,53 @@
+﻿
+body {
+    margin: auto;
+    background-image: url('bg4.jpg');
+    background-size: cover;
+    font-family: sans-serif;
+}
+
+
+#pswd, #uname{
+    font-weight: bold;
+    color: black;
+}
+
+    #btn_login,#u_input,#p_input{
+   
+width:100%;
+margin-bottom:20px;
+}
+
+#u_input, #p_input {
+    border: none;
+    border-bottom: 3px solid black;
+    outline: none;
+    color: black;
+    font-size: 16px;
+    background-color: transparent;
+}
+#btn_login {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 100%;
+    text-align: center ;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bolder;
+    background-color: black;
+    cursor: pointer;
+    border-radius: 15px;
+    transition: .3s ease-in-out;
+}
+    #btn_login:hover {
+        background-color: green;
+    }
+
+
+#valid {
+    font-weight: bold;
+    color: red;
+    padding-left:30%;
+    text-align: center;
+}
