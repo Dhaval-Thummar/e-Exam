@@ -49,6 +49,7 @@
                 <asp:TemplateField HeaderText="Options" ItemStyle-Width="6%">
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/test_details.aspx?tid=" + Eval("test_id")%>'>Details</asp:LinkButton>
+                        <asp:LinkButton ID="LinkButton2" runat="server" PostBackUrl='<%#"~/take_test.aspx?tid=" + Eval("test_id")%>'>Test</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
