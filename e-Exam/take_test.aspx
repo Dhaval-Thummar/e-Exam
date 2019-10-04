@@ -51,16 +51,21 @@
             display: inline-block;
             cursor: pointer;
         }
-
+        .table2{
+            margin-bottom:300px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Panel ID="Panel1" runat="server" Visible="False">
+        <div class="sidenav">
+            <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
+            <asp:Table ID="Table1"  HorizontalAlign="Center" runat="server" CssClass="table2">
+            </asp:Table>
 
-    <div class="sidenav">
-        <asp:Table ID="Table1" HorizontalAlign="Center" runat="server">
-
-        </asp:Table>
-    </div>
+            <asp:Button ID="submitbtn" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="submitbtn_Click" />
+        </div>
+    </asp:Panel>
 
 
     <asp:Panel ID="timer_pnl" runat="server" Visible="False">
@@ -108,7 +113,7 @@
                                 <asp:ListItem Text="C" Value="3"></asp:ListItem>
                                 <asp:ListItem Text="D" Value="4"></asp:ListItem>
                             </asp:RadioButtonList>
-                            <asp:Label ID="anslbl" runat="server" Text="Ans. "></asp:Label> 
+                            <asp:Label ID="anslbl" runat="server" Text="Ans. "></asp:Label>
                             <asp:TextBox ID="anstxt" runat="server"></asp:TextBox>
                         </div>
                     </td>

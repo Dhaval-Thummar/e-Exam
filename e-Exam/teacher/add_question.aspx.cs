@@ -10,7 +10,7 @@ using System.Configuration;
 using System.IO;
 namespace e_Exam
 {
-    public partial class add_question  : System.Web.UI.Page
+    public partial class add_question : System.Web.UI.Page
     {
         static private int q_no = 1, total_q = 0;
         static int test_id, marks = 0;
@@ -134,10 +134,14 @@ namespace e_Exam
             if (optACheck.Checked == true)
             {
                 optAimg.Visible = true;
+                txt_optionone.Visible = false;
+                require_op1.Enabled = false;
             }
             else
             {
                 optAimg.Visible = false;
+                txt_optionone.Visible = true;
+                require_op1.Enabled = true;
             }
         }
 
@@ -146,10 +150,14 @@ namespace e_Exam
             if (optBCheck.Checked == true)
             {
                 optBimg.Visible = true;
+                txt_optiontwo.Visible = false;
+                require_op2.Enabled = false;
             }
             else
             {
                 optBimg.Visible = false;
+                txt_optiontwo.Visible = true;
+                require_op2.Enabled = true;
             }
         }
 
@@ -158,10 +166,14 @@ namespace e_Exam
             if (optCCheck.Checked == true)
             {
                 optCimg.Visible = true;
+                txt_optionthree.Visible = false;
+                require_op3.Enabled = false;
             }
             else
             {
                 optCimg.Visible = false;
+                txt_optionthree.Visible = true;
+                require_op3.Enabled = true;
             }
         }
 
@@ -170,10 +182,14 @@ namespace e_Exam
             if (optDCheck.Checked == true)
             {
                 optDimg.Visible = true;
+                txt_optionfour.Visible = false;
+                require_op4.Enabled = false;
             }
             else
             {
                 optDimg.Visible = false;
+                txt_optionfour.Visible = true;
+                require_op4.Enabled = true;
             }
         }
 
@@ -359,111 +375,7 @@ namespace e_Exam
                 }
             }
 
-            //mcq_image
-            if (optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
-            {
-                //new row to q_image table
-                DataRow i1 = mcq_image.NewRow();
-                i1["test_id"] = test_id;
-                i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
-                i1["q_id"] = q_no;
-                i1["a_image"] = null;
-                i1["b_image"] = null;
-                i1["c_image"] = null;
-                i1["d_image"] = null;
 
-                if (optACheck.Checked)
-                {
-
-                    HttpPostedFile a_img = optAimg.PostedFile;
-
-                    string a_filename = Path.GetFileName(a_img.FileName);
-                    string a_fileextension = Path.GetExtension(a_filename);
-                    int a_filesize = a_img.ContentLength;
-
-                    if (a_fileextension.ToLower() == ".jpg" || a_fileextension.ToLower() == ".bmp" || a_fileextension.ToLower() == ".gif" || a_fileextension.ToLower() == ".png" || a_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = a_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["a_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl0.Visible = true;
-                        image_errror_lbl0.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl0.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optBCheck.Checked)
-                {
-                    HttpPostedFile b_img = optBimg.PostedFile;
-
-                    string b_filename = Path.GetFileName(b_img.FileName);
-                    string b_fileextension = Path.GetExtension(b_filename);
-                    int b_filesize = b_img.ContentLength;
-                    if (b_fileextension.ToLower() == ".jpg" || b_fileextension.ToLower() == ".bmp" || b_fileextension.ToLower() == ".gif" || b_fileextension.ToLower() == ".png" || b_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = b_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["b_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl1.Visible = true;
-                        image_errror_lbl1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl1.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optCCheck.Checked)
-                {
-                    HttpPostedFile c_img = optCimg.PostedFile;
-
-                    string c_filename = Path.GetFileName(c_img.FileName);
-                    string c_fileextension = Path.GetExtension(c_filename);
-                    int c_filesize = c_img.ContentLength;
-                    if (c_fileextension.ToLower() == ".jpg" || c_fileextension.ToLower() == ".bmp" || c_fileextension.ToLower() == ".gif" || c_fileextension.ToLower() == ".png" || c_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = c_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["c_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl2.Visible = true;
-                        image_errror_lbl2.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl2.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optDCheck.Checked)
-                {
-                    HttpPostedFile d_img = optDimg.PostedFile;
-
-                    string d_filename = Path.GetFileName(d_img.FileName);
-                    string d_fileextension = Path.GetExtension(d_filename);
-                    int d_filesize = d_img.ContentLength;
-                    if (d_fileextension.ToLower() == ".jpg" || d_fileextension.ToLower() == ".bmp" || d_fileextension.ToLower() == ".gif" || d_fileextension.ToLower() == ".png" || d_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = d_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["d_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl3.Visible = true;
-                        image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                mcq_image.Rows.Add(i1);
-            }
             //set question to datatable
 
             //question
@@ -479,18 +391,65 @@ namespace e_Exam
 
             if (qtype.SelectedItem.Value.Equals("1"))
             {
-                //mcq
-                DataRow m1 = mcq_table.NewRow();
-                m1["test_id"] = test_id;
-                m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
-                m1["q_id"] = q_no;
-                m1["A"] = txt_optionone.Text;
-                m1["B"] = txt_optiontwo.Text;
-                m1["C"] = txt_optionthree.Text;
-                m1["D"] = txt_optionfour.Text;
-                m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
-                m1["has_image"] = 0;
-                mcq_table.Rows.Add(m1);
+                //mcq_image
+                if (optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
+                {
+                    //mcq_with_image
+                    DataRow m1 = mcq_table.NewRow();
+                    m1["test_id"] = test_id;
+                    m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    m1["q_id"] = q_no;
+                    m1["A"] = "";
+                    m1["B"] = "";
+                    m1["C"] = "";
+                    m1["D"] = "";
+                    m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
+                    m1["has_image"] = 1;
+                    mcq_table.Rows.Add(m1);
+
+
+                    //new row to q_image table
+                    DataRow i1 = mcq_image.NewRow();
+                    i1["test_id"] = test_id;
+                    i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    i1["q_id"] = q_no;
+                    i1["a_image"] = null;
+                    i1["b_image"] = null;
+                    i1["c_image"] = null;
+                    i1["d_image"] = null;
+
+                    if (optACheck.Checked)
+                    {
+                        mcq_image_add(optAimg, i1, "a_image");
+                    }
+                    if (optBCheck.Checked)
+                    {
+                        mcq_image_add(optBimg, i1, "b_image");
+                    }
+                    if (optCCheck.Checked)
+                    {
+                        mcq_image_add(optCimg, i1, "c_image");
+                    }
+                    if (optDCheck.Checked)
+                    {
+                        mcq_image_add(optDimg, i1, "d_image");
+                    }
+                    mcq_image.Rows.Add(i1);
+                }
+                else
+                {
+                    DataRow m1 = mcq_table.NewRow();
+                    m1["test_id"] = test_id;
+                    m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    m1["q_id"] = q_no;
+                    m1["A"] = txt_optionone.Text;
+                    m1["B"] = txt_optiontwo.Text;
+                    m1["C"] = txt_optionthree.Text;
+                    m1["D"] = txt_optionfour.Text;
+                    m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
+                    m1["has_image"] = 0;
+                    mcq_table.Rows.Add(m1);
+                }
             }
             else
             {
@@ -705,5 +664,31 @@ namespace e_Exam
             duration_lbl.Text = test.duration.ToString();
             desc_lbl.Text = test.descripetion;
         }
+
+        private void mcq_image_add(FileUpload img, DataRow row, string name)
+        {
+
+
+            HttpPostedFile mcq_img = img.PostedFile;
+
+            string filename = Path.GetFileName(mcq_img.FileName);
+            string fileextension = Path.GetExtension(filename);
+            int filesize = mcq_img.ContentLength;
+            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".bmp" || fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png" || fileextension.ToLower() == ".jpeg")
+            {
+                Stream stream = mcq_img.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                row[name] = bytes;
+            }
+            else
+            {
+                image_errror_lbl3.Visible = true;
+                image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+        }
     }
+
 }
