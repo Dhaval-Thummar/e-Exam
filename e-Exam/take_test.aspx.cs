@@ -14,6 +14,7 @@ namespace e_Exam
         static DataTable qtable = new DataTable();
         static DataTable ans_table = new DataTable();
         static int qno = 1, tid = 0, total_q = 0;
+        string yellow = "#FFD500", white = "#F8F9FA", green = "#42D127";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -37,19 +38,18 @@ namespace e_Exam
         {
             add_button(total_q);
         }
-
         private DataTable generate_ans_table(int rows)
         {
+            ans_table.Rows.Clear();
             DataTable t1 = new DataTable();
             DataRow r1;
-            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
             t1.Columns.Add(new DataColumn("t_id", typeof(int)));
             t1.Columns.Add(new DataColumn("section_no", typeof(int)));
             t1.Columns.Add(new DataColumn("q_id", typeof(int)));
-            t1.Columns.Add(new DataColumn("type", typeof(int)));
-            t1.Columns.Add(new DataColumn("mcq", typeof(char)));
-            t1.Columns.Add(new DataColumn("blank", typeof(string)));
-            t1.Columns.Add(new DataColumn("correct", typeof(int)));
+            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
+            t1.Columns.Add(new DataColumn("answer", typeof(string)));
+            t1.Columns.Add(new DataColumn("correct", typeof(char)));
+            t1.Columns.Add(new DataColumn("attempt", typeof(char)));
             for (int i = 0; i < rows; i++)
             {
                 r1 = t1.NewRow();
@@ -59,6 +59,7 @@ namespace e_Exam
         }
         private DataTable Questiosns(int tid, int section)
         {
+            qtable.Rows.Clear();
             DataTable q1 = new DataTable();
             String conStr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             String qry = "select q.test_id,q.section_no,q.q_id,q.question,q.type,m.A,m.B,m.C,m.D,m.answer,f.answer as blank, q.has_image from Question as q " +
@@ -146,15 +147,34 @@ namespace e_Exam
         protected void save_answer(int qid)
         {
             ans_table.Rows[qid - 1]["student_id"] = 0;
-            ans_table.Rows[qid - 1]["t_id"] = 0;
-            ans_table.Rows[qid - 1]["section_no"] = 0;
+            ans_table.Rows[qid - 1]["t_id"] = tid;
+            ans_table.Rows[qid - 1]["section_no"] = Convert.ToInt32(ViewState["section"]);
             ans_table.Rows[qid - 1]["q_id"] = qid;
-            ans_table.Rows[qid - 1]["type"] = Convert.ToInt32(qtable.Rows[qid - 1]["type"].ToString());
-            if (RadioButtonList1.SelectedIndex != -1)
+            if(qtable.Rows[qid - 1]["type"].ToString().Equals("0"))
             {
-                ans_table.Rows[qid - 1]["mcq"] = 64 + Convert.ToInt32(RadioButtonList1.SelectedItem.Value);
+                if (RadioButtonList1.SelectedIndex != -1)
+                {
+                    ans_table.Rows[qid - 1]["answer"] = (char)(64 + Convert.ToInt32(RadioButtonList1.SelectedItem.Value));
+                    ans_table.Rows[qid - 1]["attempt"] = '1';
+                }
+                else
+                {
+                    ans_table.Rows[qid - 1]["attempt"] = '0';
+                }
             }
-            ans_table.Rows[qid - 1]["blank"] = anstxt.Text.Trim();
+
+            else
+            {
+                if(anstxt.Text.Trim() != "")
+                {
+                    ans_table.Rows[qid - 1]["answer"] = anstxt.Text.Trim();
+                    ans_table.Rows[qid - 1]["attempt"] = '1';
+                }
+                else
+                {
+                    ans_table.Rows[qid - 1]["attempt"] = '0';
+                }               
+            }
         }
         protected void nextbtn_Click(object sender, EventArgs e)
         {
@@ -165,18 +185,23 @@ namespace e_Exam
             {
                 nextbtn.Enabled = false;
             }
-            if (RadioButtonList1.SelectedIndex != -1 || anstxt.Text.Trim() != "")
-            {
-                foreach (TableRow row in Table1.Rows)
+            if(qtable.Rows[qno - 2]["type"].ToString().Equals("0"))
+            {   //mcq
+                if (RadioButtonList1.SelectedIndex != -1)
                 {
-                    Button button = (Button)row.FindControl((qno - 1).ToString());
-                    button.BackColor = System.Drawing.ColorTranslator.FromHtml("#42D127");
+                    Button button = new Button();
+                    foreach (TableRow row in Table1.Rows)
+                    {
+                        button = (Button)row.FindControl((qno - 1).ToString());
+                    }
+                    if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                    }
                 }
-
-            }
+            }            
             prevbtn.Enabled = true;
         }
-
         protected void prevbtn_Click(object sender, EventArgs e)
         {
             save_answer(qno);
@@ -188,9 +213,11 @@ namespace e_Exam
             }
             nextbtn.Enabled = true;
         }
-
         protected void submitbtn_Click(object sender, EventArgs e)
         {
+            save_answer(qno);
+            compare_answer(total_q);
+            submit_question();
             int section = Convert.ToInt32(ViewState["section"]);
             section++;
             ViewState["section"] = section;
@@ -216,8 +243,9 @@ namespace e_Exam
                 }
                 Label2.Text = "Section " + section;
             }
+            nextbtn.Enabled = true;
+            prevbtn.Enabled = false;
         }
-
         private void get_question(int qno)
         {
 
@@ -233,9 +261,9 @@ namespace e_Exam
                     RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
                     RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
                     RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
-                    if (ans_table.Rows[qno - 1]["mcq"] != DBNull.Value)
+                    if (ans_table.Rows[qno - 1]["answer"] != DBNull.Value)
                     {
-                        char ans = (char)ans_table.Rows[qno - 1]["mcq"];
+                        char ans = (char)ans_table.Rows[qno - 1]["answer"];
                         int index = ((int)ans) % 65;
                         RadioButtonList1.SelectedIndex = index;
                     }
@@ -249,9 +277,9 @@ namespace e_Exam
                     RadioButtonList1.Visible = false;
                     anslbl.Visible = true;
                     anstxt.Visible = true;
-                    if (ans_table.Rows[qno - 1]["blank"] != null)
+                    if (ans_table.Rows[qno - 1]["answer"] != null)
                     {
-                        anstxt.Text = ans_table.Rows[qno - 1]["blank"].ToString();
+                        anstxt.Text = ans_table.Rows[qno - 1]["answer"].ToString();
                     }
                 }
             }
@@ -260,7 +288,66 @@ namespace e_Exam
                 //No question found;
             }
         }
+        protected void markbtn_Click(object sender, EventArgs e)
+        {
+            Button button = new Button();
+            foreach (TableRow row in Table1.Rows)
+            {
+                button = (Button)row.FindControl((qno).ToString());
+            }
+            if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+            {   
+                button.BackColor = System.Drawing.ColorTranslator.FromHtml(yellow);
+            }
+            else
+            {
+                if (qtable.Rows[qno - 1]["type"].ToString().Equals("0"))
+                {   //mcq
+                    if (RadioButtonList1.SelectedIndex != -1)
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                    }
 
+                }
+                else
+                {
+                    if(anstxt.Text.Trim() != "")
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                    }
+                    else
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(white);
+                    }
+                }     
+            }
+        }
+        protected void anstxt_TextChanged(object sender, EventArgs e)
+        {
+            Button button = new Button();
+            if(anstxt.Text.Trim()!="")
+            {
+                foreach (TableRow row in Table1.Rows)
+                {
+                    button = (Button)row.FindControl((qno).ToString());
+                }
+                if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+                {
+                    button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                }
+            }
+            else
+            {
+                foreach (TableRow row in Table1.Rows)
+                {
+                    button = (Button)row.FindControl((qno).ToString());
+                }
+                if(button.BackColor == System.Drawing.ColorTranslator.FromHtml(green))
+                {
+                    button.BackColor = System.Drawing.ColorTranslator.FromHtml(white);
+                }
+            }
+        }
         private void navigate_q(object sender, EventArgs e)
         {
             save_answer(qno);
@@ -284,7 +371,6 @@ namespace e_Exam
                 prevbtn.Enabled = true;
             }
         }
-
         private int count_section(int tid)
         {
             int count = 1;
@@ -304,6 +390,73 @@ namespace e_Exam
                 //Not found
             }
             return count;
+        }
+        private void compare_answer(int questions)
+        {
+            for(int i=0;i<questions;i++)
+            {
+                if(ans_table.Rows[i]["t_id"] == DBNull.Value)
+                {
+                    ans_table.Rows[i]["t_id"] = tid;
+                    ans_table.Rows[i]["q_id"] = i + 1;
+                    ans_table.Rows[i]["section_no"] = Convert.ToInt32(ViewState["section"]);
+                    ans_table.Rows[i]["student_id"] = 0;
+                }
+                if(ans_table.Rows[i]["answer"] != DBNull.Value)
+                {
+                    if(qtable.Rows[i]["type"].ToString().Equals("0"))
+                    {
+                        if(ans_table.Rows[i]["answer"].ToString() == qtable.Rows[i]["answer"].ToString())
+                        {
+                            ans_table.Rows[i]["correct"] = '1';
+                        }
+                        else
+                        {
+                            ans_table.Rows[i]["correct"] = '0';
+                        }
+                    }
+                    else
+                    {
+                        if (ans_table.Rows[i]["answer"].ToString() == qtable.Rows[i]["blank"].ToString())
+                        {
+                            ans_table.Rows[i]["correct"] = '1';
+                        }
+                        else
+                        {
+                            ans_table.Rows[i]["correct"] = '0';
+                        }
+                    }
+                }
+            }
+        }
+        private void submit_question()
+        {
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(consString))
+                {
+                    using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                    {
+                        //Set the database table name
+                        sqlBulkCopy.DestinationTableName = "dbo.student_question_answer";
+                        sqlBulkCopy.ColumnMappings.Add("t_id", "test_id");
+                        sqlBulkCopy.ColumnMappings.Add("section_no", "section_no");
+                        sqlBulkCopy.ColumnMappings.Add("q_id", "q_id");
+                        sqlBulkCopy.ColumnMappings.Add("student_id", "student_id");
+                        sqlBulkCopy.ColumnMappings.Add("answer", "answer");
+                        sqlBulkCopy.ColumnMappings.Add("correct", "correct");
+                        sqlBulkCopy.ColumnMappings.Add("attempt", "attempt");
+                        con.Open();
+                        sqlBulkCopy.WriteToServer(ans_table);
+                        con.Close();
+                    }
+                }
+            }
+            catch(Exception)
+            {
+                //Sql Error
+            }
         }
     }
 }

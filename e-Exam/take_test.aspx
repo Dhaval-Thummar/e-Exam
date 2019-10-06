@@ -114,7 +114,7 @@
                                 <asp:ListItem Text="D" Value="4"></asp:ListItem>
                             </asp:RadioButtonList>
                             <asp:Label ID="anslbl" runat="server" Text="Ans. "></asp:Label>
-                            <asp:TextBox ID="anstxt" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="anstxt" runat="server" AutoPostBack="True" OnTextChanged="anstxt_TextChanged"></asp:TextBox>
                         </div>
                     </td>
                 </tr>
@@ -124,7 +124,7 @@
                         &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="nextbtn" runat="server" Text="Next" OnClick="nextbtn_Click" CssClass="btn btn-primary" />
                         &nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="markbtn" runat="server" Text="Mark" CssClass="btn btn-warning" />
+                        <asp:Button ID="markbtn" runat="server" Text="Mark/Unmark" CssClass="btn btn-warning" OnClick="markbtn_Click" />
                     </td>
                 </tr>
             </table>
