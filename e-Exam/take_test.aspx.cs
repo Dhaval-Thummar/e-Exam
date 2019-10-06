@@ -455,7 +455,7 @@ namespace e_Exam
             }
             catch(Exception)
             {
-                //Sql Error
+                //Sql Error found
             }
         }
     }
