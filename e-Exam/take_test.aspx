@@ -44,9 +44,9 @@
             border-color: black;
             color: white;
             border-radius: 50%;
-            padding: 10px;
-            width: 45px;
-            text-align: center;
+            width: 40px;
+            height: 40px;
+            text-align:center;
             text-decoration: none;
             display: inline-block;
             cursor: pointer;
@@ -55,6 +55,15 @@
             margin-bottom:300px;
         }
     </style>
+    <script type="text/javascript">
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton();
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onload = function () {void (0)}
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="Panel1" runat="server" Visible="False">
@@ -128,6 +137,9 @@
                     </td>
                 </tr>
             </table>
+        </asp:View>
+        <asp:View ID="View3" runat="server">
+            Thank you for taking test!!!
         </asp:View>
     </asp:MultiView>
 </asp:Content>
