@@ -86,6 +86,7 @@ namespace e_Exam
             student_tab.Font.Underline = true;
             teacher_tab.Font.Underline = false;
             is_student = true;
+            register.Visible = true;
         }
 
         protected void teacher_tab_Click(object sender, EventArgs e)
@@ -97,6 +98,7 @@ namespace e_Exam
             student_tab.Font.Underline = false;
             teacher_tab.Font.Underline = true;
             is_student = false;
+            register.Visible = false;
         }
     }
 }

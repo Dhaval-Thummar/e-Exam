@@ -38,6 +38,7 @@
             margin :150px auto;
             border-radius: 10px;
             background: rgba(169,169,169,0.7);
+            min-width:350px;
         }
         .auto-style2 {
             text-align:center;

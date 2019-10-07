@@ -13,5 +13,11 @@ namespace e_Exam
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session["teacherID"] = null;
+            Response.Redirect("~/login.aspx");
+        }
     }
 }

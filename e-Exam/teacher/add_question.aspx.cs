@@ -12,9 +12,9 @@ namespace e_Exam
 {
     public partial class add_question : System.Web.UI.Page
     {
-        static private int q_no = 1,total_q=0;
+        static private int q_no = 1, total_q = 0;
         static int test_id, marks = 0;
-        static float nmarks=0;
+        static float nmarks = 0;
         static DataTable qtable = new DataTable();
         static DataTable mcq_table = new DataTable();
         static DataTable fill_blank = new DataTable();
@@ -25,101 +25,101 @@ namespace e_Exam
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-              {
-                  q_no = 1;
-                  if (Session["section_no"]==null)
-                  {
-                      Server.Transfer("~/teacher/add_test.aspx");
-                  }
-                  MultiView2.ActiveViewIndex = 0; 
-                  Session["section"] = 1;
-                  if (Session["section"].ToString().Equals(Session["section_no"].ToString()))
-                  {
-                      next_section_btn.Enabled = false;
-                      next_section_btn.CssClass="btn btn-warning disabled";
-                  }
-                  if (Session["test"] != null)
-                  {
-                      Test t1 = (Test)Session["test"];
-                      test_id = t1.test_id;
-                  }
-                  //question_table
-                  qtable.Columns.Add(new DataColumn("test_id",typeof(int)));
-                  qtable.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("subject_id", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("question", typeof(string)));
-                  qtable.Columns.Add(new DataColumn("type", typeof(int)));
-                  qtable.Columns.Add(new DataColumn("has_image", typeof(int)));
+            {
+                q_no = 1;
+                if (Session["section_no"] == null)
+                {
+                    Server.Transfer("~/teacher/add_test.aspx");
+                }
+                MultiView2.ActiveViewIndex = 0;
+                Session["section"] = 1;
+                if (Session["section"].ToString().Equals(Session["section_no"].ToString()))
+                {
+                    next_section_btn.Enabled = false;
+                    next_section_btn.CssClass = "btn btn-warning disabled";
+                }
+                if (Session["test"] != null)
+                {
+                    Test t1 = (Test)Session["test"];
+                    test_id = t1.test_id;
+                }
+                //question_table
+                qtable.Columns.Add(new DataColumn("test_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("section_no", typeof(int)));
+                qtable.Columns.Add(new DataColumn("q_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("subject_id", typeof(int)));
+                qtable.Columns.Add(new DataColumn("question", typeof(string)));
+                qtable.Columns.Add(new DataColumn("type", typeof(int)));
+                qtable.Columns.Add(new DataColumn("has_image", typeof(int)));
 
-                  //mcq_table
-                  mcq_table.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  mcq_table.Columns.Add(new DataColumn("A", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("B", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("C", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("D", typeof(string)));
-                  mcq_table.Columns.Add(new DataColumn("answer", typeof(char)));
-                  mcq_table.Columns.Add(new DataColumn("has_image", typeof(int)));
+                //mcq_table
+                mcq_table.Columns.Add(new DataColumn("test_id", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("section_no", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("q_id", typeof(int)));
+                mcq_table.Columns.Add(new DataColumn("A", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("B", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("C", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("D", typeof(string)));
+                mcq_table.Columns.Add(new DataColumn("answer", typeof(char)));
+                mcq_table.Columns.Add(new DataColumn("has_image", typeof(int)));
 
-                  //fill_in_blank_table
-                  fill_blank.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  fill_blank.Columns.Add(new DataColumn("answer", typeof(string)));
+                //fill_in_blank_table
+                fill_blank.Columns.Add(new DataColumn("test_id", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("section_no", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("q_id", typeof(int)));
+                fill_blank.Columns.Add(new DataColumn("answer", typeof(string)));
 
-                  //q_image
-                  q_image.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  q_image.Columns.Add(new DataColumn("image", typeof(byte[])));
+                //q_image
+                q_image.Columns.Add(new DataColumn("test_id", typeof(int)));
+                q_image.Columns.Add(new DataColumn("section_no", typeof(int)));
+                q_image.Columns.Add(new DataColumn("q_id", typeof(int)));
+                q_image.Columns.Add(new DataColumn("image", typeof(byte[])));
 
-                  //mcq_image
-                  mcq_image.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("section_no", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("q_id", typeof(int)));
-                  mcq_image.Columns.Add(new DataColumn("a_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("b_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("c_image", typeof(byte[])));
-                  mcq_image.Columns.Add(new DataColumn("d_image", typeof(byte[])));
+                //mcq_image
+                mcq_image.Columns.Add(new DataColumn("test_id", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("section_no", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("q_id", typeof(int)));
+                mcq_image.Columns.Add(new DataColumn("a_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("b_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("c_image", typeof(byte[])));
+                mcq_image.Columns.Add(new DataColumn("d_image", typeof(byte[])));
 
-                  //test_table
-                  test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
-                  test_table.Columns.Add(new DataColumn("name",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("subject",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("duration",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("sections",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("total_marks",typeof(int)));
-                  test_table.Columns.Add(new DataColumn("-ve marks",typeof(float)));
-                  test_table.Columns.Add(new DataColumn("added_date",typeof(DateTime)));
-                  test_table.Columns.Add(new DataColumn("description",typeof(string)));
-                  test_table.Columns.Add(new DataColumn("teacher_id",typeof(int)));
+                //test_table
+                test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
+                test_table.Columns.Add(new DataColumn("name", typeof(string)));
+                test_table.Columns.Add(new DataColumn("subject", typeof(string)));
+                test_table.Columns.Add(new DataColumn("duration", typeof(int)));
+                test_table.Columns.Add(new DataColumn("sections", typeof(int)));
+                test_table.Columns.Add(new DataColumn("total_marks", typeof(int)));
+                test_table.Columns.Add(new DataColumn("-ve marks", typeof(float)));
+                test_table.Columns.Add(new DataColumn("added_date", typeof(DateTime)));
+                test_table.Columns.Add(new DataColumn("description", typeof(string)));
+                test_table.Columns.Add(new DataColumn("teacher_id", typeof(int)));
 
                 //test_section
-                 test_section.Columns.Add(new DataColumn("test_id", typeof(int)));
+                test_section.Columns.Add(new DataColumn("test_id", typeof(int)));
                 test_section.Columns.Add(new DataColumn("section_no", typeof(int)));
                 test_section.Columns.Add(new DataColumn("marks_per_q", typeof(int)));
                 test_section.Columns.Add(new DataColumn("nmarks", typeof(float)));
-                
+
             }
         }
 
         protected void qtype_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(qtype.SelectedItem.Value == "1")
+            if (qtype.SelectedItem.Value == "1")
             {
                 MultiView1.ActiveViewIndex = 0;
             }
-            else if(qtype.SelectedItem.Value=="2")
+            else if (qtype.SelectedItem.Value == "2")
             {
-                MultiView1.ActiveViewIndex = 1; 
+                MultiView1.ActiveViewIndex = 1;
             }
         }
 
         protected void image_upload_check(object sender, EventArgs e)
         {
-            if(q_image_checkbox.Checked==true)
+            if (q_image_checkbox.Checked == true)
             {
                 q_image_upload.Visible = true;
             }
@@ -134,10 +134,14 @@ namespace e_Exam
             if (optACheck.Checked == true)
             {
                 optAimg.Visible = true;
+                txt_optionone.Visible = false;
+                require_op1.Enabled = false;
             }
             else
             {
                 optAimg.Visible = false;
+                txt_optionone.Visible = true;
+                require_op1.Enabled = true;
             }
         }
 
@@ -146,10 +150,14 @@ namespace e_Exam
             if (optBCheck.Checked == true)
             {
                 optBimg.Visible = true;
+                txt_optiontwo.Visible = false;
+                require_op2.Enabled = false;
             }
             else
             {
                 optBimg.Visible = false;
+                txt_optiontwo.Visible = true;
+                require_op2.Enabled = true;
             }
         }
 
@@ -158,10 +166,14 @@ namespace e_Exam
             if (optCCheck.Checked == true)
             {
                 optCimg.Visible = true;
+                txt_optionthree.Visible = false;
+                require_op3.Enabled = false;
             }
             else
             {
                 optCimg.Visible = false;
+                txt_optionthree.Visible = true;
+                require_op3.Enabled = true;
             }
         }
 
@@ -170,10 +182,14 @@ namespace e_Exam
             if (optDCheck.Checked == true)
             {
                 optDimg.Visible = true;
+                txt_optionfour.Visible = false;
+                require_op4.Enabled = false;
             }
             else
             {
                 optDimg.Visible = false;
+                txt_optionfour.Visible = true;
+                require_op4.Enabled = true;
             }
         }
 
@@ -188,8 +204,8 @@ namespace e_Exam
         protected void next_section_btn_Click(object sender, EventArgs e)
         {
             int a = Convert.ToInt32(marks_input.Text);
-            marks = marks + a*(q_no-1);
-            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value)*(q_no-1)*a;
+            marks = marks + a * (q_no - 1);
+            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no - 1) * a;
             q_no = 1;
             question_no_label.Text = "Question " + q_no;
 
@@ -198,7 +214,7 @@ namespace e_Exam
             DataRow ts1 = test_section.NewRow();
             ts1["test_id"] = test_id;
             ts1["section_no"] = int.Parse(Session["section"].ToString());
-            ts1["marks_per_q"]= Convert.ToInt32(marks_input.Text);
+            ts1["marks_per_q"] = Convert.ToInt32(marks_input.Text);
             ts1["nmarks"] = float.Parse(negative_list.SelectedItem.Value);
             test_section.Rows.Add(ts1);
 
@@ -329,7 +345,7 @@ namespace e_Exam
 
         protected void next_question_btn_Click(object sender, EventArgs e)
         {
-            if(q_image_checkbox.Checked)
+            if (q_image_checkbox.Checked)
             {
                 HttpPostedFile httpPostedFile = q_image_upload.PostedFile;
                 string filename = Path.GetFileName(httpPostedFile.FileName);
@@ -353,117 +369,13 @@ namespace e_Exam
                 else
                 {
                     image_errror_lbl.Visible = true;
-                    image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded " + fileextension.ToLower();
+                    image_errror_lbl.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
                     image_errror_lbl.ForeColor = System.Drawing.Color.Red;
                     return;
                 }
             }
-            
-            //mcq_image
-            if(optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
-            {
-                //new row to q_image table
-                DataRow i1 = mcq_image.NewRow();
-                i1["test_id"] = test_id;
-                i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
-                i1["q_id"] = q_no;
-                i1["a_image"] = null;
-                i1["b_image"] = null;
-                i1["c_image"] = null;
-                i1["d_image"] = null;
 
-                if (optACheck.Checked)
-                {
 
-                    HttpPostedFile a_img = optAimg.PostedFile;
-
-                    string a_filename = Path.GetFileName(a_img.FileName);
-                    string a_fileextension = Path.GetExtension(a_filename);
-                    int a_filesize = a_img.ContentLength;
-
-                    if (a_fileextension.ToLower() == ".jpg" || a_fileextension.ToLower() == ".bmp" || a_fileextension.ToLower() == ".gif" || a_fileextension.ToLower() == ".png" || a_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = a_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["a_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl0.Visible = true;
-                        image_errror_lbl0.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl0.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optBCheck.Checked)
-                {
-                    HttpPostedFile b_img = optBimg.PostedFile;
-
-                    string b_filename = Path.GetFileName(b_img.FileName);
-                    string b_fileextension = Path.GetExtension(b_filename);
-                    int b_filesize = b_img.ContentLength;
-                    if (b_fileextension.ToLower() == ".jpg" || b_fileextension.ToLower() == ".bmp" || b_fileextension.ToLower() == ".gif" || b_fileextension.ToLower() == ".png" || b_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = b_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["b_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl1.Visible = true;
-                        image_errror_lbl1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl1.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optCCheck.Checked)
-                {
-                    HttpPostedFile c_img = optCimg.PostedFile;
-
-                    string c_filename = Path.GetFileName(c_img.FileName);
-                    string c_fileextension = Path.GetExtension(c_filename);
-                    int c_filesize = c_img.ContentLength;
-                    if (c_fileextension.ToLower() == ".jpg" || c_fileextension.ToLower() == ".bmp" || c_fileextension.ToLower() == ".gif" || c_fileextension.ToLower() == ".png" || c_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = c_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["c_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl2.Visible = true;
-                        image_errror_lbl2.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl2.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                if (optDCheck.Checked)
-                {
-                    HttpPostedFile d_img = optDimg.PostedFile;
-
-                    string d_filename = Path.GetFileName(d_img.FileName);
-                    string d_fileextension = Path.GetExtension(d_filename);
-                    int d_filesize = d_img.ContentLength;
-                    if (d_fileextension.ToLower() == ".jpg" || d_fileextension.ToLower() == ".bmp" || d_fileextension.ToLower() == ".gif" || d_fileextension.ToLower() == ".png" || d_fileextension.ToLower() == ".jpeg")
-                    {
-                        Stream stream = d_img.InputStream;
-                        BinaryReader binaryReader = new BinaryReader(stream);
-                        byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-                        i1["d_image"] = bytes;
-                    }
-                    else
-                    {
-                        image_errror_lbl3.Visible = true;
-                        image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                        image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
-                        return;
-                    }
-                }
-                mcq_image.Rows.Add(i1);
-            }
             //set question to datatable
 
             //question
@@ -473,24 +385,71 @@ namespace e_Exam
             q1["q_id"] = q_no;
             q1["subject_id"] = Convert.ToInt32(Session["subject_id"].ToString()); ;
             q1["question"] = question.Text;
-            q1["type"] = (qtype.SelectedItem.Text == "MCQ")?0:1;
-            q1["has_image"] = q_image_checkbox.Checked?1:0;
+            q1["type"] = (qtype.SelectedItem.Text == "MCQ") ? 0 : 1;
+            q1["has_image"] = q_image_checkbox.Checked ? 1 : 0;
             qtable.Rows.Add(q1);
-            
-            if(qtype.SelectedItem.Value.Equals("1"))
+
+            if (qtype.SelectedItem.Value.Equals("1"))
             {
-                //mcq
-                DataRow m1 = mcq_table.NewRow();
-                m1["test_id"] = test_id;
-                m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
-                m1["q_id"] = q_no;
-                m1["A"] = txt_optionone.Text;
-                m1["B"] = txt_optiontwo.Text;
-                m1["C"] = txt_optionthree.Text;
-                m1["D"] = txt_optionfour.Text;
-                m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
-                m1["has_image"] = 0;
-                mcq_table.Rows.Add(m1);
+                //mcq_image
+                if (optACheck.Checked | optBCheck.Checked | optCCheck.Checked | optDCheck.Checked)
+                {
+                    //mcq_with_image
+                    DataRow m1 = mcq_table.NewRow();
+                    m1["test_id"] = test_id;
+                    m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    m1["q_id"] = q_no;
+                    m1["A"] = "";
+                    m1["B"] = "";
+                    m1["C"] = "";
+                    m1["D"] = "";
+                    m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
+                    m1["has_image"] = 1;
+                    mcq_table.Rows.Add(m1);
+
+
+                    //new row to q_image table
+                    DataRow i1 = mcq_image.NewRow();
+                    i1["test_id"] = test_id;
+                    i1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    i1["q_id"] = q_no;
+                    i1["a_image"] = null;
+                    i1["b_image"] = null;
+                    i1["c_image"] = null;
+                    i1["d_image"] = null;
+
+                    if (optACheck.Checked)
+                    {
+                        mcq_image_add(optAimg, i1, "a_image");
+                    }
+                    if (optBCheck.Checked)
+                    {
+                        mcq_image_add(optBimg, i1, "b_image");
+                    }
+                    if (optCCheck.Checked)
+                    {
+                        mcq_image_add(optCimg, i1, "c_image");
+                    }
+                    if (optDCheck.Checked)
+                    {
+                        mcq_image_add(optDimg, i1, "d_image");
+                    }
+                    mcq_image.Rows.Add(i1);
+                }
+                else
+                {
+                    DataRow m1 = mcq_table.NewRow();
+                    m1["test_id"] = test_id;
+                    m1["section_no"] = Convert.ToInt32(Session["section"].ToString());
+                    m1["q_id"] = q_no;
+                    m1["A"] = txt_optionone.Text;
+                    m1["B"] = txt_optiontwo.Text;
+                    m1["C"] = txt_optionthree.Text;
+                    m1["D"] = txt_optionfour.Text;
+                    m1["answer"] = 64 + Convert.ToInt32(rdo_correctanswer.SelectedItem.Value);
+                    m1["has_image"] = 0;
+                    mcq_table.Rows.Add(m1);
+                }
             }
             else
             {
@@ -503,6 +462,13 @@ namespace e_Exam
                 fill_blank.Rows.Add(f1);
             }
 
+            question.Text = "";
+            txt_optionone.Text = "";
+            txt_optiontwo.Text = "";
+            txt_optionthree.Text = "";
+            txt_optionfour.Text = "";
+            blank_ans.Text = "";
+            rdo_correctanswer.ClearSelection();
             Label1.Text = "Question no. " + q_no + " added...";
             q_no++;
             question_no_label.Text = "Question " + q_no;
@@ -514,8 +480,8 @@ namespace e_Exam
         {
             //submit test
             int a = Convert.ToInt32(marks_input.Text);
-            marks = marks + a * (q_no-1);
-            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no-1) * a;
+            marks = marks + a * (q_no - 1);
+            nmarks = nmarks + float.Parse(negative_list.SelectedItem.Value) * (q_no - 1) * a;
             Test test = (Test)Session["test"];
 
             DataRow t1 = test_table.NewRow();
@@ -691,12 +657,38 @@ namespace e_Exam
             }
             //test summary
             MultiView2.ActiveViewIndex = 2;
-            test_id_lbl.Text = test_id+"";
+            test_id_lbl.Text = test_id.ToString();
             test_name_lbl.Text = test.name;
-            no_of_q_lbl.Text = total_q + "";
-            total_marks_lbl.Text = marks+"";
-            duration_lbl.Text = test.duration+"";
+            no_of_q_lbl.Text = total_q.ToString();
+            total_marks_lbl.Text = marks.ToString();
+            duration_lbl.Text = test.duration.ToString();
             desc_lbl.Text = test.descripetion;
         }
+
+        private void mcq_image_add(FileUpload img, DataRow row, string name)
+        {
+
+
+            HttpPostedFile mcq_img = img.PostedFile;
+
+            string filename = Path.GetFileName(mcq_img.FileName);
+            string fileextension = Path.GetExtension(filename);
+            int filesize = mcq_img.ContentLength;
+            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".bmp" || fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png" || fileextension.ToLower() == ".jpeg")
+            {
+                Stream stream = mcq_img.InputStream;
+                BinaryReader binaryReader = new BinaryReader(stream);
+                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                row[name] = bytes;
+            }
+            else
+            {
+                image_errror_lbl3.Visible = true;
+                image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
+                image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
+                return;
+            }
+        }
     }
+
 }

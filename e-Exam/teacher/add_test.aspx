@@ -136,7 +136,8 @@
             </tr>
             <tr>
                <td colspan="2" class="auto-style2">
-                   <asp:Button ID="test_next" runat="server" Text="next >>" class="btn btn-primary" OnClick="test_next_Click"/>
+
+                   <asp:Button ID="test_next" runat="server" Text="next >>" class="btn btn-primary" OnClick="test_next_Click" />
                </td>
             </tr>
             </table>
