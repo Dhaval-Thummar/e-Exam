@@ -44,9 +44,9 @@
             border-color: black;
             color: white;
             border-radius: 50%;
-            padding: 10px;
-            width: 45px;
-            text-align: center;
+            width: 40px;
+            height: 40px;
+            text-align:center;
             text-decoration: none;
             display: inline-block;
             cursor: pointer;
@@ -55,6 +55,15 @@
             margin-bottom:300px;
         }
     </style>
+    <script type="text/javascript">
+        function DisableBackButton() {
+            window.history.forward()
+        }
+        DisableBackButton();
+        window.onload = DisableBackButton();
+        window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
+        window.onload = function () {void (0)}
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="Panel1" runat="server" Visible="False">
@@ -100,6 +109,9 @@
                 <tr>
                     <td>
                         <asp:Label ID="qlbl" runat="server" Text=""></asp:Label>
+                        <asp:Panel ID="qPnl" runat="server" Visible="False">
+                            <asp:Image ID="qImg" runat="server" />
+                        </asp:Panel>
                         <br />
                     </td>
                 </tr>
@@ -114,7 +126,7 @@
                                 <asp:ListItem Text="D" Value="4"></asp:ListItem>
                             </asp:RadioButtonList>
                             <asp:Label ID="anslbl" runat="server" Text="Ans. "></asp:Label>
-                            <asp:TextBox ID="anstxt" runat="server"></asp:TextBox>
+                            <asp:TextBox ID="anstxt" runat="server" AutoPostBack="True" OnTextChanged="anstxt_TextChanged"></asp:TextBox>
                         </div>
                     </td>
                 </tr>
@@ -124,10 +136,13 @@
                         &nbsp;&nbsp;&nbsp;
                         <asp:Button ID="nextbtn" runat="server" Text="Next" OnClick="nextbtn_Click" CssClass="btn btn-primary" />
                         &nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="markbtn" runat="server" Text="Mark" CssClass="btn btn-warning" />
+                        <asp:Button ID="markbtn" runat="server" Text="Mark/Unmark" CssClass="btn btn-warning" OnClick="markbtn_Click" />
                     </td>
                 </tr>
             </table>
+        </asp:View>
+        <asp:View ID="View3" runat="server">
+            Thank you for taking test!!!
         </asp:View>
     </asp:MultiView>
 </asp:Content>

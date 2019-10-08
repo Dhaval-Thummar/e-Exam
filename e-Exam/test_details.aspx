@@ -5,6 +5,10 @@
         .div1 {
             text-align: center;
         }
+        .opt-image{
+            height:200px;
+            width:200px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -49,7 +53,7 @@
             </div>
         </asp:View>
         <asp:View ID="View3" runat="server">
-            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ExamDB %>" SelectCommand="SELECT Question.test_id, Question.section_no, Question.q_id, Question.question, Question.type, mcq.A, mcq.B, mcq.C, mcq.D, mcq.answer, fill_in_blank.answer AS blank_answer, Test_Section.marks_per_question, Test_Section.negative_marks, Question.has_image, mcq.has_image AS Expr1 FROM Question INNER JOIN Test_Section ON Question.test_id = Test_Section.test_id AND Question.section_no = Test_Section.section_no LEFT OUTER JOIN mcq ON Question.test_id = mcq.test_id AND Question.section_no = mcq.section_no AND Question.q_id = mcq.q_id LEFT OUTER JOIN fill_in_blank ON Question.test_id = fill_in_blank.test_id AND Question.section_no = fill_in_blank.section_no AND Question.q_id = fill_in_blank.q_id WHERE (Question.test_id = @test_id)">
+            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ExamDB %>" SelectCommand="SELECT Question.test_id, Question.section_no, Question.q_id, Question.question, Question.type, mcq.A, mcq.B, mcq.C, mcq.D, mcq.answer, fill_in_blank.answer AS blank_answer, Test_Section.marks_per_question, Test_Section.negative_marks, Question.has_image, mcq.has_image AS mcq_image FROM Question INNER JOIN Test_Section ON Question.test_id = Test_Section.test_id AND Question.section_no = Test_Section.section_no LEFT OUTER JOIN mcq ON Question.test_id = mcq.test_id AND Question.section_no = mcq.section_no AND Question.q_id = mcq.q_id LEFT OUTER JOIN fill_in_blank ON Question.test_id = fill_in_blank.test_id AND Question.section_no = fill_in_blank.section_no AND Question.q_id = fill_in_blank.q_id WHERE (Question.test_id = @test_id)">
                 <SelectParameters>
                     <asp:QueryStringParameter DefaultValue="0" Name="test_id" QueryStringField="tid" Type="Int32" />
                 </SelectParameters>
@@ -73,33 +77,54 @@
                     <asp:Label ID="lblQuestion" runat="server" Text='<%# " " + Eval("question") %>'></asp:Label>
                     <asp:TextBox ID="txtQuestion" runat="server" Text='<%# Eval("question") %>' Visible="False" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                     <asp:Panel ID="Panel2" runat="server" Visible="False">
-                        <asp:Image ID="q_image" runat="server" Height="400px" Width="400px" />
+                        <asp:Image ID="q_image" runat="server" CssClass="opt-image" />
                     </asp:Panel>
                     <asp:HiddenField ID="hidden_section" runat="server" Value='<%# Eval("section_no") %>' />
                     <asp:HiddenField ID="hidden_qid" runat="server" Value='<%# Eval("q_id") %>' />
                     <asp:HiddenField ID="q_type" Value='<%#Eval("type") %>' runat="server" />
                     <asp:HiddenField ID="hidden_q_image" Value='<%#Eval("has_image") %>' runat="server" />
+                    <asp:HiddenField ID="mcq_image" Value='<%#Eval("mcq_image") %>' runat="server" />
                     <br />
                     <asp:Label ID="lbl1" runat="server" Text=""></asp:Label>
                     <asp:Panel ID="mcq_panel" runat="server">
                         <asp:Label ID="Label4" runat="server" Text="A "></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ForeColor="#FF0001" ControlToValidate="txtopt1"></asp:RequiredFieldValidator>
                         <asp:Label ID="opt1" Text='<%#Eval("A") %>' runat="server" />
+
+                        <asp:Panel ID="optPnl1" runat="server" Visible="False">
+                            <asp:Image ID="optImg1" runat="server" CssClass="opt-image" />
+                        </asp:Panel>
+
                         <asp:TextBox ID="txtopt1" runat="server" Text='<%# Eval("A") %>' CssClass="form-control" Visible="False"></asp:TextBox>
                         <br />
                         <asp:Label ID="Label8" runat="server" Text="B "></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="*" ForeColor="#FF0001" ControlToValidate="txtopt2"></asp:RequiredFieldValidator>
                         <asp:Label ID="opt2" Text='<%# Eval("B") %>' runat="server" />
+
+                        <asp:Panel ID="optPnl2" runat="server" Visible="False">
+                            <asp:Image ID="optImg2" runat="server" CssClass="opt-image"/>
+                        </asp:Panel>
+
                         <asp:TextBox ID="txtopt2" runat="server" Text='<%# Eval("B") %>' CssClass="form-control" Visible="False"></asp:TextBox>
                         <br />
                         <asp:Label ID="Label9" runat="server" Text="C "></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="*" ForeColor="#FF0001" ControlToValidate="txtopt3"></asp:RequiredFieldValidator>
                         <asp:Label ID="opt3" Text='<%# Eval("C") %>' runat="server" />
+
+                        <asp:Panel ID="optPnl3" runat="server" Visible="False">
+                            <asp:Image ID="optImg3" runat="server" CssClass="opt-image"/>
+                        </asp:Panel>
+
                         <asp:TextBox ID="txtopt3" runat="server" Text='<%# Eval("C") %>' CssClass="form-control" Visible="False"></asp:TextBox>
                         <br />
                         <asp:Label ID="Label10" runat="server" Text="D "></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*" ForeColor="#FF0001" ControlToValidate="txtopt4"></asp:RequiredFieldValidator>
                         <asp:Label ID="opt4" Text='<%#Eval("D") %>' runat="server" />
+
+                        <asp:Panel ID="optPnl4" runat="server" Visible="False">
+                            <asp:Image ID="optImg4" runat="server" CssClass="opt-image"/>
+                        </asp:Panel>
+
                         <asp:TextBox ID="txtopt4" runat="server" Text='<%# Eval("D") %>' CssClass="form-control" Visible="False"></asp:TextBox>
                         <br />
                         <asp:Label ID="Label11" runat="server" Text="Ans: "></asp:Label>

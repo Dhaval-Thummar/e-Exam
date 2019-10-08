@@ -12,13 +12,13 @@ namespace e_Exam
 {
     public partial class test_details : System.Web.UI.Page
     {
-        static int a = 1, count = 0,check=0;
+        static int a = 1, count = 0, check = 0;
         static Teacher_test t1;
         protected void Page_Load(object sender, EventArgs e)
         {
             a = 1;
             count = 0;
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 int tid = Convert.ToInt32(Session["teacherID"].ToString());
                 t1 = new Teacher_test(tid);
@@ -45,7 +45,7 @@ namespace e_Exam
                     Label1.Text = "No test found";
                 }
             }*/
-            if(check==1)
+            if (check == 1)
             {
                 MultiView1.ActiveViewIndex = 1;
                 check = 0;
@@ -153,6 +153,39 @@ namespace e_Exam
                 //mcq or fill_in_blank
                 if (type.Value.ToString().Equals("0"))
                 {
+                    HiddenField mcq_image = (HiddenField)e.Item.FindControl("mcq_image");
+                    if (mcq_image.Value.ToString().Equals("1"))
+                    {
+                        int section_no = Convert.ToInt32(section.Value.ToString());
+                        int q_id = Convert.ToInt32(qid.Value.ToString());
+                        Image a_image = (Image)e.Item.FindControl("optImg1");
+                        Image b_image = (Image)e.Item.FindControl("optImg2");
+                        Image c_image = (Image)e.Item.FindControl("optImg3");
+                        Image d_image = (Image)e.Item.FindControl("optImg4");
+
+
+                        Image image = retrive_image(section_no, q_id, "a_image");
+                        a_image.ImageUrl = image.ImageUrl;
+
+                        image = retrive_image(section_no, q_id, "b_image");
+                        b_image.ImageUrl = image.ImageUrl;
+
+                        image = retrive_image(section_no, q_id, "c_image");
+                        c_image.ImageUrl = image.ImageUrl;
+
+                        image = retrive_image(section_no, q_id, "d_image");
+                        d_image.ImageUrl = image.ImageUrl;
+
+                        Panel a = (Panel)e.Item.FindControl("optPnl1");
+                        Panel b = (Panel)e.Item.FindControl("optPnl2");
+                        Panel c = (Panel)e.Item.FindControl("optPnl3");
+                        Panel d = (Panel)e.Item.FindControl("optPnl4");
+
+                        a.Visible = true;
+                        b.Visible = true;
+                        c.Visible = true;
+                        d.Visible = true;
+                    }
                     mcq_pnl.Visible = true;
                     fill_pnl.Visible = false;
                 }
@@ -198,6 +231,38 @@ namespace e_Exam
 
         }
 
+        private Image retrive_image(int section, int qid, string opt_image)
+        {
+            Image image = new Image();
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                SqlCommand cmd = new SqlCommand("select " + opt_image + " from mcq_image where test_id=@tid and section_no=@section and q_id=@qid", con);
+                cmd.Parameters.AddWithValue("@tid", Request.QueryString["tid"]);
+                cmd.Parameters.AddWithValue("@section", section);
+                cmd.Parameters.AddWithValue("@qid", qid);
+                cmd.CommandType = CommandType.Text;
+                try
+                {
+                    con.Open();
+                    byte[] bytes = (byte[])cmd.ExecuteScalar();
+                    if (bytes != null)
+                    {
+                        string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        image.ImageUrl = "data:image/png;base64," + base64String;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    no_details.Visible = true;
+                    no_details.Text = "Something went wrong. Please try after sometime later.</br> Contact you developer for this problem";
+                }
+            }
+
+            return image;
+        }
+
+
         protected void Repeater1_ItemCreated(object sender, RepeaterItemEventArgs e)
         {
 
@@ -224,7 +289,7 @@ namespace e_Exam
             item.FindControl("lblQuestion").Visible = !isEdit;
             item.FindControl("txtQuestion").Visible = isEdit;
 
-            if(type.Value.ToString().Equals("0"))
+            if (type.Value.ToString().Equals("0"))
             {
                 item.FindControl("opt1").Visible = !isEdit;
                 item.FindControl("opt2").Visible = !isEdit;
@@ -244,8 +309,6 @@ namespace e_Exam
                 item.FindControl("lblBlank").Visible = !isEdit;
                 item.FindControl("txtBlank").Visible = isEdit;
             }
-
-
         }
 
         protected void OnUpdate(object sender, EventArgs e)
@@ -263,7 +326,7 @@ namespace e_Exam
             string constr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
 
             //mcd_update
-            if(type == 0)
+            if (type == 0)
             {
                 string opt1 = (item.FindControl("txtopt1") as TextBox).Text.Trim();
                 string opt2 = (item.FindControl("txtopt2") as TextBox).Text.Trim();
@@ -336,8 +399,8 @@ namespace e_Exam
 
             int type = Convert.ToInt32((item.FindControl("q_type") as HiddenField).Value.ToString());
             string constr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            
-            if(type == 0)
+
+            if (type == 0)
             {
                 using (SqlConnection con = new SqlConnection(constr))
                 {

@@ -14,6 +14,7 @@ namespace e_Exam
         static DataTable qtable = new DataTable();
         static DataTable ans_table = new DataTable();
         static int qno = 1, tid = 0, total_q = 0;
+        string yellow = "#FFD500", white = "#F8F9FA", green = "#42D127";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -37,19 +38,20 @@ namespace e_Exam
         {
             add_button(total_q);
         }
-
         private DataTable generate_ans_table(int rows)
         {
+            ans_table.Rows.Clear();
             DataTable t1 = new DataTable();
             DataRow r1;
-            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
             t1.Columns.Add(new DataColumn("t_id", typeof(int)));
             t1.Columns.Add(new DataColumn("section_no", typeof(int)));
             t1.Columns.Add(new DataColumn("q_id", typeof(int)));
-            t1.Columns.Add(new DataColumn("type", typeof(int)));
+            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
+            t1.Columns.Add(new DataColumn("type", typeof(char)));
             t1.Columns.Add(new DataColumn("mcq", typeof(char)));
             t1.Columns.Add(new DataColumn("blank", typeof(string)));
-            t1.Columns.Add(new DataColumn("correct", typeof(int)));
+            t1.Columns.Add(new DataColumn("correct", typeof(char)));
+            t1.Columns.Add(new DataColumn("attempt", typeof(char)));
             for (int i = 0; i < rows; i++)
             {
                 r1 = t1.NewRow();
@@ -59,12 +61,12 @@ namespace e_Exam
         }
         private DataTable Questiosns(int tid, int section)
         {
+            qtable.Rows.Clear();
             DataTable q1 = new DataTable();
             String conStr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            String qry = "select q.test_id,q.section_no,q.q_id,q.question,q.type,m.A,m.B,m.C,m.D,m.answer,f.answer as blank, q.has_image from Question as q " +
+            String qry = "select q.test_id,q.section_no,q.q_id,q.question,q.type,m.A,m.B,m.C,m.D,m.answer,f.answer as blank, q.has_image ,m.has_image as mcq_image from Question as q " +
                 "left outer join mcq as m on q.test_id = m.test_id and q.section_no = m.section_no and q.q_id = m.q_id " +
                 "left outer join fill_in_blank as f on q.test_id = f.test_id and q.section_no = f.section_no and q.q_id = f.q_id where q.test_id =" + tid + " and q.section_no=" + section;
-
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 con.Open();
@@ -145,38 +147,70 @@ namespace e_Exam
         }
         protected void save_answer(int qid)
         {
-            ans_table.Rows[qid - 1]["student_id"] = 0;
-            ans_table.Rows[qid - 1]["t_id"] = 0;
-            ans_table.Rows[qid - 1]["section_no"] = 0;
-            ans_table.Rows[qid - 1]["q_id"] = qid;
-            ans_table.Rows[qid - 1]["type"] = Convert.ToInt32(qtable.Rows[qid - 1]["type"].ToString());
-            if (RadioButtonList1.SelectedIndex != -1)
+            try
             {
-                ans_table.Rows[qid - 1]["mcq"] = 64 + Convert.ToInt32(RadioButtonList1.SelectedItem.Value);
+                ans_table.Rows[qid - 1]["student_id"] = 0;
+                ans_table.Rows[qid - 1]["t_id"] = tid;
+                ans_table.Rows[qid - 1]["section_no"] = Convert.ToInt32(ViewState["section"]);
+                ans_table.Rows[qid - 1]["q_id"] = qid;
+                if (qtable.Rows[qid - 1]["type"].ToString().Equals("0"))
+                {
+                    ans_table.Rows[qid - 1]["type"] = '0';
+                    if (RadioButtonList1.SelectedIndex != -1)
+                    {
+                        ans_table.Rows[qid - 1]["mcq"] = (char)(64 + Convert.ToInt32(RadioButtonList1.SelectedItem.Value));
+                        ans_table.Rows[qid - 1]["attempt"] = '1';
+                    }
+                }
+
+                else
+                {
+                    ans_table.Rows[qid - 1]["type"] = '1';
+                    if (anstxt.Text.Trim() != "")
+                    {
+                        ans_table.Rows[qid - 1]["blank"] = anstxt.Text.Trim();
+                        ans_table.Rows[qid - 1]["attempt"] = '1';
+                    }
+                }
             }
-            ans_table.Rows[qid - 1]["blank"] = anstxt.Text.Trim();
+            catch (Exception)
+            {
+                //No Question found
+            }
         }
         protected void nextbtn_Click(object sender, EventArgs e)
         {
             save_answer(qno);
             qno++;
-            get_question(qno);
             if (qno == total_q)
             {
                 nextbtn.Enabled = false;
             }
-            if (RadioButtonList1.SelectedIndex != -1 || anstxt.Text.Trim() != "")
+            try
             {
-                foreach (TableRow row in Table1.Rows)
-                {
-                    Button button = (Button)row.FindControl((qno - 1).ToString());
-                    button.BackColor = System.Drawing.ColorTranslator.FromHtml("#42D127");
+                if (qtable.Rows[qno - 2]["type"].ToString().Equals("0"))
+                {   //mcq
+                    if (RadioButtonList1.SelectedIndex != -1)
+                    {
+                        Button button = new Button();
+                        foreach (TableRow row in Table1.Rows)
+                        {
+                            button = (Button)row.FindControl((qno - 1).ToString());
+                        }
+                        if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+                        {
+                            button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                        }
+                    }
                 }
-
             }
+            catch (Exception)
+            {
+                //No Question found
+            }
+            get_question(qno);
             prevbtn.Enabled = true;
         }
-
         protected void prevbtn_Click(object sender, EventArgs e)
         {
             save_answer(qno);
@@ -188,9 +222,11 @@ namespace e_Exam
             }
             nextbtn.Enabled = true;
         }
-
         protected void submitbtn_Click(object sender, EventArgs e)
         {
+            save_answer(qno);
+            compare_answer(total_q);
+            submit_question();
             int section = Convert.ToInt32(ViewState["section"]);
             section++;
             ViewState["section"] = section;
@@ -216,23 +252,58 @@ namespace e_Exam
                 }
                 Label2.Text = "Section " + section;
             }
+            else
+            {
+                Panel1.Visible = false;
+                timer_pnl.Visible = false;
+                MultiView1.ActiveViewIndex = 2;
+            }
+            nextbtn.Enabled = true;
+            prevbtn.Enabled = false;
         }
-
         private void get_question(int qno)
         {
-
             try
             {
                 qlbl.Text = "Q." + qno + ") " + qtable.Rows[qno - 1]["question"].ToString();
+                if (qtable.Rows[qno - 1]["has_image"].ToString().Equals("1"))
+                {
+                    Image image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "image", "question_image");
+                    qImg.ImageUrl = image.ImageUrl;
+                    qPnl.Visible = true;
+                }
                 if (qtable.Rows[qno - 1]["type"].ToString().Equals("0"))
                 {
+
                     RadioButtonList1.Visible = true;
                     anslbl.Visible = false;
                     anstxt.Visible = false;
-                    RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
-                    RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
-                    RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
-                    RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
+                    if(qtable.Rows[qno - 1]["mcq_image"].ToString().Equals("0"))
+                    {
+                        RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
+                        RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
+                        RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
+                        RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
+                    }
+                    else
+                    {
+                        Image image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "a_image", "mcq_image");
+                        string url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "b_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "c_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "d_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                    }
                     if (ans_table.Rows[qno - 1]["mcq"] != DBNull.Value)
                     {
                         char ans = (char)ans_table.Rows[qno - 1]["mcq"];
@@ -260,7 +331,66 @@ namespace e_Exam
                 //No question found;
             }
         }
+        protected void markbtn_Click(object sender, EventArgs e)
+        {
+            Button button = new Button();
+            foreach (TableRow row in Table1.Rows)
+            {
+                button = (Button)row.FindControl((qno).ToString());
+            }
+            if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+            {
+                button.BackColor = System.Drawing.ColorTranslator.FromHtml(yellow);
+            }
+            else
+            {
+                if (qtable.Rows[qno - 1]["type"].ToString().Equals("0"))
+                {   //mcq
+                    if (RadioButtonList1.SelectedIndex != -1)
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                    }
 
+                }
+                else
+                {
+                    if (anstxt.Text.Trim() != "")
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                    }
+                    else
+                    {
+                        button.BackColor = System.Drawing.ColorTranslator.FromHtml(white);
+                    }
+                }
+            }
+        }
+        protected void anstxt_TextChanged(object sender, EventArgs e)
+        {
+            Button button = new Button();
+            if (anstxt.Text.Trim() != "")
+            {
+                foreach (TableRow row in Table1.Rows)
+                {
+                    button = (Button)row.FindControl((qno).ToString());
+                }
+                if (button.BackColor != System.Drawing.ColorTranslator.FromHtml(yellow))
+                {
+                    button.BackColor = System.Drawing.ColorTranslator.FromHtml(green);
+                }
+            }
+            else
+            {
+                foreach (TableRow row in Table1.Rows)
+                {
+                    button = (Button)row.FindControl((qno).ToString());
+                }
+                if (button.BackColor == System.Drawing.ColorTranslator.FromHtml(green))
+                {
+                    button.BackColor = System.Drawing.ColorTranslator.FromHtml(white);
+                }
+            }
+        }
         private void navigate_q(object sender, EventArgs e)
         {
             save_answer(qno);
@@ -284,7 +414,6 @@ namespace e_Exam
                 prevbtn.Enabled = true;
             }
         }
-
         private int count_section(int tid)
         {
             int count = 1;
@@ -304,6 +433,92 @@ namespace e_Exam
                 //Not found
             }
             return count;
+        }
+        private void compare_answer(int questions)
+        {
+            for (int i = 0; i < questions; i++)
+            {
+                if (ans_table.Rows[i]["t_id"] == DBNull.Value)
+                {
+                    ans_table.Rows[i]["t_id"] = tid;
+                    ans_table.Rows[i]["q_id"] = i + 1;
+                    ans_table.Rows[i]["section_no"] = Convert.ToInt32(ViewState["section"]);
+                    ans_table.Rows[i]["student_id"] = 0;
+                }
+                if (qtable.Rows[i]["type"].ToString().Equals("0"))
+                {
+                    if (ans_table.Rows[i]["mcq"].ToString() == qtable.Rows[i]["answer"].ToString())
+                    {
+                        ans_table.Rows[i]["correct"] = '1';
+                    }
+                }
+                else
+                {
+                    if (ans_table.Rows[i]["blank"].ToString() == qtable.Rows[i]["blank"].ToString())
+                    {
+                        ans_table.Rows[i]["correct"] = '1';
+                    }
+                }
+            }
+        }
+        private void submit_question()
+        {
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(consString))
+                {
+                    using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                    {
+                        //Set the database table name
+                        sqlBulkCopy.DestinationTableName = "dbo.student_question_answer";
+                        sqlBulkCopy.ColumnMappings.Add("t_id", "test_id");
+                        sqlBulkCopy.ColumnMappings.Add("section_no", "section_no");
+                        sqlBulkCopy.ColumnMappings.Add("q_id", "q_id");
+                        sqlBulkCopy.ColumnMappings.Add("type", "type");
+                        sqlBulkCopy.ColumnMappings.Add("student_id", "student_id");
+                        sqlBulkCopy.ColumnMappings.Add("mcq", "mcq");
+                        sqlBulkCopy.ColumnMappings.Add("blank", "blank");
+                        sqlBulkCopy.ColumnMappings.Add("correct", "correct");
+                        sqlBulkCopy.ColumnMappings.Add("attempt", "attempt");
+                        con.Open();
+                        sqlBulkCopy.WriteToServer(ans_table);
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                //Sql Error found
+            }
+        }
+        private Image retrive_image(int section, int qid, string opt_image, string table)
+        {
+            Image image = new Image();
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                SqlCommand cmd = new SqlCommand("select " + opt_image + " from " + table + " where test_id=@tid and section_no=@section and q_id=@qid", con);
+                cmd.Parameters.AddWithValue("@tid", Request.QueryString["tid"]);
+                cmd.Parameters.AddWithValue("@section", section);
+                cmd.Parameters.AddWithValue("@qid", qid);
+                cmd.CommandType = CommandType.Text;
+                try
+                {
+                    con.Open();
+                    byte[] bytes = (byte[])cmd.ExecuteScalar();
+                    if (bytes != null)
+                    {
+                        string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        image.ImageUrl = "data:image/png;base64," + base64String;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Image Exception
+                }
+            }
+            return image;
         }
     }
 }
