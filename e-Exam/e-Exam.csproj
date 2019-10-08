@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44337</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -80,10 +80,6 @@
     <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_dashboard1.aspx" />
     <Content Include="admin_login.aspx" />
-    <Content Include="App_Data\exam.mdf" />
-    <Content Include="App_Data\exam_log.ldf">
-      <DependentUpon>exam.mdf</DependentUpon>
-    </Content>
     <Content Include="App_LocalResources\bg4.jpg" />
     <Content Include="App_LocalResources\bg5.png" />
     <Content Include="App_LocalResources\lg1.jpg" />
@@ -338,6 +334,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>

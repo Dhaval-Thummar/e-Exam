@@ -31,7 +31,10 @@
     <form id="form1" runat="server">
         <div class="auto-style8">
            
-            &nbsp;<img src="lg1.jpg" class="auto-style7" /></div> 
+            <p style="margin-left: 80px">
+           
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="lg1.jpg" class="auto-style7" /></p>
+        </div> 
              <table class="auto-style1" style="background-color: #ffffff; filter: alpha(opacity=40); opacity: 0.95;">
         <tr>
             <td class="auto-style2">
@@ -195,8 +198,10 @@
         <tr>    
             <td class="auto-style5" colspan="2">
         
-                <asp:Button ID="submit_btn" runat="server" Text="Submit" OnClick="submit_btn_Click" CssClass="auto-style8" Height="40px" Width="217px" />
-                <asp:Button ID="cancel_btn" runat="server" Text="Cancel" OnClick="cancel_btn_Click" OnClientClick="return confirm('Are you sure you wish to Cancel?');" CssClass="auto-style8" Height="40px" Width="217px"/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        
+                <asp:Button ID="submit_btn" runat="server" Text="Submit" OnClick="submit_btn_Click" CssClass="auto-style8" Height="40px" Width="200px" />
+                <asp:Button ID="cancel_btn" runat="server" Text="Cancel" OnClick="cancel_btn_Click" OnClientClick="return confirm('Are you sure you wish to Cancel?');" CssClass="auto-style8" Height="40px" Width="207px"/>
                 <br />
                 <br />
             </td>
