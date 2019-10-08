@@ -109,6 +109,9 @@
                 <tr>
                     <td>
                         <asp:Label ID="qlbl" runat="server" Text=""></asp:Label>
+                        <asp:Panel ID="qPnl" runat="server" Visible="False">
+                            <asp:Image ID="qImg" runat="server" />
+                        </asp:Panel>
                         <br />
                     </td>
                 </tr>

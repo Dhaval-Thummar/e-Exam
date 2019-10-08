@@ -64,10 +64,9 @@ namespace e_Exam
             qtable.Rows.Clear();
             DataTable q1 = new DataTable();
             String conStr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            String qry = "select q.test_id,q.section_no,q.q_id,q.question,q.type,m.A,m.B,m.C,m.D,m.answer,f.answer as blank, q.has_image from Question as q " +
+            String qry = "select q.test_id,q.section_no,q.q_id,q.question,q.type,m.A,m.B,m.C,m.D,m.answer,f.answer as blank, q.has_image ,m.has_image as mcq_image from Question as q " +
                 "left outer join mcq as m on q.test_id = m.test_id and q.section_no = m.section_no and q.q_id = m.q_id " +
                 "left outer join fill_in_blank as f on q.test_id = f.test_id and q.section_no = f.section_no and q.q_id = f.q_id where q.test_id =" + tid + " and q.section_no=" + section;
-
             using (SqlConnection con = new SqlConnection(conStr))
             {
                 con.Open();
@@ -174,7 +173,7 @@ namespace e_Exam
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //No Question found
             }
@@ -205,7 +204,7 @@ namespace e_Exam
                     }
                 }
             }
-            catch(Exception)
+            catch (Exception)
             {
                 //No Question found
             }
@@ -267,15 +266,44 @@ namespace e_Exam
             try
             {
                 qlbl.Text = "Q." + qno + ") " + qtable.Rows[qno - 1]["question"].ToString();
+                if (qtable.Rows[qno - 1]["has_image"].ToString().Equals("1"))
+                {
+                    Image image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "image", "question_image");
+                    qImg.ImageUrl = image.ImageUrl;
+                    qPnl.Visible = true;
+                }
                 if (qtable.Rows[qno - 1]["type"].ToString().Equals("0"))
                 {
+
                     RadioButtonList1.Visible = true;
                     anslbl.Visible = false;
                     anstxt.Visible = false;
-                    RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
-                    RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
-                    RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
-                    RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
+                    if(qtable.Rows[qno - 1]["mcq_image"].ToString().Equals("0"))
+                    {
+                        RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
+                        RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
+                        RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
+                        RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
+                    }
+                    else
+                    {
+                        Image image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "a_image", "mcq_image");
+                        string url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "b_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "c_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                        image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "d_image", "mcq_image");
+                        url = image.ImageUrl;
+                        RadioButtonList1.Items.Add(new ListItem(String.Format("<img src='{0}'>", url), url));
+
+                    }
                     if (ans_table.Rows[qno - 1]["mcq"] != DBNull.Value)
                     {
                         char ans = (char)ans_table.Rows[qno - 1]["mcq"];
@@ -463,6 +491,34 @@ namespace e_Exam
             {
                 //Sql Error found
             }
+        }
+        private Image retrive_image(int section, int qid, string opt_image, string table)
+        {
+            Image image = new Image();
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                SqlCommand cmd = new SqlCommand("select " + opt_image + " from " + table + " where test_id=@tid and section_no=@section and q_id=@qid", con);
+                cmd.Parameters.AddWithValue("@tid", Request.QueryString["tid"]);
+                cmd.Parameters.AddWithValue("@section", section);
+                cmd.Parameters.AddWithValue("@qid", qid);
+                cmd.CommandType = CommandType.Text;
+                try
+                {
+                    con.Open();
+                    byte[] bytes = (byte[])cmd.ExecuteScalar();
+                    if (bytes != null)
+                    {
+                        string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        image.ImageUrl = "data:image/png;base64," + base64String;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Image Exception
+                }
+            }
+            return image;
         }
     }
 }
