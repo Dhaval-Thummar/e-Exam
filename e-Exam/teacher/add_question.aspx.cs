@@ -422,17 +422,33 @@ namespace e_Exam
                     {
                         mcq_image_add(optAimg, i1, "a_image");
                     }
+                    else
+                    {
+                        m1["A"] = txt_optionone.Text;
+                    }
                     if (optBCheck.Checked)
                     {
                         mcq_image_add(optBimg, i1, "b_image");
+                    }
+                    else
+                    {
+                        m1["B"] = txt_optionone.Text;
                     }
                     if (optCCheck.Checked)
                     {
                         mcq_image_add(optCimg, i1, "c_image");
                     }
+                    else
+                    {
+                        m1["C"] = txt_optionone.Text;
+                    }
                     if (optDCheck.Checked)
                     {
                         mcq_image_add(optDimg, i1, "d_image");
+                    }
+                    else
+                    {
+                        m1["D"] = txt_optionone.Text;
                     }
                     mcq_image.Rows.Add(i1);
                 }
@@ -667,8 +683,6 @@ namespace e_Exam
 
         private void mcq_image_add(FileUpload img, DataRow row, string name)
         {
-
-
             HttpPostedFile mcq_img = img.PostedFile;
 
             string filename = Path.GetFileName(mcq_img.FileName);
@@ -690,5 +704,4 @@ namespace e_Exam
             }
         }
     }
-
 }
