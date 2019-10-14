@@ -46,13 +46,14 @@
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            text-align:center;
+            text-align: center;
             text-decoration: none;
             display: inline-block;
             cursor: pointer;
         }
-        .table2{
-            margin-bottom:300px;
+
+        .table2 {
+            margin-bottom: 300px;
         }
     </style>
     <script type="text/javascript">
@@ -62,14 +63,14 @@
         DisableBackButton();
         window.onload = DisableBackButton();
         window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
-        window.onload = function () {void (0)}
+        window.onload = function () { void (0) }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="Panel1" runat="server" Visible="False">
         <div class="sidenav">
             <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
-            <asp:Table ID="Table1"  HorizontalAlign="Center" runat="server" CssClass="table2">
+            <asp:Table ID="Table1" HorizontalAlign="Center" runat="server" CssClass="table2">
             </asp:Table>
 
             <asp:Button ID="submitbtn" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="submitbtn_Click" />
@@ -142,7 +143,16 @@
             </table>
         </asp:View>
         <asp:View ID="View3" runat="server">
-            Thank you for taking test!!!
+            <br>
+            </br>
+            <div class="div1">
+                Thank you for taking test!!!
+                <br>
+                </br>
+                <br>
+                </br>
+                <a href="student/student_dashboard.aspx" class="btn btn-primary" ><i class="fa fa-home"></i> Home</a>
+            </div>
         </asp:View>
     </asp:MultiView>
 </asp:Content>

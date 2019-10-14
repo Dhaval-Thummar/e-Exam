@@ -73,6 +73,7 @@
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="custom.css" />
     <Content Include="font-awesome.min.css" />
+    <Content Include="result.aspx" />
     <Content Include="Scripts\all.js" />
     <Content Include="take_test.aspx" />
     <Content Include="teacher\add_question.aspx" />
@@ -177,6 +178,13 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="result.aspx.cs">
+      <DependentUpon>result.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="result.aspx.designer.cs">
+      <DependentUpon>result.aspx</DependentUpon>
+    </Compile>
     <Compile Include="take_test.aspx.cs">
       <DependentUpon>take_test.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -27,54 +27,59 @@ namespace e_Exam
             DataTable dt = new DataTable();
             SqlCommand cmd;
 
-            //student login
-            if (is_student)
+            try
             {
-                 cmd = new SqlCommand("user_verify", con);
-                 cmd.CommandType = CommandType.StoredProcedure;
-                 cmd.Parameters.Add(new SqlParameter("@uname", u_input.Text));
-                 cmd.Parameters.Add(new SqlParameter("@pass", p_input.Text));
-                 da.SelectCommand = cmd;
-                 da.Fill(dt);
+                //student login
+                if (is_student)
+                {
+                    cmd = new SqlCommand("user_verify", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@uname", u_input.Text.Trim()));
+                    cmd.Parameters.Add(new SqlParameter("@pass", p_input.Text));
+                    da.SelectCommand = cmd;
+                    da.Fill(dt);
 
-                 if(dt.Rows.Count > 0)
-                 {
-                     cmd.CommandText = "select Name from Student_info where email ='" + u_input.Text + "'";
-                     cmd.CommandType = CommandType.Text;
-                     Session["studentID"] = dt.Rows[0][0].ToString();
-                     da.SelectCommand = cmd;
-                     DataTable dt1 = new DataTable();
-                     da.Fill(dt1);
-                     Session["student"] = dt1.Rows[0][0].ToString();
-                     Server.Transfer("~/student/student_dashboard.aspx");
-                 }
-                 else
-                 {
-                     valid.Text = "Invalid Username or Password";
-                 }
+                    if (dt.Rows.Count > 0)
+                    {
+                        cmd.CommandText = "select Name from Student_info where email ='" + u_input.Text.Trim() + "'";
+                        cmd.CommandType = CommandType.Text;
+                        Session["studentID"] = dt.Rows[0][0].ToString();
+                        da.SelectCommand = cmd;
+                        DataTable dt1 = new DataTable();
+                        da.Fill(dt1);
+                        Session["student"] = dt1.Rows[0][0].ToString();
+                        Server.Transfer("~/student/student_dashboard.aspx");
+                    }
+                    else
+                    {
+                        valid.Text = "Invalid Username or Password";
+                    }
+                }
+                //teacher login
+                else
+                {
+                    cmd = new SqlCommand("teacher_login", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add(new SqlParameter("@uname", u_input.Text));
+                    cmd.Parameters.Add(new SqlParameter("@pass", p_input.Text));
+                    da.SelectCommand = cmd;
+                    da.Fill(dt);
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        Session["teacherID"] = dt.Rows[0][0].ToString();
+                        Server.Transfer("~/teacher/teacher_dashboard.aspx");
+                    }
+                    else
+                    {
+                        valid.Text = "Invalid Username or Password";
+                    }
+                }
             }
-            //teacher login
-            else
+            catch(SqlException)
             {
-                
-                 cmd = new SqlCommand("teacher_login", con);
-                 cmd.CommandType = CommandType.StoredProcedure;
-                 cmd.Parameters.Add(new SqlParameter("@uname", u_input.Text));
-                 cmd.Parameters.Add(new SqlParameter("@pass", p_input.Text));
-                 da.SelectCommand = cmd;
-                 da.Fill(dt);
-
-                 if(dt.Rows.Count > 0)
-                 {
-                     Session["teacherID"] = dt.Rows[0][0].ToString();
-                    Server.Transfer("~/teacher/teacher_dashboard.aspx");
-                 }
-                 else
-                 {
-                     valid.Text = "Invalid Username or Password";
-                 }
+                valid.Text = "No Database found!";
             }
-
         }
 
         protected void Button1_Click(object sender, EventArgs e)

@@ -60,7 +60,7 @@
                 <br />
             <asp:HyperLink ID="HyperLink4" runat="server" CssClass="auto1" ForeColor="Black" NavigateUrl="~/student/student_dashboard.aspx">Home</asp:HyperLink>
             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1">Test</asp:HyperLink>
-            <asp:HyperLink ID="HyperLink2" runat="server" class="auto1">History</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/result.aspx">Result</asp:HyperLink>
             <asp:HyperLink ID="HyperLink3" runat="server" CssClass="auto1">View Profile</asp:HyperLink>
             </div>
         </div>

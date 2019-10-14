@@ -10,7 +10,7 @@
 namespace e_Exam {
     
     
-    public partial class student_dashboard {
+    public partial class result {
         
         /// <summary>
         /// MultiView1 control.
@@ -31,6 +31,15 @@ namespace e_Exam {
         protected global::System.Web.UI.WebControls.View View1;
         
         /// <summary>
+        /// SqlDataSource1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
@@ -49,12 +58,12 @@ namespace e_Exam {
         protected global::System.Web.UI.WebControls.View View2;
         
         /// <summary>
-        /// GridView2 control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
     }
 }
