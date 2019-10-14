@@ -40,7 +40,7 @@ namespace e_Exam
 
                  if(dt.Rows.Count > 0)
                  {
-                     cmd.CommandText = "select Name from Student_info where email ='" + u_input.Text + "'";
+                     cmd.CommandText = "select id from Student_info where email ='" + u_input.Text + "'";
                      cmd.CommandType = CommandType.Text;
                      Session["studentID"] = dt.Rows[0][0].ToString();
                      da.SelectCommand = cmd;

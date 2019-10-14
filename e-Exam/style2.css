@@ -1,6 +1,6 @@
 ﻿
 body {
-    margin: auto;
+    margin:auto;
     background-image: url('bg4.jpg');
     background-size: cover;
 }
@@ -30,11 +30,12 @@ body {
     color: black;
     font-weight: 900;
     background-color: dodgerblue;
-    cursor: pointer;
+    cursor: pointer ;
     margin-bottom: 30px;
 }
 
     #Button1:hover {
+       
         background-color: rgba(0,255,0,0.5);
     }
 
@@ -44,6 +45,7 @@ body {
     color: dodgerblue;
     font-size: large;
     text-align: center;
+  
 }
 
 

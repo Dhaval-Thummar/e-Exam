@@ -39,7 +39,7 @@ namespace e_Exam
             if (dt.Rows.Count > 0)
             {
                 valid1.Text = dt.Rows[0][0].ToString();
-                //Response.Redirect("~/login.aspx");
+                Server.Transfer("~/admin_dashboard1.aspx");
             }
             else
             {

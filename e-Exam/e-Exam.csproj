@@ -69,14 +69,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
     <Content Include="custom.css" />
     <Content Include="font-awesome.min.css" />
     <Content Include="teacher\add_question.aspx" />
     <Content Include="teacher\add_test.aspx" />
     <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_dashboard1.aspx" />
-
     <Content Include="admin_login.aspx" />
     <Content Include="App_Data\exam.mdf" />
     <Content Include="App_Data\exam_log.ldf">
@@ -124,6 +122,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="admin.Master" />
+    <Content Include="WebForm4.aspx" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -137,7 +136,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-
     <Content Include="student\student_dashboard.aspx" />
     <Content Include="student_list.aspx" />
     <Content Include="style.css" />
@@ -147,7 +145,6 @@
     <Content Include="teacher\teacher_dashboard.aspx" />
     <Content Include="teacher_list.aspx" />
     <Content Include="teacher\view_test.aspx" />
-
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="Scripts\umd\popper.min.js.map" />
@@ -161,7 +158,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="teacher\add_question.aspx.cs">
       <DependentUpon>add_question.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -190,7 +186,6 @@
     <Compile Include="admin_dashboard.aspx.designer.cs">
       <DependentUpon>admin_dashboard.aspx</DependentUpon>
     </Compile>
-
     <Compile Include="admin_dashboard1.aspx.cs">
       <DependentUpon>admin_dashboard1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -230,7 +225,6 @@
     <Compile Include="Registration.aspx.designer.cs">
       <DependentUpon>Registration.aspx</DependentUpon>
     </Compile>
-
     <Compile Include="student.Master.cs">
       <DependentUpon>student.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -280,6 +274,13 @@
     </Compile>
     <Compile Include="teacher\view_test.aspx.designer.cs">
       <DependentUpon>view_test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm4.aspx.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm4.aspx.designer.cs">
+      <DependentUpon>WebForm4.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

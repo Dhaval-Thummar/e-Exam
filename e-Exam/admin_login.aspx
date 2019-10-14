@@ -9,6 +9,7 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
+            text-align:center;
             width: 25%;
            margin:150px auto;
         }
@@ -25,6 +26,7 @@
         .auto-style5 {
             height: 26px;
         }
+
         .auto-style6 {
             text-align:center;
         }
@@ -32,7 +34,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <table align="center" class="auto-style1" style=" filter: alpha(opacity=40); opacity: 0.95;border:5px orange solid;">
+        <table class="auto-style1" style=" filter: alpha(opacity=40); opacity: 0.95;border:5px orange solid;">
             <tr>
                 <td colspan="2" class="auto-style2">
                     <asp:Label ID="admin_label" runat="server" Text="Admin Login"></asp:Label>

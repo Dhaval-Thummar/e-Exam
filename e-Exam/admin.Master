@@ -30,9 +30,9 @@
             font-weight:400;
             display:block;
         }
-        .main {
-            margin-left: 250px;
-            padding :20px 10px;
+        .main{
+            margin-left: 290px;
+            padding:54px;
         }
     </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -49,7 +49,7 @@
              <asp:Image ID="Image1" runat="server" Height="175px" ImageUrl="~/Images/bg1.png" Width="144px" />
              <br />
              <br />
-             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/teacher_list.aspx">Teacher List</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/admin_dashboard1.aspx">Add Teacher</asp:HyperLink>
              <br />
              <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/student_list.aspx">Student List</asp:HyperLink>
              <br />
@@ -57,7 +57,7 @@
              <br />
              <asp:HyperLink ID="HyperLink4" runat="server" class="auto1">Result</asp:HyperLink>
         </div>
-        <div>
+        <div class="main">
             <asp:ContentPlaceHolder ID="maincontent" runat="server">
             </asp:ContentPlaceHolder>
         </div>
