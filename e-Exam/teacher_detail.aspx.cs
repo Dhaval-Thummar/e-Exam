@@ -36,6 +36,10 @@ namespace e_Exam
             da.SelectCommand = cmd;
             DataTable dt = new DataTable();
             da.Fill(dt);
+            cmd = new SqlCommand("select name from teacher_info where teacher_id="+Session["teacher_id"].ToString(), con);
+            con.Open();
+            Label10.Text = cmd.ExecuteScalar().ToString();
+            con.Close();
             GridView2.DataSource = dt;
             GridView2.DataBind();
 

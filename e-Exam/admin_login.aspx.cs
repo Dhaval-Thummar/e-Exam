@@ -19,7 +19,7 @@ namespace e_Exam
         
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session.Clear();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -41,6 +41,7 @@ namespace e_Exam
             if (dt.Rows.Count > 0)
             {
                 valid1.Text = dt.Rows[0][0].ToString();
+                Session["admin_id"] = user_textbox.Text.Trim();
                 Server.Transfer("~/admin_dashboard1.aspx");
             }
             else

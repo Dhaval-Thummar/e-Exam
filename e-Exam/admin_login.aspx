@@ -8,7 +8,7 @@
 <head runat="server">
     <title></title>
     <style type="text/css">
-        .auto-style1 {
+        .auto-style1 {  
             text-align:center;
             width: 25%;
            margin:150px auto;

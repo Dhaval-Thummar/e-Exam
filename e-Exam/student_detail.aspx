@@ -51,6 +51,8 @@
                 </asp:GridView>
             </asp:View>
             <asp:View ID="View2" runat="server">
+                <asp:Label ID="Label8" runat="server" Text="NAME:" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                <asp:Label ID="Label7" runat="server" Text="Label" Font-Size="X-Large"></asp:Label>
                 <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="name">
                     <Columns>
                         <asp:TemplateField HeaderText="Name">

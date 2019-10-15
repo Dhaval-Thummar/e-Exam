@@ -196,5 +196,6 @@ namespace e_Exam
                 Response.Write("Email verification is required");
             }
         }
+       
     }
 }
