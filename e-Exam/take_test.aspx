@@ -2,6 +2,36 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        body {
+    background-image: url('bg4.jpg');
+    background-size: cover;
+        }
+       
+         .auto-style1 {
+            width: 40%;
+            text-align:center;
+            margin: 150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+           
+        }
+
+         .auto-style7{
+            width: 100%;
+            text-align:center;
+           
+            
+            
+           
+        }
+        .auto-style5,#Button1 {
+            text-align: center;
+            height: 60px;
+        }
+         .auto-style6 {
+            height: 29px;
+        }
+        
         .div1 {
             text-align: center;
         }
@@ -12,7 +42,7 @@
             vertical-align: middle;
             padding-right: 40px;
             padding-top: 10px;
-            height: 50px;
+            height: 50pxs
             position: fixed;
             width: 100%;
             top: 0;
@@ -94,12 +124,30 @@
     </asp:Panel>
 
     <asp:MultiView ID="MultiView1" runat="server">
+     
         <asp:View ID="View1" runat="server">
             <div class="div1">
-                <br />
-                Instructions.
-                <br />
-                <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
+                <table class="auto-style7">
+                 <td class="auto-style2"> 
+                            <br />
+                            <asp:Label ID="Label4" runat="server" Text="INSTRUCTION" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
+                            <br />
+                     PLEASE READ GIVEN INSTRUCTION BRFORE STRATING EXAM.
+                     <br />
+                     There are total <asp:Label ID="Label5" runat="server" Text="SECTION NO"></asp:Label> section avalible.
+                     <br />
+                     Total Time is for exam is <asp:Label ID="Label6" runat="server" Text="TIME"></asp:Label>HH:MM:SS.
+                         <br />
+                    There are <asp:Label ID="Label7" runat="server" Text="YES/NO"></asp:Label> Nagative marking  for wrong answer.
+                      <br />
+          White colour show that use not visited question yet.Green colour show that you sumbit answer for this Question.
+                     If you want mark any Question there is mark button is avalible.its look in Yellow colour.
+                     <br />
+                  </td>
+
+                </table>
+               
+                <asp:Button ID="Button1" runat="server"   class="btn btn-primary" Text="START EXAM" OnClick="Button1_Click" />
             </div>
         </asp:View>
         <asp:View ID="View2" runat="server">
@@ -142,7 +190,38 @@
             </table>
         </asp:View>
         <asp:View ID="View3" runat="server">
-            Thank you for taking test!!!
+         <div>
+       
+      <table class="auto-style1">
+                    <tr>
+                        <td class="auto-style6"> 
+                        </td>
+                         
+                    <tr>
+                        <td class="auto-style2"> 
+                            <br />
+                            <asp:Label ID="Label3" runat="server" Text="THANK YOU!!!" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
+                            <br />
+                        </td>
+                        
+                    </tr>
+                   
+                        </tr>
+                   
+             <tr>
+
+                 <td class="auto-style5">
+                     <asp:Button ID="Button2" runat="server"   class="btn btn-primary" Text="OK" />
+                     <br />
+                     <br />
+                     <br />
+                 </td>
+                 
+             </tr>
+                        
+                </table>
+
+   </div>
         </asp:View>
     </asp:MultiView>
 </asp:Content>
