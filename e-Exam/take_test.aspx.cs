@@ -13,7 +13,7 @@ namespace e_Exam
     {
         static DataTable qtable = new DataTable();
         static DataTable ans_table = new DataTable();
-        static int qno = 1, tid = 0, total_q = 0,student_id=0;
+        static int qno = 1, tid = 0, total_q = 0, student_id = 0;
         string yellow = "#FFD500", white = "#F8F9FA", green = "#42D127";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,11 +24,11 @@ namespace e_Exam
                 int section = Convert.ToInt32(ViewState["section"]);
                 Session["Timer"] = DateTime.Now.AddMinutes(5).ToString();
                 MultiView1.ActiveViewIndex = 0;
-                if(Session["t_id"]!=null)
+                if (Session["t_id"] != null)
                 {
                     tid = Convert.ToInt32(Session["t_id"].ToString());
-                }        
-                if(Session["studentID"] != null)
+                }
+                if (Session["studentID"] != null)
                 {
                     student_id = Convert.ToInt32(Session["studentID"].ToString());
                 }
@@ -62,9 +62,22 @@ namespace e_Exam
             for (int i = 0; i < rows; i++)
             {
                 r1 = t1.NewRow();
+                //r1["t_id"] = qtable.Rows[0]["test_id"].ToString();
+                //r1["section_no"] = qtable.Rows[0]["section_no"].ToString();
+                //r1["q_id"] = qtable.Rows[0]["q_id"].ToString();
+                //r1["type"] = qtable.Rows[0]["type"].ToString();
+                //r1["student_id"] = student_id;
                 t1.Rows.Add(r1);
             }
             return t1;
+        }
+        private void copy_question()
+        {
+            int i;
+            for (i = 0; i < qtable.Rows.Count; i++)
+            {
+                
+            }
         }
         private DataTable Questiosns(int tid, int section)
         {
@@ -156,7 +169,7 @@ namespace e_Exam
         {
             try
             {
-                ans_table.Rows[qid - 1]["student_id"] = student_id; 
+                ans_table.Rows[qid - 1]["student_id"] = student_id;
                 ans_table.Rows[qid - 1]["t_id"] = tid;
                 ans_table.Rows[qid - 1]["section_no"] = Convert.ToInt32(ViewState["section"]);
                 ans_table.Rows[qid - 1]["q_id"] = qid;

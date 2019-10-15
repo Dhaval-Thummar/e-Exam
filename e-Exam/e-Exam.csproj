@@ -75,6 +75,7 @@
     <Content Include="font-awesome.min.css" />
     <Content Include="result.aspx" />
     <Content Include="Scripts\all.js" />
+    <Content Include="student_homepage.aspx" />
     <Content Include="take_test.aspx" />
     <Content Include="teacher\add_question.aspx" />
     <Content Include="teacher\add_test.aspx" />
@@ -184,6 +185,13 @@
     </Compile>
     <Compile Include="result.aspx.designer.cs">
       <DependentUpon>result.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student_homepage.aspx.cs">
+      <DependentUpon>student_homepage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student_homepage.aspx.designer.cs">
+      <DependentUpon>student_homepage.aspx</DependentUpon>
     </Compile>
     <Compile Include="take_test.aspx.cs">
       <DependentUpon>take_test.aspx</DependentUpon>

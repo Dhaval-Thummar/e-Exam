@@ -64,7 +64,7 @@ namespace e_Exam
             int tid = Int32.Parse(e.CommandArgument.ToString());
             if (tid > 0)
             {
-                Server.Transfer("~/take_test.aspx");
+                Response.Redirect("~/take_test.aspx");
             }
         }
     }

@@ -151,7 +151,7 @@
                 </br>
                 <br>
                 </br>
-                <a href="student/student_dashboard.aspx" class="btn btn-primary" ><i class="fa fa-home"></i> Home</a>
+                <a href="~/student_homepage.aspx" class="btn btn-primary" ><i class="fa fa-home"></i> Home</a>
             </div>
         </asp:View>
     </asp:MultiView>

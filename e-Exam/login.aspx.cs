@@ -48,7 +48,7 @@ namespace e_Exam
                         DataTable dt1 = new DataTable();
                         da.Fill(dt1);
                         Session["student"] = dt1.Rows[0][0].ToString();
-                        Server.Transfer("~/student/student_dashboard.aspx");
+                        Response.Redirect("~/student_homepage.aspx");
                     }
                     else
                     {
@@ -68,7 +68,7 @@ namespace e_Exam
                     if (dt.Rows.Count > 0)
                     {
                         Session["teacherID"] = dt.Rows[0][0].ToString();
-                        Server.Transfer("~/teacher/teacher_dashboard.aspx");
+                        Response.Redirect("~/teacher/teacher_dashboard.aspx");
                     }
                     else
                     {
