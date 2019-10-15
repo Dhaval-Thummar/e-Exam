@@ -150,6 +150,7 @@ namespace e_Exam
                         {
                             lblmcq.Visible = true;
                             lblmcq.Text = "Correct answer is " + mcq.Value.ToString();
+                            lblmcq.ForeColor = System.Drawing.Color.Green;
                             mcq_ans.Text = "Wrong";
                             mcq_ans.ForeColor = System.Drawing.Color.Red;
                         }
@@ -158,6 +159,7 @@ namespace e_Exam
                     {
                         lblmcq.Visible = true;
                         lblmcq.Text = "Correct answer is " + mcq.Value.ToString();
+                        lblmcq.ForeColor = System.Drawing.Color.Green;
                         mcq_ans.Text = "Not Attempted";
                         mcq_ans.ForeColor = System.Drawing.Color.Chocolate;
                     }
@@ -179,6 +181,7 @@ namespace e_Exam
                         {
                             lblblank.Visible = true;
                             lblblank.Text = "Correct answer is " + blank.Value.ToString();
+                            lblblank.ForeColor = System.Drawing.Color.Green;
                             blank_ans.Text = "Wrong";
                             blank_ans.ForeColor = System.Drawing.Color.Red;
                         }
@@ -187,6 +190,7 @@ namespace e_Exam
                     {
                         lblblank.Visible = true;
                         lblblank.Text = "Correct answer is " + blank.Value.ToString();
+                        lblblank.ForeColor = System.Drawing.Color.Green;
                         blank_ans.Text = "Not Attempted";
                         blank_ans.ForeColor = System.Drawing.Color.Chocolate;
                     }

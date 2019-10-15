@@ -55,6 +55,11 @@
         .table2 {
             margin-bottom: 300px;
         }
+
+        .opt-image {
+            height: 200px;
+            width: 200px;
+        }
     </style>
     <script type="text/javascript">
         function DisableBackButton() {
@@ -143,15 +148,12 @@
             </table>
         </asp:View>
         <asp:View ID="View3" runat="server">
-            <br>
-            </br>
+            <br></br>
             <div class="div1">
                 Thank you for taking test!!!
-                <br>
-                </br>
-                <br>
-                </br>
-                <a href="~/student_homepage.aspx" class="btn btn-primary" ><i class="fa fa-home"></i> Home</a>
+                <br></br>
+                <br></br>
+                <a href="student_homepage.aspx" class="btn btn-primary"><i class="fa fa-home"></i>Home</a>
             </div>
         </asp:View>
     </asp:MultiView>

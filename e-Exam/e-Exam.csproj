@@ -75,6 +75,7 @@
     <Content Include="font-awesome.min.css" />
     <Content Include="result.aspx" />
     <Content Include="Scripts\all.js" />
+    <Content Include="student\bg4.jpg" />
     <Content Include="student_homepage.aspx" />
     <Content Include="take_test.aspx" />
     <Content Include="teacher\add_question.aspx" />

@@ -11,6 +11,11 @@
             text-align: right;
             top: 5px;
         }
+
+        .body {
+            background-image: url('bg4.jpg');
+            background-size: cover;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -18,7 +23,7 @@
         <asp:View ID="View1" runat="server">
             <br />
             <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="subject" OnRowCommand="onrowcommand" HeaderStyle-Height="0px">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="subject" OnRowCommand="onrowcommand" HeaderStyle-Height="0px" ShowHeaderWhenEmpty="True">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

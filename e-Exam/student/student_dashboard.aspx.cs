@@ -32,7 +32,7 @@ namespace e_Exam
                 MultiView1.SetActiveView(View1);
                 GridView1.DataSource = dt;
                 GridView1.DataBind();
-
+                GridView1.Columns[0].HeaderText = "Subject";
             }
         }
 

@@ -22,7 +22,6 @@ namespace e_Exam
                 qno = 1;
                 ViewState["section"] = 1;
                 int section = Convert.ToInt32(ViewState["section"]);
-                Session["Timer"] = DateTime.Now.AddMinutes(5).ToString();
                 MultiView1.ActiveViewIndex = 0;
                 if (Session["t_id"] != null)
                 {
@@ -32,6 +31,7 @@ namespace e_Exam
                 {
                     student_id = Convert.ToInt32(Session["studentID"].ToString());
                 }
+                Session["Timer"] = DateTime.Now.AddMinutes(get_duration(tid)).ToString();
                 qtable = Questiosns(tid, section);
                 ViewState["total_section"] = count_section(tid);
                 total_q = qtable.Rows.Count;
@@ -62,22 +62,14 @@ namespace e_Exam
             for (int i = 0; i < rows; i++)
             {
                 r1 = t1.NewRow();
-                //r1["t_id"] = qtable.Rows[0]["test_id"].ToString();
-                //r1["section_no"] = qtable.Rows[0]["section_no"].ToString();
-                //r1["q_id"] = qtable.Rows[0]["q_id"].ToString();
-                //r1["type"] = qtable.Rows[0]["type"].ToString();
-                //r1["student_id"] = student_id;
+                r1["t_id"] = qtable.Rows[i]["test_id"].ToString();
+                r1["section_no"] = qtable.Rows[i]["section_no"].ToString();
+                r1["q_id"] = qtable.Rows[i]["q_id"].ToString();
+                r1["type"] = qtable.Rows[i]["type"].ToString();
+                r1["student_id"] = student_id;
                 t1.Rows.Add(r1);
             }
             return t1;
-        }
-        private void copy_question()
-        {
-            int i;
-            for (i = 0; i < qtable.Rows.Count; i++)
-            {
-                
-            }
         }
         private DataTable Questiosns(int tid, int section)
         {
@@ -637,6 +629,27 @@ namespace e_Exam
             {
                 //Error
             }
+        }
+        private int get_duration(int tid)
+        {
+            int duration = 0;
+            String conStr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            String qry = "select duration from Test where test_id=" + tid;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(qry, con);
+                    duration = (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception)
+            {
+                //Not found
+            }
+
+            return duration;
         }
     }
 }
