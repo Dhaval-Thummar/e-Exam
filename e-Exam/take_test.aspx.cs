@@ -31,7 +31,9 @@ namespace e_Exam
                 {
                     student_id = Convert.ToInt32(Session["studentID"].ToString());
                 }
-                Session["Timer"] = DateTime.Now.AddMinutes(get_duration(tid)).ToString();
+                //Session["Timer"] = DateTime.Now.AddMinutes(get_duration(tid)).ToString();
+                int time = get_duration(tid);
+                Session["Timer"] = DateTime.Now.AddMinutes(time).ToString();
                 qtable = Questiosns(tid, section);
                 ViewState["total_section"] = count_section(tid);
                 total_q = qtable.Rows.Count;
@@ -126,6 +128,8 @@ namespace e_Exam
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
+            int time = get_duration(tid);
+            Session["Timer"] = DateTime.Now.AddMinutes(time).ToString();
             Panel1.Visible = true;
             timer_pnl.Visible = true;
             if (qtable.Rows.Count != 0)
@@ -146,12 +150,28 @@ namespace e_Exam
         }
         protected void Timer1_Tick(object sender, EventArgs e)
         {
+
             if (DateTime.Compare(DateTime.Now, DateTime.Parse(Session["Timer"].ToString())) < 0)
             {
+                if((DateTime.Parse(Session["Timer"].ToString()) - DateTime.Now).TotalSeconds < 60)
+                {
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                }
                 Label1.Text = ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalHours).ToString() + ":" +
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalMinutes % 60).ToString() + ":" +
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalSeconds % 60).ToString();
+
+                if(Label1.Text.Equals("0:0:0"))
+                {
+                    //Test Comptele event
+                    save_answer(qno);
+                    compare_answer(total_q);
+                    submit_question();
+                    generate_result(tid, student_id);
+                    Response.Redirect("~/student_homepage.aspx");
+                }
             }
+
             //int a = Convert.ToInt32(Session["t1"].ToString());
             //a--;
             //Session["t1"] = a;

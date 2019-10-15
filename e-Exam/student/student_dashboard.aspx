@@ -23,29 +23,21 @@
         <asp:View ID="View1" runat="server">
             <br />
             <br />
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="subject" OnRowCommand="onrowcommand" HeaderStyle-Height="0px" ShowHeaderWhenEmpty="True">
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ExamDB %>" SelectCommand="showtestdata" SelectCommandType="StoredProcedure">
+                <SelectParameters>
+                    <asp:SessionParameter DefaultValue="0" Name="stdid" SessionField="studentID" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
+            <asp:GridView ID="GridView3" runat="server" AutoGenerateColumns="False" Width="100%" OnRowCommand="onrowcommand" CssClass="table table-striped table-sm" DataSourceID="SqlDataSource1">
                 <Columns>
-                    <asp:TemplateField>
+                    <asp:BoundField DataField="subject" HeaderText="subject" SortExpression="subject" />
+                    <asp:TemplateField HeaderText="Options" ItemStyle-Width="6%">
                         <ItemTemplate>
-                            <table>
-                                <tr>
-                                    <td class="class1">
-                                        <asp:Label ID="Label1" runat="server" Text='<%#Eval("subject") %>'></asp:Label>
-                                    </td>
-                                    <td class="class2">
-                                        <asp:LinkButton ID="Button1" runat="server" Text="Tests" CommandArgument='<%#Eval("subject") %>' />
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("subject") %>'>Tests</asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
-                <EmptyDataRowStyle CssClass="alert alert-primary" VerticalAlign="Middle" />
-                <EmptyDataTemplate>
-                    <div class="alert alert-danger" role="alert">
-                        No any test found!
-                    </div>
-                </EmptyDataTemplate>
+                <HeaderStyle BackColor="#33CCFF" />
             </asp:GridView>
         </asp:View>
         <asp:View ID="View2" runat="server">

@@ -20,19 +20,7 @@ namespace e_Exam
                 {
                     student_id = Int32.Parse(Session["StudentID"].ToString());
                 }
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["examDB"].ConnectionString;
-                SqlCommand cmd = new SqlCommand("showtestdata", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add(new SqlParameter("@stdid", student_id));
-                SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
-                DataSet dt = new DataSet();
-                da.Fill(dt);
                 MultiView1.SetActiveView(View1);
-                GridView1.DataSource = dt;
-                GridView1.DataBind();
-                GridView1.Columns[0].HeaderText = "Subject";
             }
         }
 

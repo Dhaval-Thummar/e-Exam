@@ -60,6 +60,21 @@
             height: 200px;
             width: 200px;
         }
+
+        .auto-style1 {
+            width: 40%;
+            text-align: center;
+            margin: 150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+        }
+        .auto-style5 {
+            text-align: center;
+            height: 60px;
+        }
+        .auto-style6 {
+            height: 29px;
+        }
     </style>
     <script type="text/javascript">
         function DisableBackButton() {
@@ -90,6 +105,7 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <%--            <asp:Literal ID="Literal1" runat="server"></asp:Literal>--%>
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Text="Time Left: "></asp:Label>
                     <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large"></asp:Label>
                 </ContentTemplate>
                 <Triggers>
@@ -103,7 +119,7 @@
         <asp:View ID="View1" runat="server">
             <div class="div1">
                 <br />
-                Instructions.
+                <asp:Label ID="Label6" runat="server" Text="Instruction" Font-Size="X-Large" ForeColor="#3333FF"></asp:Label>
                 <br />
                 <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
             </div>
@@ -149,11 +165,35 @@
         </asp:View>
         <asp:View ID="View3" runat="server">
             <br></br>
-            <div class="div1">
+            <%--            <div class="div1">
                 Thank you for taking test!!!
                 <br></br>
                 <br></br>
                 <a href="student_homepage.aspx" class="btn btn-primary"><i class="fa fa-home"></i>Home</a>
+            </div>--%>
+
+            <div>
+                <table class="auto-style1">
+                    <tr>
+                        <td class="auto-style6"></td>
+                        <tr>
+                            <td class="auto-style2">
+                                <br />
+                                <asp:Label ID="Label4" runat="server" Text="Thank You for taking test!" Font-Bold="True" Font-Size="X-Large" ForeColor="#3333FF"></asp:Label>
+                                <br />
+                            </td>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <td class="auto-style5">
+                            <br />
+                            <a href="student_homepage.aspx" class="btn btn-primary"><i class="fa fa-home"></i>Home</a>
+                            <br />
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
+                </table>
             </div>
         </asp:View>
     </asp:MultiView>
