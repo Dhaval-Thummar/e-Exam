@@ -13,5 +13,10 @@ namespace e_Exam
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Server.Transfer("~/admin_login.aspx");
+        }
     }
 }

@@ -26,8 +26,11 @@ namespace e_Exam
 
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-
-            SqlCommand cmd = new SqlCommand("select uname, pswd from Login_info where uname=@email", con);
+            SqlCommand cmd;
+            if (Request.QueryString["admin"]=="1")
+                cmd = new SqlCommand("select id, password from admin_info where id=@email", con);
+            else
+                cmd = new SqlCommand("select uname, pswd from Login_info where uname=@email", con);
             cmd.Parameters.AddWithValue("email",email_input.Text);
 
 

@@ -53,7 +53,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style4">
+                <td class="auto-style4">    
                     <asp:Label ID="password_label" runat="server" Text="Password:"></asp:Label>
                 </td>
                 <td class="auto-style5">
@@ -68,12 +68,13 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style6" colspan="2">
-                    &nbsp;</td>
+                <td class="auto-style6"></td>
             </tr>
             <tr>
                 <td class="auto-style6" colspan="2">
-                    <asp:HyperLink ID="H_forgot" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forgot Password</asp:HyperLink>
+                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" >forgot password</asp:LinkButton>
+                    <br />
+                    <asp:Label ID="Label2" runat="server" ForeColor="Red"></asp:Label>
                 </td>
             </tr>
         </table>

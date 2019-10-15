@@ -42,7 +42,7 @@
     <form id="form1" runat="server">
         <nav class="navbar navbar-dark bg-dark fixed-top">
             <asp:Label ID="top_label" runat="server" Text="e-Exam" Font-Bold="True" Font-Size="X-Large" ForeColor="White"></asp:Label>  
-            <asp:Button ID="Button1" runat="server" Text="Logout" class="btn" ForeColor="#CCCCCC" />
+            <asp:Button ID="Button1" runat="server" Text="Logout" class="btn" ForeColor="#CCCCCC" OnClick="Button1_Click" />
         </nav>
    
          <div class ="sidenav">
@@ -51,11 +51,9 @@
              <br />
              <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/admin_dashboard1.aspx">Add Teacher</asp:HyperLink>
              <br />
-             <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/student_list.aspx">Student List</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/teacher_detail.aspx">Teacher List</asp:HyperLink>
              <br />
-             <asp:HyperLink ID="HyperLink3" runat="server" class="auto1">Exam</asp:HyperLink>
-             <br />
-             <asp:HyperLink ID="HyperLink4" runat="server" class="auto1">Result</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink3" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/student_detail.aspx">Student detail</asp:HyperLink>
         </div>
         <div class="main">
             <asp:ContentPlaceHolder ID="maincontent" runat="server">
