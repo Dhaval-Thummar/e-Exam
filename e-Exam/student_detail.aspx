@@ -26,10 +26,14 @@
     <div>
         <asp:MultiView ID="MultiView1" runat="server">
             <asp:View ID="View1" runat="server">
+                <br />
+                <asp:Label ID="Label10" runat="server" Text="Department" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 <asp:DropDownList ID="dddepartment" runat="server" AutoPostBack="true" AppendDataBoundItems="false" OnSelectedIndexChanged="department_changed">
                     <asp:ListItem Text="All" Value="All"></asp:ListItem >
                 </asp:DropDownList>
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="name" Width="100%" OnRowCommand="detail">
+                <br />
+                <br />
+                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="name" Width="100%" OnRowCommand="detail" CssClass="table table-striped table-sm">
                     <Columns>
                         <asp:TemplateField HeaderText="Name">
                             <ItemTemplate>
@@ -53,7 +57,11 @@
             <asp:View ID="View2" runat="server">
                 <asp:Label ID="Label8" runat="server" Text="NAME:" Font-Bold="True" Font-Size="X-Large"></asp:Label>
                 <asp:Label ID="Label7" runat="server" Text="Label" Font-Size="X-Large"></asp:Label>
-                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="name">
+                <br />
+                <asp:Label ID="Label11" runat="server"></asp:Label>
+                <br />
+                <br />
+                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="false" Width="100%" DataKeyNames="name" CssClass="table table-striped table-sm">
                     <Columns>
                         <asp:TemplateField HeaderText="Name">
                             <ItemTemplate>

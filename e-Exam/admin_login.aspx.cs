@@ -42,7 +42,7 @@ namespace e_Exam
             {
                 valid1.Text = dt.Rows[0][0].ToString();
                 Session["admin_id"] = user_textbox.Text.Trim();
-                Server.Transfer("~/admin_dashboard1.aspx");
+                Server.Transfer("~/admin_home.aspx");
             }
             else
             {

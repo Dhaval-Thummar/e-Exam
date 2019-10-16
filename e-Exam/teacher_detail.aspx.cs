@@ -14,6 +14,7 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Label13.Visible = false;
             if (!IsPostBack)
             {
                 ViewState["filter"] = "ALL";
@@ -40,9 +41,17 @@ namespace e_Exam
             con.Open();
             Label10.Text = cmd.ExecuteScalar().ToString();
             con.Close();
-            GridView2.DataSource = dt;
-            GridView2.DataBind();
-
+            if (dt.Rows.Count == 0)
+            {
+                Label13.Visible = true;
+                Label13.ForeColor = System.Drawing.Color.Red;
+                Label13.Text = "No data found";
+            }
+            else
+            {
+                GridView2.DataSource = dt;
+                GridView2.DataBind();
+            }
 
         }
 

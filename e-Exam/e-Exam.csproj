@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin_home.aspx" />
     <Content Include="custom.css" />
     <Content Include="font-awesome.min.css" />
     <Content Include="student_detail.aspx" />
@@ -160,6 +161,13 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_home.aspx.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_home.aspx.designer.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="student_detail.aspx.cs">
       <DependentUpon>student_detail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -24,6 +24,12 @@
             padding-left: 40px;
             text-align: left;
         }
+        body {
+    margin: auto;
+    background-image: url('bg4.jpg');
+    background-size: cover;
+    font-family: sans-serif;
+}
 
         .auto1 {
             padding-left: 20px;
@@ -50,6 +56,8 @@
         <div class="sidenav">
             <asp:Image ID="Image1" runat="server" Height="175px" ImageUrl="~/Images/bg1.png" Width="144px" />
             <br />
+            <br />
+            <asp:HyperLink ID="HyperLink4" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/admin_home.aspx">Home</asp:HyperLink>
             <br />
             <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/admin_dashboard1.aspx">Add Teacher</asp:HyperLink>
             <br />

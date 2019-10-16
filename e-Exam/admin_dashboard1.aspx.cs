@@ -108,11 +108,13 @@ namespace e_Exam
                 bool f = SendOTP("help.eexam@gmail.com", TextBox2.Text.Trim(), "Subjected to OTP", msg);
                 if (f)
                 {
+                    Label2.ForeColor = System.Drawing.Color.Green;
                     Label2.Text = "otp is sent";
                     Label2.Visible = true;
                 }
                 else
                 {
+                    Label2.ForeColor = System.Drawing.Color.Red;
                     Label2.Text = "otp not sent";
                     Label2.Visible = false;
                 }
@@ -146,25 +148,25 @@ namespace e_Exam
             return f;
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            if (TextBox4.Text == ViewState["msgotp"].ToString())
+            protected void Button2_Click(object sender, EventArgs e)
             {
-                autho = true;
-                Label7.Visible = true;
-                Label7.Text = "authontication successful";
-                Response.Write("authontication successful");
-                /////authorized person  
+                if (TextBox4.Text == ViewState["msgotp"].ToString())
+                {
+                    autho = true;
+                    Label7.Visible = true;
+                    Label7.Text = "authontication successful";
+                    Response.Write("authontication successful");
+                    /////authorized person  
+                }
+                else
+                {
+                    autho = false;
+                    Label7.Visible = true;
+                    Label7.Text = "authontication failed";
+                    //// user entered wrong otp  
+                    Response.Write("authpntication failed");
+                }
             }
-            else
-            {
-                autho = false;
-                Label7.Visible = true;
-                Label7.Text = "authontication failed";
-                //// user entered wrong otp  
-                Response.Write("authpntication failed");
-            }
-        }
 
         protected void Button4_Click(object sender, EventArgs e)
         {
