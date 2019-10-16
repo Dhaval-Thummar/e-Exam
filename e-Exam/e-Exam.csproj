@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin_home.aspx" />
     <Content Include="Content\all.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="custom.css" />
@@ -76,11 +77,11 @@
     <Content Include="result.aspx" />
     <Content Include="Scripts\all.js" />
     <Content Include="student\bg4.jpg" />
+    <Content Include="student_detail.aspx" />
     <Content Include="student_homepage.aspx" />
     <Content Include="take_test.aspx" />
     <Content Include="teacher\add_question.aspx" />
     <Content Include="teacher\add_test.aspx" />
-    <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_dashboard1.aspx" />
     <Content Include="admin_login.aspx" />
     <Content Include="App_Data\exam.mdf" />
@@ -129,6 +130,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="admin.Master" />
+    <Content Include="teacher_detail.aspx" />
     <Content Include="test_details.aspx" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
@@ -180,12 +182,26 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_home.aspx.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_home.aspx.designer.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="result.aspx.cs">
       <DependentUpon>result.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="result.aspx.designer.cs">
       <DependentUpon>result.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="student_detail.aspx.cs">
+      <DependentUpon>student_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="student_detail.aspx.designer.cs">
+      <DependentUpon>student_detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="student_homepage.aspx.cs">
       <DependentUpon>student_homepage.aspx</DependentUpon>
@@ -221,13 +237,6 @@
     </Compile>
     <Compile Include="admin.Master.designer.cs">
       <DependentUpon>admin.Master</DependentUpon>
-    </Compile>
-    <Compile Include="admin_dashboard.aspx.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin_dashboard.aspx.designer.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin_dashboard1.aspx.cs">
       <DependentUpon>admin_dashboard1.aspx</DependentUpon>
@@ -302,6 +311,13 @@
     </Compile>
     <Compile Include="teacher\teacher_dashboard.aspx.designer.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher_detail.aspx.cs">
+      <DependentUpon>teacher_detail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher_detail.aspx.designer.cs">
+      <DependentUpon>teacher_detail.aspx</DependentUpon>
     </Compile>
     <Compile Include="teacher_list.aspx.cs">
       <DependentUpon>teacher_list.aspx</DependentUpon>

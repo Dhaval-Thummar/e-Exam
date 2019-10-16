@@ -27,8 +27,8 @@ namespace e_Exam
             DataTable dt = new DataTable();
             SqlCommand cmd;
 
-            try
-            {
+         //   try
+           // {
                 //student login
                 if (is_student)
                 {
@@ -75,11 +75,11 @@ namespace e_Exam
                         valid.Text = "Invalid Username or Password";
                     }
                 }
-            }
-            catch(SqlException)
+          //  }
+          /*  catch(SqlException)
             {
                 valid.Text = "No Database found!";
-            }
+            }*/
         }
 
         protected void Button1_Click(object sender, EventArgs e)

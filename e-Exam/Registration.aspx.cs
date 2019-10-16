@@ -15,7 +15,7 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Visible = false;
+            
         }
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -158,29 +158,6 @@ namespace e_Exam
             }
 
 
-        }
-
-        protected void upload_btn_Click(object sender, EventArgs e)
-        {
-            HttpPostedFile httpPostedFile = photo_upload.PostedFile;
-            string filename = Path.GetFileName(httpPostedFile.FileName);
-            string fileextension = Path.GetExtension(filename);
-            int filesize = httpPostedFile.ContentLength;
-
-            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".bmp" || fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png" || fileextension.ToLower() == ".jpeg")
-            {
-                Stream stream = httpPostedFile.InputStream;
-                BinaryReader binaryReader = new BinaryReader(stream);
-                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-
-            }
-            else
-            {
-                Label1.Visible = true;
-                Label1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                Label1.ForeColor = System.Drawing.Color.Red;
-
-            }
         }
         public Boolean check_email(String email, SqlConnection con)
         {
