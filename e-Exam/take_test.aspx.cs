@@ -13,7 +13,7 @@ namespace e_Exam
     {
         static DataTable qtable = new DataTable();
         static DataTable ans_table = new DataTable();
-        static int qno = 1, tid = 0, total_q = 0;
+        static int qno = 1, tid = 0, total_q = 0, student_id = 0;
         string yellow = "#FFD500", white = "#F8F9FA", green = "#42D127";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,9 +22,18 @@ namespace e_Exam
                 qno = 1;
                 ViewState["section"] = 1;
                 int section = Convert.ToInt32(ViewState["section"]);
-                Session["Timer"] = DateTime.Now.AddMinutes(5).ToString();
                 MultiView1.ActiveViewIndex = 0;
-                tid = Convert.ToInt32(Request.QueryString["tid"]);
+                if (Session["t_id"] != null)
+                {
+                    tid = Convert.ToInt32(Session["t_id"].ToString());
+                }
+                if (Session["studentID"] != null)
+                {
+                    student_id = Convert.ToInt32(Session["studentID"].ToString());
+                }
+                //Session["Timer"] = DateTime.Now.AddMinutes(get_duration(tid)).ToString();
+                int time = get_duration(tid);
+                Session["Timer"] = DateTime.Now.AddMinutes(time).ToString();
                 qtable = Questiosns(tid, section);
                 ViewState["total_section"] = count_section(tid);
                 total_q = qtable.Rows.Count;
@@ -55,6 +64,11 @@ namespace e_Exam
             for (int i = 0; i < rows; i++)
             {
                 r1 = t1.NewRow();
+                r1["t_id"] = qtable.Rows[i]["test_id"].ToString();
+                r1["section_no"] = qtable.Rows[i]["section_no"].ToString();
+                r1["q_id"] = qtable.Rows[i]["q_id"].ToString();
+                r1["type"] = qtable.Rows[i]["type"].ToString();
+                r1["student_id"] = student_id;
                 t1.Rows.Add(r1);
             }
             return t1;
@@ -114,6 +128,8 @@ namespace e_Exam
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
+            int time = get_duration(tid);
+            Session["Timer"] = DateTime.Now.AddMinutes(time).ToString();
             Panel1.Visible = true;
             timer_pnl.Visible = true;
             if (qtable.Rows.Count != 0)
@@ -134,12 +150,28 @@ namespace e_Exam
         }
         protected void Timer1_Tick(object sender, EventArgs e)
         {
+
             if (DateTime.Compare(DateTime.Now, DateTime.Parse(Session["Timer"].ToString())) < 0)
             {
+                if ((DateTime.Parse(Session["Timer"].ToString()) - DateTime.Now).TotalSeconds < 60)
+                {
+                    Label1.ForeColor = System.Drawing.Color.Red;
+                }
                 Label1.Text = ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalHours).ToString() + ":" +
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalMinutes % 60).ToString() + ":" +
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalSeconds % 60).ToString();
+
+                if (Label1.Text.Equals("0:0:0"))
+                {
+                    //Test Comptele event
+                    save_answer(qno);
+                    compare_answer(total_q);
+                    submit_question();
+                    generate_result(tid, student_id);
+                    Response.Redirect("~/student_homepage.aspx");
+                }
             }
+
             //int a = Convert.ToInt32(Session["t1"].ToString());
             //a--;
             //Session["t1"] = a;
@@ -149,7 +181,7 @@ namespace e_Exam
         {
             try
             {
-                ans_table.Rows[qid - 1]["student_id"] = 0;
+                ans_table.Rows[qid - 1]["student_id"] = student_id;
                 ans_table.Rows[qid - 1]["t_id"] = tid;
                 ans_table.Rows[qid - 1]["section_no"] = Convert.ToInt32(ViewState["section"]);
                 ans_table.Rows[qid - 1]["q_id"] = qid;
@@ -254,9 +286,11 @@ namespace e_Exam
             }
             else
             {
+                // Test complete
                 Panel1.Visible = false;
                 timer_pnl.Visible = false;
                 MultiView1.ActiveViewIndex = 2;
+                generate_result(tid, student_id);
             }
             nextbtn.Enabled = true;
             prevbtn.Enabled = false;
@@ -268,7 +302,7 @@ namespace e_Exam
                 qlbl.Text = "Q." + qno + ") " + qtable.Rows[qno - 1]["question"].ToString();
                 if (qtable.Rows[qno - 1]["has_image"].ToString().Equals("1"))
                 {
-                    Image image = retrive_image(Convert.ToInt32(ViewState["section"]), qno, "image", "question_image");
+                    Image image = retrieve_image(Convert.ToInt32(ViewState["section"]), qno, "image", "question_image");
                     qImg.ImageUrl = image.ImageUrl;
                     qPnl.Visible = true;
                 }
@@ -282,32 +316,60 @@ namespace e_Exam
                     RadioButtonList1.Visible = true;
                     anslbl.Visible = false;
                     anstxt.Visible = false;
-                    if(qtable.Rows[qno - 1]["mcq_image"].ToString().Equals("0"))
+                    if (qtable.Rows[qno - 1]["mcq_image"].ToString().Equals("0"))
                     {
                         RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
                         RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
                         RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
                         RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
-                        
+
                     }
                     else
                     {
                         int width = 200, height = 200;
                         Image image = retrieve_image(Convert.ToInt32(ViewState["section"]), qno, "a_image", "mcq_image");
-                        string url = image.ImageUrl;
-                        RadioButtonList1.Items[0].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        if (image != null)
+                        {
+                            string url = image.ImageUrl;
+                            RadioButtonList1.Items[0].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        }
+                        else
+                        {
+                            RadioButtonList1.Items[0].Text = "A. " + qtable.Rows[qno - 1]["A"].ToString();
+                        }
 
                         image = retrieve_image(Convert.ToInt32(ViewState["section"]), qno, "b_image", "mcq_image");
-                        url = image.ImageUrl;
-                        RadioButtonList1.Items[1].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        if (image != null)
+                        {
+                            string url = image.ImageUrl;
+                            RadioButtonList1.Items[1].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        }
+                        else
+                        {
+                            RadioButtonList1.Items[1].Text = "B. " + qtable.Rows[qno - 1]["B"].ToString();
+                        }
 
                         image = retrieve_image(Convert.ToInt32(ViewState["section"]), qno, "c_image", "mcq_image");
-                        url = image.ImageUrl;
-                        RadioButtonList1.Items[2].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        if (image != null)
+                        {
+                            string url = image.ImageUrl;
+                            RadioButtonList1.Items[2].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        }
+                        else
+                        {
+                            RadioButtonList1.Items[2].Text = "C. " + qtable.Rows[qno - 1]["C"].ToString();
+                        }
 
                         image = retrieve_image(Convert.ToInt32(ViewState["section"]), qno, "d_image", "mcq_image");
-                        url = image.ImageUrl;
-                        RadioButtonList1.Items[3].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        if (image != null)
+                        {
+                            string url = image.ImageUrl;
+                            RadioButtonList1.Items[3].Text = String.Format("<img src='{0}' width='{1}' height='{2}'>", url, width, height);
+                        }
+                        else
+                        {
+                            RadioButtonList1.Items[3].Text = "D. " + qtable.Rows[qno - 1]["D"].ToString();
+                        }
                     }
                     if (ans_table.Rows[qno - 1]["mcq"] != DBNull.Value)
                     {
@@ -499,12 +561,12 @@ namespace e_Exam
         }
         private Image retrieve_image(int section, int qid, string opt_image, string table)
         {
-            Image image = new Image();
+            Image image = null;
             string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             using (SqlConnection con = new SqlConnection(consString))
             {
                 SqlCommand cmd = new SqlCommand("select " + opt_image + " from " + table + " where test_id=@tid and section_no=@section and q_id=@qid", con);
-                cmd.Parameters.AddWithValue("@tid", Request.QueryString["tid"]);
+                cmd.Parameters.AddWithValue("@tid", tid);
                 cmd.Parameters.AddWithValue("@section", section);
                 cmd.Parameters.AddWithValue("@qid", qid);
                 cmd.CommandType = CommandType.Text;
@@ -515,6 +577,7 @@ namespace e_Exam
                     if (bytes != null)
                     {
                         string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        image = new Image();
                         image.ImageUrl = "data:image/png;base64," + base64String;
                     }
                 }
@@ -524,6 +587,89 @@ namespace e_Exam
                 }
             }
             return image;
+        }
+        public void generate_result(int tid, int student_id)
+        {
+            DataTable result = new DataTable();
+            string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            using (SqlConnection con = new SqlConnection(consString))
+            {
+                string qry = "select s.test_id , s.section_no ,s.q_id,s.correct,s.attempt,t.marks_per_question,t.negative_marks " +
+                    "from student_question_answer as s inner join Test_Section as t on s.test_id=t.test_id and s.section_no = t.section_no " +
+                    "where s.test_id = @tid and s.student_id=@sid";
+                SqlCommand cmd = new SqlCommand(qry, con);
+                cmd.Parameters.AddWithValue("@tid", tid);
+                cmd.Parameters.AddWithValue("@sid", student_id);
+                cmd.CommandType = CommandType.Text;
+
+                con.Open();
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(result);
+                con.Close();
+            }
+
+            int marks = 0;
+            int correct, marks_per_question, attempt;
+            float n_marks, negative = 0;
+            for (int i = 0; i < result.Rows.Count; i++)
+            {
+                correct = Convert.ToInt32(result.Rows[i][3].ToString());
+                marks_per_question = Convert.ToInt32(result.Rows[i][5].ToString());
+                n_marks = (float)Convert.ToDouble(result.Rows[i][6].ToString());
+                attempt = Convert.ToInt32(result.Rows[i][4].ToString());
+                marks += correct * marks_per_question;
+                negative -= (1 - correct) * attempt * n_marks;
+            }
+
+            int total = 0;
+            string qry1 = "select total_marks from Test where test_id=" + tid;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(consString))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(qry1, con);
+                    total = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+                }
+                using (SqlConnection con = new SqlConnection(consString))
+                {
+                    SqlCommand cmd = new SqlCommand("generate_result", con);
+                    cmd.Parameters.AddWithValue("@tid", tid);
+                    cmd.Parameters.AddWithValue("@sid", student_id);
+                    cmd.Parameters.AddWithValue("@total", total);
+                    cmd.Parameters.AddWithValue("@marks", marks - negative);
+                    cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                //Error
+            }
+        }
+        private int get_duration(int tid)
+        {
+            int duration = 0;
+            String conStr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            String qry = "select duration from Test where test_id=" + tid;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(conStr))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand(qry, con);
+                    duration = (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception)
+            {
+                //Not found
+            }
+
+            return duration;
         }
     }
 }

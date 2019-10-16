@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace e_Exam
 {
-    public partial class admin_dashboard1 : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+	public partial class admin_dashboard11 : System.Web.UI.Page
+	{
+		protected void Page_Load(object sender, EventArgs e)
+		{
 
-        }
-    }
+		}
+	}
 }

@@ -5,7 +5,7 @@
            
         }
         .table1 {
-            margin: 150px auto;
+            margin: 0px auto;
             width:50%;
         }
         .auto-style1 {
@@ -56,32 +56,40 @@
                 width: 75%;
                 padding-left: 35px;
             }
+            .auto-style10 {
+                font-size: xx-large;
+                color: #0099FF;
+            }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="div1">
+    <div class="div1">
+            <center>
+            <strong><span class="auto-style10">ADD TEST</span></strong>
+            </center>    
         <table class="table1">
-        <tr>
-            <td class="auto-style4">
-                <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
+            
+            <tr>
+               <td class="auto-style4">
+                   <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
+                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                 
-            </td>
-            <td class="auto-style5">
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="80%"></asp:TextBox>
+               </td>
+               <td class="auto-style5">
+                   <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="80%"></asp:TextBox>
                 
-            </td>
-        </tr>   
-         <tr>
-             <td class="auto-style4">
-                 <asp:Label ID="Subject" runat="server" Text="Subject"></asp:Label>
-                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="sub_list" ErrorMessage="*" Font-Bold="True" ForeColor="Red" InitialValue="none"></asp:RequiredFieldValidator>
-             </td>
-             <td class="auto-style5">
-                 <asp:DropDownList ID="sub_list" runat="server" CssClass="form-control" OnSelectedIndexChanged="sub_list_SelectedIndexChanged" Width="80%">
-                 </asp:DropDownList>
-             </td>
-         </tr>
+               </td>
+            </tr>   
+            <tr>
+               <td class="auto-style4">
+                   <asp:Label ID="Subject" runat="server" Text="Subject"></asp:Label>
+                   <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="sub_list" ErrorMessage="*" Font-Bold="True" ForeColor="Red" InitialValue="none"></asp:RequiredFieldValidator>
+               </td>
+               <td class="auto-style5">
+                   <asp:DropDownList ID="sub_list" runat="server" CssClass="form-control" OnSelectedIndexChanged="sub_list_SelectedIndexChanged" Width="80%">
+                   </asp:DropDownList>
+               </td>
+            </tr>
             <tr>
                 <td class="auto-style6">
                     <asp:Label ID="Label2" runat="server" Text="Test Duration"></asp:Label>
@@ -140,6 +148,6 @@
                    <asp:Button ID="test_next" runat="server" Text="next >>" class="btn btn-primary" OnClick="test_next_Click" />
                </td>
             </tr>
-            </table>
+        </table>
     </div>
 </asp:Content>

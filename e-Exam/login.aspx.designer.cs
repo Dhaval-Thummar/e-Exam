@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace e_Exam {
-    
-    
-    public partial class WebForm1 {
-        
+namespace e_Exam
+{
+
+
+    public partial class WebForm1
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// student_tab control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button student_tab;
-        
+
         /// <summary>
         /// teacher_tab control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button teacher_tab;
-        
+
         /// <summary>
         /// uname control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label uname;
-        
+
         /// <summary>
         /// u_input control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox u_input;
-        
+
         /// <summary>
         /// pswd control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label pswd;
-        
+
         /// <summary>
         /// p_input control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox p_input;
-        
+
         /// <summary>
         /// btn_login control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_login;
-        
+
         /// <summary>
         /// valid control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label valid;
-        
+
         /// <summary>
         /// register control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace e_Exam {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink register;
-        
+
         /// <summary>
         /// forgot_pswd control.
         /// </summary>

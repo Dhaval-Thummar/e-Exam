@@ -7,17 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace e_Exam
 {
-    public partial class Teacher : System.Web.UI.MasterPage
+    public partial class WebForm2 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Session["teacherID"] = null;
-            Response.Redirect("~/login.aspx");
         }
     }
 }

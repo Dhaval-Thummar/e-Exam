@@ -16,13 +16,13 @@ namespace e_Exam
         static int teacher_id = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["teacherID"] != null)
+            if (Session["teacherID"] != null)
             {
                 teacher_id = Convert.ToInt32(Session["teacherID"].ToString());
             }
             else
             {
-               Response.Redirect("~/login.aspx");
+                Response.Redirect("~/login.aspx");
             }
             gettotalexam();
             gettotalquestion();
@@ -34,7 +34,7 @@ namespace e_Exam
         {
             using (SqlConnection con = new SqlConnection(s))
             {
-                SqlCommand cmd = new SqlCommand("select count(test_id) from Test where teacher_id ="+teacher_id, con);
+                SqlCommand cmd = new SqlCommand("select count(test_id) from Test where teacher_id =" + teacher_id, con);
                 try
                 {
                     con.Open();
@@ -45,7 +45,7 @@ namespace e_Exam
                 catch (Exception ex)
                 {
                     panel_index_warning.Visible = true;
-                    lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
+                    //lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace e_Exam
                 catch (Exception ex)
                 {
                     panel_index_warning.Visible = true;
-                    lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
+                    //lbl_indexwarning.Text = "Something went wrong. Please try after sometime later</br> Contact you developer for this problem" + ex.Message;
                 }
             }
         }

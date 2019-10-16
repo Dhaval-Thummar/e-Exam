@@ -32,19 +32,6 @@ namespace e_Exam
                     MultiView1.ActiveViewIndex = 0;
                 }
             }
-            /*if (!IsPostBack)
-            {
-                MultiView1.ActiveViewIndex = 0;
-                if (Request.QueryString["tid"] != null)
-                {
-                    getTestData();
-                    //getQuestion(Convert.ToInt32(Request.QueryString["tid"]));
-                }
-                else
-                {
-                    Label1.Text = "No test found";
-                }
-            }*/
             if (check == 1)
             {
                 MultiView1.ActiveViewIndex = 1;
@@ -58,21 +45,21 @@ namespace e_Exam
             {
                 DataView dv = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
                 DataRowView drv = dv[0];
-                Label1.Text = drv["name"].ToString();
-                test_subject.Text = "Subject: " + drv["subject"].ToString();
+                Label1.Text = "Test name : " + drv["name"].ToString();
+                test_subject.Text = "Subject : " + drv["subject"].ToString();
                 if (drv["duration"].ToString().Equals("0"))
                 {
                     duration.Text = "No duration";
                 }
                 else
                 {
-                    duration.Text = "Duration: " + drv["duration"].ToString() + " min";
+                    duration.Text = "Duration : " + drv["duration"].ToString() + " min";
                 }
-                marks.Text = "Total Marks: " + drv["total_marks"].ToString();
-                nmarks.Text = "Negative Marks: " + drv["negative_marks"].ToString();
-                added_date.Text = "Added Date: " + drv["added_date"].ToString();
-                times_taken.Text = " times taken";
-                desc.Text = "Descriptoin: " + drv["description"].ToString();
+                marks.Text = "Total Marks : " + drv["total_marks"].ToString();
+                nmarks.Text = "Negative Marks : " + drv["negative_marks"].ToString();
+                added_date.Text = "Added Date : " + drv["added_date"].ToString();
+                
+                desc.Text = "Descriptoin : " + drv["description"].ToString();
             }
             catch (Exception)
             {
@@ -163,28 +150,37 @@ namespace e_Exam
                         Image c_image = (Image)e.Item.FindControl("optImg3");
                         Image d_image = (Image)e.Item.FindControl("optImg4");
 
+                        Image image = retrieve_image(section_no, q_id, "a_image");
+                        if (image != null)
+                        {
+                            a_image.ImageUrl = image.ImageUrl;
+                            Panel a = (Panel)e.Item.FindControl("optPnl1");
+                            a.Visible = true;
+                        }
 
-                        Image image = retrive_image(section_no, q_id, "a_image");
-                        a_image.ImageUrl = image.ImageUrl;
+                        image = retrieve_image(section_no, q_id, "b_image");
+                        if (image != null)
+                        {
+                            b_image.ImageUrl = image.ImageUrl;
+                            Panel b = (Panel)e.Item.FindControl("optPnl2");
+                            b.Visible = true;
+                        }
 
-                        image = retrive_image(section_no, q_id, "b_image");
-                        b_image.ImageUrl = image.ImageUrl;
+                        image = retrieve_image(section_no, q_id, "c_image");
+                        if (image != null)
+                        {
+                            c_image.ImageUrl = image.ImageUrl;
+                            Panel c = (Panel)e.Item.FindControl("optPnl3");
+                            c.Visible = true;
+                        }
 
-                        image = retrive_image(section_no, q_id, "c_image");
-                        c_image.ImageUrl = image.ImageUrl;
-
-                        image = retrive_image(section_no, q_id, "d_image");
-                        d_image.ImageUrl = image.ImageUrl;
-
-                        Panel a = (Panel)e.Item.FindControl("optPnl1");
-                        Panel b = (Panel)e.Item.FindControl("optPnl2");
-                        Panel c = (Panel)e.Item.FindControl("optPnl3");
-                        Panel d = (Panel)e.Item.FindControl("optPnl4");
-
-                        a.Visible = true;
-                        b.Visible = true;
-                        c.Visible = true;
-                        d.Visible = true;
+                        image = retrieve_image(section_no, q_id, "d_image");
+                        if (image != null)
+                        {
+                            d_image.ImageUrl = image.ImageUrl;
+                            Panel d = (Panel)e.Item.FindControl("optPnl4");
+                            d.Visible = true;
+                        }
                     }
                     mcq_pnl.Visible = true;
                     fill_pnl.Visible = false;
@@ -231,9 +227,9 @@ namespace e_Exam
 
         }
 
-        private Image retrive_image(int section, int qid, string opt_image)
+        private Image retrieve_image(int section, int qid, string opt_image)
         {
-            Image image = new Image();
+            Image image = null;
             string consString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             using (SqlConnection con = new SqlConnection(consString))
             {
@@ -249,6 +245,7 @@ namespace e_Exam
                     if (bytes != null)
                     {
                         string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                        image = new Image();
                         image.ImageUrl = "data:image/png;base64," + base64String;
                     }
                 }
@@ -379,6 +376,11 @@ namespace e_Exam
             }
             check = 1;
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void MultiView1_ActiveViewChanged(object sender, EventArgs e)
+        {
+
         }
 
         protected void OnCancel(object sender, EventArgs e)

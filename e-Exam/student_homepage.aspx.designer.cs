@@ -10,24 +10,33 @@
 namespace e_Exam {
     
     
-    public partial class view_test {
+    public partial class student_homepage {
         
         /// <summary>
-        /// GridView1 control.
+        /// lbltotaltest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Label lbltotaltest;
         
         /// <summary>
-        /// SqlDataSource1 control.
+        /// lbltestpending control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
+        protected global::System.Web.UI.WebControls.Label lbltestpending;
+        
+        /// <summary>
+        /// panel_index_warning control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_index_warning;
     }
 }

@@ -9,17 +9,27 @@
             height:200px;
             width:200px;
         }
+        .auto-style1 {
+            font-size: xx-large;
+            color: #0099FF;
+        }
+        .auto-style2 {
+            font-size: xx-large;
+            color: #0066CC;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ExamDB %>" SelectCommand="SELECT * FROM [Test] WHERE ([test_id] = @test_id)">
-        <SelectParameters>
-            <asp:QueryStringParameter DefaultValue="0" Name="test_id" QueryStringField="tid" Type="Int32" />
-        </SelectParameters>
-    </asp:SqlDataSource>
-    <asp:MultiView ID="MultiView1" runat="server">
+    <asp:MultiView ID="MultiView1" runat="server" OnActiveViewChanged="MultiView1_ActiveViewChanged">
         <asp:View ID="View1" runat="server">
-            <br />
+            <center>
+            <strong><span class="auto-style1">TEST DETAILS</span></strong><br />
+            </center>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ExamDB %>" SelectCommand="SELECT * FROM [Test] WHERE ([test_id] = @test_id)">
+                <SelectParameters>
+                    <asp:QueryStringParameter DefaultValue="0" Name="test_id" QueryStringField="tid" Type="Int32" />
+                </SelectParameters>
+            </asp:SqlDataSource>
             <div class="card mx-auto w-50" style="width: 18rem">
                 <div class="card-header">
                     <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="25px"></asp:Label>
@@ -41,9 +51,6 @@
                         <asp:Label ID="added_date" runat="server" Text=""></asp:Label>
                     </li>
                     <li class="list-group-item">
-                        <asp:Label ID="times_taken" runat="server" Text=""></asp:Label>
-                    </li>
-                    <li class="list-group-item">
                         <asp:Label ID="desc" runat="server" Text=""></asp:Label>
                     </li>
                     <li class="list-group-item div1">
@@ -58,7 +65,12 @@
                     <asp:QueryStringParameter DefaultValue="0" Name="test_id" QueryStringField="tid" Type="Int32" />
                 </SelectParameters>
             </asp:SqlDataSource>
+            <br />
+            <center>
+            <strong><span class="auto-style2">VIEW TEST DETAILS : QUESTIONS</span></strong>
+            </center>
             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" GridLines="None">
+            
             </asp:GridView>
             <asp:Repeater ID="Repeater1" runat="server" OnItemCreated="Repeater1_ItemCreated" OnItemDataBound="Repeater1_ItemDataBound" DataSourceID="SqlDataSource2" Visible="True">
 
