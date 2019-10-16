@@ -9,7 +9,15 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <link href="Content/fontawesome.min.css" rel="stylesheet" />
+    <link href="Content/all.css" rel="stylesheet" />
     <style>
+        body{
+            margin:auto;
+            background-image:url('bg4.jpg');
+            background-size:cover;
+            font-family:sans-serif;
+        }
         .sidenav {
             height: 100%;
             width: 250px;
@@ -58,9 +66,9 @@
 
             <div class="div2"> 
                 <br />
-            <asp:HyperLink ID="HyperLink4" runat="server" CssClass="auto1" ForeColor="Black" NavigateUrl="~/student/student_dashboard.aspx">Home</asp:HyperLink>
-            <asp:HyperLink ID="HyperLink1" runat="server" class="auto1">Test</asp:HyperLink>
-            <asp:HyperLink ID="HyperLink2" runat="server" class="auto1">History</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink4" runat="server" CssClass="auto1" ForeColor="Black" NavigateUrl="~/student_homepage.aspx">Home</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/student/student_dashboard.aspx">Test</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/result.aspx">Result</asp:HyperLink>
             <asp:HyperLink ID="HyperLink3" runat="server" CssClass="auto1">View Profile</asp:HyperLink>
             </div>
         </div>

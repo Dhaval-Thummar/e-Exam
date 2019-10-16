@@ -15,7 +15,7 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Visible = false;
+            
         }
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -126,7 +126,7 @@ namespace e_Exam
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
 
-            if (check_user(roll_no_input.Text, con))
+            if (check_email(email_input.Text, con))
             {
 
                 SqlCommand cmd = new SqlCommand("student_registration", con);
@@ -154,46 +154,20 @@ namespace e_Exam
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('User already registered');window.location ='registration.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('email already registered');window.location ='registration.aspx';", true);
             }
 
 
         }
-
-        protected void upload_btn_Click(object sender, EventArgs e)
-        {
-            HttpPostedFile httpPostedFile = photo_upload.PostedFile;
-            string filename = Path.GetFileName(httpPostedFile.FileName);
-            string fileextension = Path.GetExtension(filename);
-            int filesize = httpPostedFile.ContentLength;
-
-            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".bmp" || fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png" || fileextension.ToLower() == ".jpeg")
-            {
-                Stream stream = httpPostedFile.InputStream;
-                BinaryReader binaryReader = new BinaryReader(stream);
-                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-
-            }
-            else
-            {
-                Label1.Visible = true;
-                Label1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                Label1.ForeColor = System.Drawing.Color.Red;
-
-            }
-        }
-        public Boolean check_user(String roll_no, SqlConnection con)
+        public Boolean check_email(String email, SqlConnection con)
         {
             Boolean userstatus;
-            String myqry;
-            String mycon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Dhaval Thummar\\Desktop\\D101\\App_Data\\User.mdf\";Integrated Security=True;Connect Timeout=30";
+            string myqry;
 
-            myqry = "Select uname from Login_info where uname='" + roll_no + "'";
-
-            SqlConnection c1 = con;
+            myqry = "Select uname from Login_info where uname='" + email + "'";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = myqry;
-            cmd.Connection = c1;
+            cmd.Connection = con;
 
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;
@@ -207,7 +181,7 @@ namespace e_Exam
             {
                 userstatus = true;
             }
-            c1.Close();
+            con.Close();
 
             return userstatus;
         }

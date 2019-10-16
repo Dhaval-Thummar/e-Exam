@@ -158,19 +158,6 @@
         </tr>
         <tr>
             <td class="auto-style2">
-                <asp:Label ID="photo_label" runat="server" Text="Upload photo"></asp:Label>
-            </td>
-            <td class="auto-style9">
-                <asp:FileUpload ID="photo_upload" runat="server" OnClick="upload_btn_Click"/>
-                <asp:Label ID="Label1" runat="server" Visible="False"></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td class="auto-style5" colspan="2">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td class="auto-style2">
                 <asp:Label ID="pswd_label" runat="server" Text="Password "></asp:Label>
             &nbsp;</td>
             <td class="auto-style9">

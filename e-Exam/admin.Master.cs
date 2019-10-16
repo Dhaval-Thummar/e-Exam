@@ -11,7 +11,16 @@ namespace e_Exam
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["admin_id"] == null)
+            {
+                Response.Redirect("~/admin_login.aspx");
+            }
+        }
 
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("~/admin_login.aspx");
         }
     }
 }

@@ -32,19 +32,6 @@ namespace e_Exam
                     MultiView1.ActiveViewIndex = 0;
                 }
             }
-            /*if (!IsPostBack)
-            {
-                MultiView1.ActiveViewIndex = 0;
-                if (Request.QueryString["tid"] != null)
-                {
-                    getTestData();
-                    //getQuestion(Convert.ToInt32(Request.QueryString["tid"]));
-                }
-                else
-                {
-                    Label1.Text = "No test found";
-                }
-            }*/
             if (check == 1)
             {
                 MultiView1.ActiveViewIndex = 1;

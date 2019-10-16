@@ -10,6 +10,8 @@
     <script src="Scripts/popper.min.js"></script>
     <script src="Scripts/jquery-3.0.0.min.js"></script>
     <script src="Scripts/jquery-3.0.0.min.js"></script>
+    <link href="Content/fontawesome.min.css" rel="stylesheet" />
+    <link href="Content/all.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

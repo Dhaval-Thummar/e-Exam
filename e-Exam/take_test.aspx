@@ -76,13 +76,34 @@
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            text-align:center;
+            text-align: center;
             text-decoration: none;
             display: inline-block;
             cursor: pointer;
         }
-        .table2{
-            margin-bottom:300px;
+
+        .table2 {
+            margin-bottom: 300px;
+        }
+
+        .opt-image {
+            height: 200px;
+            width: 200px;
+        }
+
+        .auto-style1 {
+            width: 40%;
+            text-align: center;
+            margin: 150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+        }
+        .auto-style5 {
+            text-align: center;
+            height: 60px;
+        }
+        .auto-style6 {
+            height: 29px;
         }
     </style>
     <script type="text/javascript">
@@ -92,14 +113,14 @@
         DisableBackButton();
         window.onload = DisableBackButton();
         window.onpageshow = function (evt) { if (evt.persisted) DisableBackButton() }
-        window.onload = function () {void (0)}
+        window.onload = function () { void (0) }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:Panel ID="Panel1" runat="server" Visible="False">
         <div class="sidenav">
             <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
-            <asp:Table ID="Table1"  HorizontalAlign="Center" runat="server" CssClass="table2">
+            <asp:Table ID="Table1" HorizontalAlign="Center" runat="server" CssClass="table2">
             </asp:Table>
 
             <asp:Button ID="submitbtn" runat="server" Text="Submit" CssClass="btn btn-success" OnClick="submitbtn_Click" />
@@ -114,6 +135,7 @@
             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
                     <%--            <asp:Literal ID="Literal1" runat="server"></asp:Literal>--%>
+                    <asp:Label ID="Label3" runat="server" Font-Bold="True" Text="Time Left: "></asp:Label>
                     <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Large"></asp:Label>
                 </ContentTemplate>
                 <Triggers>
@@ -127,27 +149,10 @@
      
         <asp:View ID="View1" runat="server">
             <div class="div1">
-                <table class="auto-style7">
-                 <td class="auto-style2"> 
-                            <br />
-                            <asp:Label ID="Label4" runat="server" Text="INSTRUCTION" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
-                            <br />
-                     PLEASE READ GIVEN INSTRUCTION BRFORE STRATING EXAM.
-                     <br />
-                     There are total <asp:Label ID="Label5" runat="server" Text="SECTION NO"></asp:Label> section avalible.
-                     <br />
-                     Total Time is for exam is <asp:Label ID="Label6" runat="server" Text="TIME"></asp:Label>HH:MM:SS.
-                         <br />
-                    There are <asp:Label ID="Label7" runat="server" Text="YES/NO"></asp:Label> Nagative marking  for wrong answer.
-                      <br />
-          White colour show that use not visited question yet.Green colour show that you sumbit answer for this Question.
-                     If you want mark any Question there is mark button is avalible.its look in Yellow colour.
-                     <br />
-                  </td>
-
-                </table>
-               
-                <asp:Button ID="Button1" runat="server"   class="btn btn-primary" Text="START EXAM" OnClick="Button1_Click" />
+                <br />
+                <asp:Label ID="Label6" runat="server" Text="Instruction" Font-Size="X-Large" ForeColor="#3333FF"></asp:Label>
+                <br />
+                <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
             </div>
         </asp:View>
         <asp:View ID="View2" runat="server">
@@ -190,38 +195,37 @@
             </table>
         </asp:View>
         <asp:View ID="View3" runat="server">
-         <div>
-       
-      <table class="auto-style1">
+            <br></br>
+            <%--            <div class="div1">
+                Thank you for taking test!!!
+                <br></br>
+                <br></br>
+                <a href="student_homepage.aspx" class="btn btn-primary"><i class="fa fa-home"></i>Home</a>
+            </div>--%>
+
+            <div>
+                <table class="auto-style1">
                     <tr>
-                        <td class="auto-style6"> 
-                        </td>
-                         
-                    <tr>
-                        <td class="auto-style2"> 
-                            <br />
-                            <asp:Label ID="Label3" runat="server" Text="THANK YOU!!!" Font-Bold="True" Font-Size="XX-Large" ForeColor="#3333FF"></asp:Label>
-                            <br />
-                        </td>
-                        
-                    </tr>
-                   
+                        <td class="auto-style6"></td>
+                        <tr>
+                            <td class="auto-style2">
+                                <br />
+                                <asp:Label ID="Label4" runat="server" Text="Thank You for taking test!" Font-Bold="True" Font-Size="X-Large" ForeColor="#3333FF"></asp:Label>
+                                <br />
+                            </td>
                         </tr>
-                   
-             <tr>
-
-                 <td class="auto-style5">
-                     <asp:Button ID="Button2" runat="server"   class="btn btn-primary" Text="OK" />
-                     <br />
-                     <br />
-                     <br />
-                 </td>
-                 
-             </tr>
-                        
+                    </tr>
+                    <tr>
+                        <td class="auto-style5">
+                            <br />
+                            <a href="student_homepage.aspx" class="btn btn-primary"><i class="fa fa-home"></i>Home</a>
+                            <br />
+                            <br />
+                            <br />
+                        </td>
+                    </tr>
                 </table>
-
-   </div>
+            </div>
         </asp:View>
     </asp:MultiView>
 </asp:Content>
