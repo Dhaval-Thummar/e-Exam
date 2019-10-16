@@ -51,7 +51,7 @@
             <asp:BoundField DataField="date" HeaderText="date" SortExpression="date" />
             <asp:TemplateField HeaderText="Details" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/teacher/student_result_details.aspx?tid=" + Eval("student_id")%>'>Details</asp:LinkButton>   
+                        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/teacher/student_result_details.aspx"%>'>Details</asp:LinkButton>   
                     </ItemTemplate>
             </asp:TemplateField>
         </Columns>

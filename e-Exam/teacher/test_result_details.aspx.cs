@@ -24,7 +24,7 @@ namespace e_Exam.teacher
                 Label1.Text = "Test ID : "+ Request.QueryString["tid"];
                 SqlConnection con = new SqlConnection();
                 con.ConnectionString = ConfigurationManager.ConnectionStrings["examDB"].ConnectionString;
-                SqlCommand cmd = new SqlCommand("select subject,total_marks from Test where test_id = "+ Request.QueryString["tid"], con);
+                SqlCommand cmd = new SqlCommand("select subject,total_marks from Test where test_id="+ Request.QueryString["tid"], con);
                 cmd.CommandType = CommandType.Text;
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
@@ -32,17 +32,19 @@ namespace e_Exam.teacher
                 da.Fill(dt);
                 Label2.Text = "Subject : "+dt.Rows[0][0].ToString();
                 Label3.Text = "Total Marks : "+dt.Rows[0][1].ToString();
-                cmd = new SqlCommand("select AVG(marks),MAX(marks),MIN(marks) from student_result where test_id = " + Request.QueryString["tid"], con);
+                cmd = new SqlCommand("select AVG(marks),MAX(marks),MIN(marks) from student_result where test_id=" + Request.QueryString["tid"], con);
                 da.SelectCommand = cmd;
+                dt = new DataTable();
                 da.Fill(dt);
                 Label4.Text = "Subject : " + dt.Rows[0][0].ToString();
-                Label5.Text = dt.Rows[0][1].ToString();
-                Label6.Text = dt.Rows[0][2].ToString();
-                cmd = new SqlCommand("select count(*) from test_taken where test_id = " + Request.QueryString["tid"], con);
+                Label5.Text = "maximum marks:"+dt.Rows[0][1].ToString();
+                Label6.Text = "minimum:"+dt.Rows[0][2].ToString();
+                cmd = new SqlCommand("select count(*) from test_taken where test_id=" + Request.QueryString["tid"], con);
                 da.SelectCommand = cmd;
+                dt =new DataTable();
                 da.Fill(dt);
-                Label7.Text = dt.Rows[0][0].ToString();
-       
+                Label7.Text = "No of student was test given:"+dt.Rows[0][0].ToString();
+                
     
             }
         }
