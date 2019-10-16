@@ -2,6 +2,36 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <style>
+        body {
+    background-image: url('bg4.jpg');
+    background-size: cover;
+        }
+       
+         .auto-style1 {
+            width: 40%;
+            text-align:center;
+            margin: 150px auto;
+            border-radius: 10px;
+            background: rgba(169,169,169,0.7);
+           
+        }
+
+         .auto-style7{
+            width: 100%;
+            text-align:center;
+           
+            
+            
+           
+        }
+        .auto-style5,#Button1 {
+            text-align: center;
+            height: 60px;
+        }
+         .auto-style6 {
+            height: 29px;
+        }
+        
         .div1 {
             text-align: center;
         }
@@ -12,7 +42,7 @@
             vertical-align: middle;
             padding-right: 40px;
             padding-top: 10px;
-            height: 50px;
+            height: 50pxs
             position: fixed;
             width: 100%;
             top: 0;
@@ -116,6 +146,7 @@
     </asp:Panel>
 
     <asp:MultiView ID="MultiView1" runat="server">
+     
         <asp:View ID="View1" runat="server">
             <div class="div1">
                 <br />
