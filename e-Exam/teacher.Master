@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="teacher.master.cs" Inherits="e_Exam.teacher" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="teacher.master.cs" Inherits="e_Exam.teacher1" %>
 
 <!DOCTYPE html>
 
@@ -59,9 +59,7 @@
              <br />
              <asp:HyperLink ID="HyperLink2" runat="server" class="auto1" ForeColor="Black" NavigateUrl="~/teacher/view_test.aspx">View Test</asp:HyperLink>
              <br />
-             <asp:HyperLink ID="HyperLink3" runat="server" class="auto1">Exam</asp:HyperLink>
-             <br />
-             <asp:HyperLink ID="HyperLink4" runat="server" class="auto1">Result</asp:HyperLink>
+             <asp:HyperLink ID="HyperLink4" runat="server" ForeColor="Black" class="auto1" NavigateUrl="~/teacher/test_result_teacher.aspx">Result</asp:HyperLink>
         </div>
    
     <div class="main">

@@ -15,7 +15,7 @@
     <RootNamespace>e_Exam</RootNamespace>
     <AssemblyName>e-Exam</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -130,8 +130,11 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="admin.Master" />
+    <Content Include="teacher\student_result_details.aspx" />
     <Content Include="teacher_detail.aspx" />
     <Content Include="test_details.aspx" />
+    <Content Include="teacher\test_result_details.aspx" />
+    <Content Include="teacher\test_result_teacher.aspx" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -305,6 +308,13 @@
     <Compile Include="teacher.Master.designer.cs">
       <DependentUpon>teacher.Master</DependentUpon>
     </Compile>
+    <Compile Include="teacher\student_result_details.aspx.cs">
+      <DependentUpon>student_result_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\student_result_details.aspx.designer.cs">
+      <DependentUpon>student_result_details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="teacher\teacher_dashboard.aspx.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,6 +359,20 @@
     <Compile Include="test_details.aspx.designer.cs">
       <DependentUpon>test_details.aspx</DependentUpon>
     </Compile>
+    <Compile Include="teacher\test_result_details.aspx.cs">
+      <DependentUpon>test_result_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\test_result_details.aspx.designer.cs">
+      <DependentUpon>test_result_details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher\test_result_teacher.aspx.cs">
+      <DependentUpon>test_result_teacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\test_result_teacher.aspx.designer.cs">
+      <DependentUpon>test_result_teacher.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -389,7 +413,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49840/</IISUrl>
+          <IISUrl>http://localhost/e-Exam</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
