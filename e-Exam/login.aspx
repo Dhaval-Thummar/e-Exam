@@ -129,7 +129,7 @@
                     <td class="auto-style5">
                         <asp:HyperLink ID="register" runat="server" NavigateUrl="~/Registration.aspx">Doesn't Have Account?</asp:HyperLink>
                         <br />
-                        <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forget Password</asp:HyperLink>
+                        <asp:HyperLink ID="forgot_pswd" runat="server" NavigateUrl="~/Forgot_Password.aspx">Forgot Password</asp:HyperLink>
                     </td>
                 </tr>
                 <tr>
