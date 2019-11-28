@@ -1,9 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/teacher.Master" AutoEventWireup="true" CodeBehind="add_test.aspx.cs" Inherits="e_Exam.add_test" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
         <style type="text/css">
-        .div1 {
-           
-        }
         .table1 {
             margin: 150px auto;
             width:50%;
@@ -72,6 +69,16 @@
                 
             </td>
         </tr>   
+         <tr>
+             <td class="auto-style4">
+                 <asp:Label ID="Label4" runat="server" Text="Department"></asp:Label>
+                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="dept_list" ErrorMessage="*" Font-Bold="True" ForeColor="Red" InitialValue="none"></asp:RequiredFieldValidator>
+             </td>
+             <td class="auto-style5">
+                 <asp:DropDownList ID="dept_list" runat="server" CssClass="form-control"  Width="80%" AutoPostBack="True" OnSelectedIndexChanged="dept_list_SelectedIndexChanged">
+                 </asp:DropDownList>
+             </td>
+         </tr>
          <tr>
              <td class="auto-style4">
                  <asp:Label ID="Subject" runat="server" Text="Subject"></asp:Label>

@@ -77,7 +77,6 @@ margin-bottom:20px;
         }
          .auto-style9 {
             text-align: center;
-
         }
 
 
@@ -156,7 +155,7 @@ margin-bottom:20px;
             </tr>
             <tr>
                <td>
-                   </br>
+                   <br />
                </td>
             </tr>
         </table>

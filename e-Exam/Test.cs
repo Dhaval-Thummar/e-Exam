@@ -12,6 +12,7 @@ namespace e_Exam
     {
         public int test_id;
         public String name;
+        public int dept_id;
         public String subject;
         public bool has_duration;
         public int duration;

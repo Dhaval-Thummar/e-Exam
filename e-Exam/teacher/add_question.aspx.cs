@@ -87,6 +87,7 @@ namespace e_Exam
                 //test_table
                 test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
                 test_table.Columns.Add(new DataColumn("name", typeof(string)));
+                test_table.Columns.Add(new DataColumn("dept_id", typeof(int)));
                 test_table.Columns.Add(new DataColumn("subject", typeof(string)));
                 test_table.Columns.Add(new DataColumn("duration", typeof(int)));
                 test_table.Columns.Add(new DataColumn("sections", typeof(int)));
@@ -503,6 +504,7 @@ namespace e_Exam
             DataRow t1 = test_table.NewRow();
             t1["test_id"] = test_id;
             t1["name"] = test.name;
+            t1["dept_id"] = test.dept_id;
             t1["subject"] = test.subject;
             t1["duration"] = test.duration;
             t1["sections"] = test.sections;
@@ -598,6 +600,7 @@ namespace e_Exam
 
                     sqlBulkCopy.ColumnMappings.Add("test_id", "test_id");
                     sqlBulkCopy.ColumnMappings.Add("name", "name");
+                    sqlBulkCopy.ColumnMappings.Add("dept_id", "dept_id");
                     sqlBulkCopy.ColumnMappings.Add("subject", "subject");
                     sqlBulkCopy.ColumnMappings.Add("duration", "duration");
                     sqlBulkCopy.ColumnMappings.Add("sections", "sections");

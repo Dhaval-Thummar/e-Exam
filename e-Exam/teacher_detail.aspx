@@ -21,6 +21,12 @@
             text-align: center;
             width: 100%;
         }
+        .auto-style1 {
+            padding-right: 10px;
+        }
+        .auto-style2 {
+            width: 70%;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="maincontent" runat="server">
@@ -29,11 +35,18 @@
         <asp:MultiView ID="MultiView1" runat="server">
             <asp:View ID="View1" runat="server">
                 <br />
-                <asp:Label ID="Label12" runat="server" Text="Department" Font-Bold="True" Font-Size="X-Large"></asp:Label>
-                
-                <asp:DropDownList ID="dddepartment" runat="server" AutoPostBack="true" AppendDataBoundItems="false" OnSelectedIndexChanged="department_changed">
-                    <asp:ListItem Text="All" Value="All"></asp:ListItem>
-                </asp:DropDownList>
+                <table>
+                    <tr>
+                        <td class="auto-style1">
+                            <asp:Label ID="Label12" runat="server" Text="Department" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+                        </td>
+                        <td class="auto-style2">
+                            <asp:DropDownList ID="dddepartment" runat="server" AutoPostBack="true" CssClass="form-control" AppendDataBoundItems="false" OnSelectedIndexChanged="department_changed" Width="80%">
+                                <asp:ListItem Text="All" Value="All"></asp:ListItem>
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                </table>
                 <br />
                 <br />
                 <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" DataKeyNames="name" Width="100%" OnRowCommand="detail" CssClass="table table-striped table-sm">
@@ -45,7 +58,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Department">
                             <ItemTemplate>
-                                <asp:Label ID="Label9" runat="server" Text='<%#Eval("department") %>'></asp:Label>
+                                <asp:Label ID="Label9" runat="server" Text='<%#Eval("dept_name") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Option">
@@ -53,8 +66,10 @@
                                 <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("teacher_id") %>'>detail</asp:LinkButton>
                             </ItemTemplate>
                         </asp:TemplateField>
-
                     </Columns>
+                    <EmptyDataTemplate>
+                        No data found
+                    </EmptyDataTemplate>
                 </asp:GridView>
             </asp:View>
             <asp:View ID="View2" runat="server">

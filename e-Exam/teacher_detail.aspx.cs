@@ -19,6 +19,7 @@ namespace e_Exam
             {
                 ViewState["filter"] = "ALL";
                 MultiView1.SetActiveView(View1);
+                binddropdown(dddepartment);
                 binddata();
 
             }
@@ -77,18 +78,18 @@ namespace e_Exam
             con.Close();
 
             // DropDownList dddepartment = ; //(DropDownList)GridView1.HeaderRow.Cells[2].FindControl("dddepartment");//FindControl("dddepartment");
-            this.binddropdown(dddepartment);
+            //this.binddropdown(dddepartment);
         }
         private void binddropdown(DropDownList dddepartment)
         {
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            SqlCommand cmd = new SqlCommand("select distinct department from teacher_info", con);
+            SqlCommand cmd = new SqlCommand("select * from Department", con);
             cmd.CommandType = CommandType.Text;
             con.Open();
             dddepartment.DataSource = cmd.ExecuteReader();
-            dddepartment.DataTextField = "department";
-            dddepartment.DataValueField = "department";
+            dddepartment.DataTextField = "dept_name";
+            dddepartment.DataValueField = "dept_id";
             dddepartment.DataBind();
             con.Close();
             dddepartment.Items.Insert(0, new ListItem("ALL", "ALL"));

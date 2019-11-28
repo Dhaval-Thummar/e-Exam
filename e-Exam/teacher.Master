@@ -47,7 +47,7 @@
     <form id="form1" runat="server">
         <nav class="navbar navbar-dark bg-dark fixed-top">
             <asp:Label ID="top_label" runat="server" Text="e-Exam" Font-Bold="True" Font-Size="X-Large" ForeColor="White"></asp:Label>
-            <asp:Button ID="Button1" runat="server" Text="Logout" class="btn" ForeColor="#CCCCCC" OnClick="Button1_Click" />
+            <asp:Button ID="Button1" runat="server" Text="Logout" class="btn" ForeColor="#CCCCCC" OnClick="Button1_Click" CausesValidation="False" />
         </nav>
         <div class ="sidenav">
              <asp:Image ID="Image1" runat="server" Height="175px" ImageUrl="~/Images/bg1.png" Width="144px" />
