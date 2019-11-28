@@ -15,7 +15,7 @@
     <RootNamespace>e_Exam</RootNamespace>
     <AssemblyName>e-Exam</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
@@ -418,7 +418,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49839</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/e-Exam</IISUrl>
+          <IISUrl>http://localhost:49840/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
