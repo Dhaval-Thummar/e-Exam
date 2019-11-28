@@ -113,7 +113,7 @@
         <div class="row form-group">
             <label class="col-md-2 col-form-label ">Qusetion Name</label>
             <div class="col-md-9"> 
-                <asp:TextBox ID="question" runat="server" TextMode="MultiLine" CssClass="form-control" Height="150px"></asp:TextBox>
+                <asp:TextBox ID="question" runat="server" TextMode="MultiLine" CssClass="form-control" Height="150px" AutoCompleteType="Disabled"></asp:TextBox>
                 <asp:CheckBox ID="q_image_checkbox" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="image_upload_check" />
                 <asp:RequiredFieldValidator ID="question_require" runat="server" ErrorMessage="Enter Question" ControlToValidate="question" ForeColor="#FF3300"></asp:RequiredFieldValidator>
                 <asp:FileUpload ID="q_image_upload" runat="server" Visible="False" />
@@ -135,7 +135,7 @@
                 <div class="row form-group">
                     <label class="col-md-2 col-form-label ">Option A</label>
                     <div class="col-md-9">
-                        <asp:TextBox ID="txt_optionone" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txt_optionone" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:CheckBox ID="optACheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optACheck_CheckedChanged" />
                         <asp:FileUpload ID="optAimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op1" runat="server" ErrorMessage="Enter option one" ControlToValidate="txt_optionone" ForeColor="red"></asp:RequiredFieldValidator>
@@ -145,7 +145,7 @@
                 <div class="row form-group">
                     <label class="col-md-2 col-form-label ">Option B</label>
                     <div class="col-md-9">
-                        <asp:TextBox ID="txt_optiontwo" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txt_optiontwo" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:CheckBox ID="optBCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optBCheck_CheckedChanged" />
                         <asp:FileUpload ID="optBimg" runat="server" Visible="False" />                        
                         <asp:RequiredFieldValidator ID="require_op2" runat="server" ErrorMessage="Enter option two" ControlToValidate="txt_optiontwo" ForeColor="red"></asp:RequiredFieldValidator>
@@ -155,7 +155,7 @@
                 <div class="row form-group">
                     <label class="col-md-2 col-form-label ">Option C</label>
                     <div class="col-md-9">
-                        <asp:TextBox ID="txt_optionthree" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txt_optionthree" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:CheckBox ID="optCCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optCCheck_CheckedChanged" />
                         <asp:FileUpload ID="optCimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op3" runat="server" ErrorMessage="Enter option three" ControlToValidate="txt_optionthree" ForeColor="red"></asp:RequiredFieldValidator>
@@ -165,7 +165,7 @@
                 <div class="row form-group">
                     <label class="col-md-2 col-form-label ">Option D</label>
                     <div class="col-md-9">
-                        <asp:TextBox ID="txt_optionfour" runat="server" CssClass="form-control"></asp:TextBox>
+                        <asp:TextBox ID="txt_optionfour" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>
                         <asp:CheckBox ID="optDCheck" runat="server" Text="Image" AutoPostBack="True" OnCheckedChanged="optDCheck_CheckedChanged" />
                         <asp:FileUpload ID="optDimg" runat="server" Visible="False" />
                         <asp:RequiredFieldValidator ID="require_op4" runat="server" ErrorMessage="Enter option four" ControlToValidate="txt_optionfour" ForeColor="red"></asp:RequiredFieldValidator>

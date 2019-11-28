@@ -13,9 +13,10 @@ namespace e_Exam
 {
     public partial class Registration2 : System.Web.UI.Page
     {
+        static int sid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!IsPostBack)
+            if (!IsPostBack)
             {
                 bind_department();
             }
@@ -53,15 +54,19 @@ namespace e_Exam
                 cmd.Parameters.AddWithValue("@address", address_input.Text);
                 cmd.Parameters.AddWithValue("@dob", dob_input.Text);
                 cmd.Parameters.AddWithValue("@pswd", confirm_pswd_input.Text);
-
+                cmd.Parameters.Add("@sid", SqlDbType.Int);
+                cmd.Parameters["@sid"].Direction = ParameterDirection.Output;
                 con.Open();
                 int k = cmd.ExecuteNonQuery();
+                con.Close();
+                sid = Int16.Parse(cmd.Parameters["@sid"].Value.ToString());
                 if (k != 0)
                 {
+                    add_name_to_test(Convert.ToInt32(dept_id));
                     //Display success message.
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('User details saved sucessfully');window.location ='login.aspx';", true);
                 }
-                con.Close();
+                
             }
             else
             {
@@ -96,7 +101,6 @@ namespace e_Exam
 
             return userstatus;
         }
-
         private void bind_department()
         {
             SqlConnection con = new SqlConnection();
@@ -113,6 +117,36 @@ namespace e_Exam
             DropDownList1.DataBind();
             DropDownList1.Items.Insert(0, new ListItem("--Select--", "none"));
             DropDownList1.Items.Add(new ListItem("Other", "-1"));
+        }
+        private void add_name_to_test(int dept_id)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select test_id from Test where dept_id = '" + dept_id + "'", con);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable t1 = new DataTable();
+            da.Fill(t1);
+
+            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
+            for (int i = 0; i < t1.Rows.Count; i++)
+            {
+                t1.Rows[i]["student_id"] = sid;
+            }
+            using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+            {
+                //Set the database table name
+                sqlBulkCopy.DestinationTableName = "dbo.test_taken";
+
+                //[OPTIONAL]: Map the DataTable columns with that of the database table
+
+                sqlBulkCopy.ColumnMappings.Add("test_id", "Test_id");
+                sqlBulkCopy.ColumnMappings.Add("student_id", "student_id");
+                con.Open();
+                sqlBulkCopy.WriteToServer(t1);
+                con.Close();
+            }
         }
     }
 }
