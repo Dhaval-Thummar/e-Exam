@@ -26,5 +26,12 @@ namespace e_Exam.teacher
         {
 
         }
+        protected void onrowcommand(object sender, GridViewCommandEventArgs e)
+        {
+            string index = (string)e.CommandArgument;
+            Session["test_id"] = index;
+            int tid = Convert.ToInt32(index);
+            Response.Redirect("~/teacher/test_result_details.aspx?tid=" + tid);
+        }
     }
 }

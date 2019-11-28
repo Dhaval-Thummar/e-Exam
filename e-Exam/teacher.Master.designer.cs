@@ -10,7 +10,7 @@
 namespace e_Exam {
     
     
-    public partial class Teacher {
+    public partial class teacher1 {
         
         /// <summary>
         /// head control.
@@ -85,13 +85,13 @@ namespace e_Exam {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
         
         /// <summary>
-        /// HyperLink3 control.
+        /// HyperLink4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink3;
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink4;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

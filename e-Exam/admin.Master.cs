@@ -19,8 +19,18 @@ namespace e_Exam
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Session.Clear();
-            Server.Transfer("~/admin_login.aspx");
+            Session["admin_id"] = null;
+            clear_cache();
+            Response.Redirect("~/admin_login.aspx");
+        }
+        private void clear_cache()
+        {
+            //Used for disabling page caching
+            HttpContext.Current.Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+            HttpContext.Current.Response.Cache.SetValidUntilExpires(false);
+            HttpContext.Current.Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            HttpContext.Current.Response.Cache.SetNoStore();
         }
     }
 }

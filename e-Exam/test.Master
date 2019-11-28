@@ -12,6 +12,14 @@
     <script src="Scripts/jquery-3.0.0.min.js"></script>
     <link href="Content/fontawesome.min.css" rel="stylesheet" />
     <link href="Content/all.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: auto;
+            background-image: url('bg4.jpg');
+            background-size: cover;
+            font-family: sans-serif;
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>

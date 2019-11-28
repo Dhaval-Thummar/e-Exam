@@ -8,49 +8,16 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 
-namespace e_Exam
+
+namespace e_Exam.teacher
 {
-    public partial class result : System.Web.UI.Page
+    public partial class student_result_details : System.Web.UI.Page
     {
-        static int a = 1, count = 0,tid=0;
+        static int a = 1, count = 0, tid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            a = 1;
-            count = 0;
-            if (!IsPostBack)
-            {
-                MultiView1.ActiveViewIndex = 0;
-            }
-        }
-
-        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            tid = Int32.Parse(e.CommandArgument.ToString());
-            Session["tid"] = tid;
-            MultiView1.ActiveViewIndex = 1;
-
-            //bind_repeater(tid);
-        }
-
-        private void bind_repeater(int tid1)
-        {
-            string constr = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-            string qry = "SELECT Question.test_id, Question.section_no, Question.q_id, Question.question, Question.type, mcq.A, mcq.B, mcq.C, mcq.D, mcq.answer, " +
-                "fill_in_blank.answer AS blank_answer, Test_Section.marks_per_question, Test_Section.negative_marks, Question.has_image, mcq.has_image AS mcq_image " +
-                "FROM Question INNER JOIN Test_Section ON Question.test_id = Test_Section.test_id AND Question.section_no = Test_Section.section_no " +
-                "LEFT OUTER JOIN mcq ON Question.test_id = mcq.test_id AND Question.section_no = mcq.section_no AND Question.q_id = mcq.q_id " +
-                "LEFT OUTER JOIN fill_in_blank ON Question.test_id = fill_in_blank.test_id AND Question.section_no = fill_in_blank.section_no AND Question.q_id = fill_in_blank.q_id " +
-                "WHERE (Question.test_id =" + tid1 + ")";
-            using (SqlConnection con = new SqlConnection(constr))
-            {
-                SqlCommand cmd = new SqlCommand(qry, con);
-                cmd.CommandType = CommandType.Text;
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                Repeater1.DataSource = dt;
-                Repeater1.DataBind();
-            }
+            a = 0;
+            count = 1;
         }
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
@@ -139,9 +106,9 @@ namespace e_Exam
                             d.Visible = true;
                         }
                     }
-                    if(attempt.Value.ToString().Equals("1"))
+                    if (attempt.Value.ToString().Equals("1"))
                     {
-                        if(correct.Value.ToString().Equals("1"))
+                        if (correct.Value.ToString().Equals("1"))
                         {
                             mcq_ans.Text = "Correct";
                             mcq_ans.ForeColor = System.Drawing.Color.Green;
@@ -170,9 +137,9 @@ namespace e_Exam
                 {
                     blank_ans.Visible = true;
                     mcq_ans.Visible = false;
-                    if(attempt.Value.ToString().Equals("1"))
+                    if (attempt.Value.ToString().Equals("1"))
                     {
-                        if(correct.Value.ToString().Equals("1"))
+                        if (correct.Value.ToString().Equals("1"))
                         {
                             blank_ans.Text = "Correct";
                             blank_ans.ForeColor = System.Drawing.Color.Green;

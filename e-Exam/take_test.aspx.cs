@@ -153,7 +153,7 @@ namespace e_Exam
 
             if (DateTime.Compare(DateTime.Now, DateTime.Parse(Session["Timer"].ToString())) < 0)
             {
-                if ((DateTime.Parse(Session["Timer"].ToString()) - DateTime.Now).TotalSeconds < 60)
+                if((DateTime.Parse(Session["Timer"].ToString()) - DateTime.Now).TotalSeconds < 60)
                 {
                     Label1.ForeColor = System.Drawing.Color.Red;
                 }
@@ -161,7 +161,7 @@ namespace e_Exam
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalMinutes % 60).ToString() + ":" +
                     ((Int32)DateTime.Parse(Session["Timer"].ToString()).Subtract(DateTime.Now).TotalSeconds % 60).ToString();
 
-                if (Label1.Text.Equals("0:0:0"))
+                if(Label1.Text.Equals("0:0:0"))
                 {
                     //Test Comptele event
                     save_answer(qno);

@@ -45,6 +45,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -69,18 +73,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="admin_home.aspx" />
     <Content Include="Content\all.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="custom.css" />
     <Content Include="font-awesome.min.css" />
     <Content Include="result.aspx" />
     <Content Include="Scripts\all.js" />
+    <Content Include="student\bg4.jpg" />
     <Content Include="student_detail.aspx" />
     <Content Include="student_homepage.aspx" />
     <Content Include="take_test.aspx" />
     <Content Include="teacher\add_question.aspx" />
     <Content Include="teacher\add_test.aspx" />
-    <Content Include="admin_dashboard.aspx" />
     <Content Include="admin_dashboard1.aspx" />
     <Content Include="admin_login.aspx" />
     <Content Include="App_LocalResources\bg4.jpg" />
@@ -125,10 +130,11 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="admin.Master" />
-    <Content Include="teacher\test_result_details.aspx" />
-    <Content Include="teacher\test_result_teacher.aspx" />
+    <Content Include="teacher\student_result_details.aspx" />
     <Content Include="teacher_detail.aspx" />
     <Content Include="test_details.aspx" />
+    <Content Include="teacher\test_result_details.aspx" />
+    <Content Include="teacher\test_result_teacher.aspx" />
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
@@ -180,6 +186,13 @@
     <Content Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_home.aspx.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin_home.aspx.designer.cs">
+      <DependentUpon>admin_home.aspx</DependentUpon>
+    </Compile>
     <Compile Include="result.aspx.cs">
       <DependentUpon>result.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -228,13 +241,6 @@
     </Compile>
     <Compile Include="admin.Master.designer.cs">
       <DependentUpon>admin.Master</DependentUpon>
-    </Compile>
-    <Compile Include="admin_dashboard.aspx.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin_dashboard.aspx.designer.cs">
-      <DependentUpon>admin_dashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="admin_dashboard1.aspx.cs">
       <DependentUpon>admin_dashboard1.aspx</DependentUpon>
@@ -303,26 +309,19 @@
     <Compile Include="teacher.Master.designer.cs">
       <DependentUpon>teacher.Master</DependentUpon>
     </Compile>
+    <Compile Include="teacher\student_result_details.aspx.cs">
+      <DependentUpon>student_result_details.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\student_result_details.aspx.designer.cs">
+      <DependentUpon>student_result_details.aspx</DependentUpon>
+    </Compile>
     <Compile Include="teacher\teacher_dashboard.aspx.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="teacher\teacher_dashboard.aspx.designer.cs">
       <DependentUpon>teacher_dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="teacher\test_result_details.aspx.cs">
-      <DependentUpon>test_result_details.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="teacher\test_result_details.aspx.designer.cs">
-      <DependentUpon>test_result_details.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="teacher\test_result_teacher.aspx.cs">
-      <DependentUpon>test_result_teacher.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="teacher\test_result_teacher.aspx.designer.cs">
-      <DependentUpon>test_result_teacher.aspx</DependentUpon>
     </Compile>
     <Compile Include="teacher_detail.aspx.cs">
       <DependentUpon>teacher_detail.aspx</DependentUpon>
@@ -361,12 +360,19 @@
     <Compile Include="test_details.aspx.designer.cs">
       <DependentUpon>test_details.aspx</DependentUpon>
     </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
+    <Compile Include="teacher\test_result_details.aspx.cs">
+      <DependentUpon>test_result_details.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
+    <Compile Include="teacher\test_result_details.aspx.designer.cs">
+      <DependentUpon>test_result_details.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="teacher\test_result_teacher.aspx.cs">
+      <DependentUpon>test_result_teacher.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="teacher\test_result_teacher.aspx.designer.cs">
+      <DependentUpon>test_result_teacher.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +394,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

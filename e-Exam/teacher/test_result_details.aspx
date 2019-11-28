@@ -44,14 +44,14 @@
     <br />
     <br />
     <center>
-    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" Width="542px">
+    <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" OnRowCommand="onrowcommand" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" Width="542px">
         <Columns>
             <asp:BoundField DataField="student_id" HeaderText="student_id" SortExpression="student_id" />
             <asp:BoundField DataField="marks" HeaderText="marks" SortExpression="marks" />
             <asp:BoundField DataField="date" HeaderText="date" SortExpression="date" />
             <asp:TemplateField HeaderText="Details" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/teacher/student_result_details.aspx"%>'>Details</asp:LinkButton>   
+                        <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("student_id")%>' PostBackUrl='<%#"~/teacher/student_result_details.aspx"%>'>Details</asp:LinkButton>   
                     </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -73,5 +73,4 @@
         }
     </style>
 </asp:Content>
-
 

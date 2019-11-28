@@ -51,7 +51,8 @@ namespace e_Exam
 
                     SmtpClient smt = new SmtpClient();
                     smt.Host = "smtp.gmail.com";
-                    System.Net.NetworkCredential ntwd = new NetworkCredential();
+                    System.Net.NetworkCredential ntwd = new 
+                    NetworkCredential();
                     ntwd.UserName = "help.eexam@gmail.com"; //Your Email ID  
                     ntwd.Password = "exam@123"; // Your Password  
                     smt.UseDefaultCredentials = true;

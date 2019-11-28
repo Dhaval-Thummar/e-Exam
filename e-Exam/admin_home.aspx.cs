@@ -10,52 +10,48 @@ using System.Configuration;
 
 namespace e_Exam
 {
-    public partial class student_homepage : System.Web.UI.Page
+    public partial class admin_home : System.Web.UI.Page
     {
-        static int student_id = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-                if (Session["studentID"] != null)
-                {
-                    student_id = Convert.ToInt32(Session["studentID"].ToString());
-                }
-            getgiventest();
-            getpendingtest();
+
+            gettotalexam();
+            gettotalquestion();
         }
-        public void getgiventest()
+        String s = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+        //method for getting all the exam 
+        public void gettotalexam()
         {
-            String s = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             using (SqlConnection con = new SqlConnection(s))
             {
-                SqlCommand cmd = new SqlCommand("select count(test_id) from test_taken where student_id =" + student_id + " and has_taken = 1", con);
+                SqlCommand cmd = new SqlCommand("select COUNT(student_id) from Student_info", con);
                 try
                 {
                     con.Open();
                     int i = Convert.ToInt32(cmd.ExecuteScalar());
-                    lbltotaltest.Text = i.ToString();
+                    lbltotalexam.Text = i.ToString();
+
                 }
                 catch (Exception ex)
                 {
-
                 }
             }
         }
         //method for getting all the question 
-        public void getpendingtest()
+        public void gettotalquestion()
         {
-            String s = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             using (SqlConnection con = new SqlConnection(s))
             {
-                SqlCommand cmd = new SqlCommand("select count(test_id) from test_taken where student_id = " + student_id + " and has_taken = 0", con);
+                SqlCommand cmd = new SqlCommand("select COUNT(teacher_id) from teacher_info", con);
                 try
                 {
                     con.Open();
                     int i = Convert.ToInt32(cmd.ExecuteScalar());
-                    lbltestpending.Text = i.ToString();
+                    lbltotalquestion.Text = i.ToString();
+
                 }
                 catch (Exception ex)
                 {
-
                 }
             }
         }

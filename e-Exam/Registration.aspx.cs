@@ -13,76 +13,15 @@ namespace e_Exam
 {
     public partial class Registration2 : System.Web.UI.Page
     {
+        static int sid = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Label1.Visible = false;
-        }
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Qualification_drop_down.SelectedValue == "Secondary" || Qualification_drop_down.SelectedValue == "Primary" || Qualification_drop_down.SelectedValue == "Higher Secondary")
+            if (!IsPostBack)
             {
-                standard_label.Text = "Standard";
-                standard_input.Visible = true;
-                be_drop_down.Enabled = false;
-                year_drop_down.Enabled = false;
-                standard_drop_down.Visible = false;
-            }
-            else if (Qualification_drop_down.SelectedValue == "Diploma")
-            {
-                standard_input.Visible = false;
-                standard_drop_down.Enabled = false;
-                standard_drop_down.Visible = true;
-                be_drop_down.Enabled = true;
-                standard_drop_down.SelectedIndex = 1;
-                year_drop_down.Enabled = true;
-                year_drop_down.Items[3].Enabled = false;
-            }
-            else if (Qualification_drop_down.SelectedValue == "Under Graduate")
-            {
-                standard_label.Text = "Degree";
-                standard_drop_down.Visible = true;
-                standard_drop_down.Enabled = true;
-                standard_input.Visible = false;
-                standard_drop_down.SelectedIndex = 0;
-            }
-            else
-            {
-                standard_drop_down.Visible = false;
-                bsc_drop_down.Enabled = false;
-                year_drop_down.Enabled = false;
-                standard_input.Visible = true;
-                standard_drop_down.SelectedIndex = 0;
-            }
-
-        }
-
-        protected void standard_drop_down_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (standard_drop_down.SelectedValue == "B.E/B.Tech")
-            {
-                year_drop_down.Items[3].Enabled = true;
-                be_drop_down.Visible = true;
-                bsc_drop_down.Visible = false;
-                be_drop_down.Enabled = true;
-                year_drop_down.Enabled = true;
-            }
-
-            else if (standard_drop_down.SelectedValue == "B.Sc")
-            {
-                year_drop_down.Items[3].Enabled = false;
-                bsc_drop_down.Visible = true;
-                be_drop_down.Visible = false;
-                year_drop_down.Enabled = true;
-                bsc_drop_down.Enabled = true;
-            }
-            else
-            {
-                be_drop_down.Visible = true;
-                be_drop_down.Enabled = false;
-                bsc_drop_down.Visible = false;
-                year_drop_down.Items[3].Enabled = false;
+                bind_department();
             }
         }
+
 
         protected void cancel_btn_Click(object sender, EventArgs e)
         {
@@ -90,43 +29,18 @@ namespace e_Exam
             roll_no_input.Text = "";
             mobile_input.Text = "";
             email_input.Text = "";
-            Qualification_drop_down.SelectedIndex = 0;
-            standard_drop_down.SelectedIndex = 0;
-            standard_input.Text = "";
-            be_drop_down.SelectedIndex = 0;
-            bsc_drop_down.SelectedIndex = 0;
             year_drop_down.SelectedIndex = 0;
             address_input.Text = "";
         }
 
         protected void submit_btn_Click(object sender, EventArgs e)
         {
-            String std = "", dept = "", year = "";
-            if (standard_drop_down.Visible == true)
-            {
-                std = standard_drop_down.SelectedValue;
-            }
-            else
-            {
-                std = standard_input.Text;
-            }
-            if (be_drop_down.Visible == true && be_drop_down.Enabled == true)
-            {
-                dept = be_drop_down.SelectedValue;
-            }
-            if (bsc_drop_down.Visible == true && bsc_drop_down.Enabled == true)
-            {
-                dept = bsc_drop_down.SelectedValue;
-            }
-            if (year_drop_down.Enabled == true)
-            {
-                year = year_drop_down.SelectedValue;
-            }
-
+            String year = year_drop_down.SelectedValue;
+            String dept_id = DropDownList1.SelectedValue;
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
 
-            if (check_user(roll_no_input.Text, con))
+            if (check_email(email_input.Text, con))
             {
 
                 SqlCommand cmd = new SqlCommand("student_registration", con);
@@ -134,66 +48,42 @@ namespace e_Exam
                 cmd.Parameters.AddWithValue("@roll_no", roll_no_input.Text);
                 cmd.Parameters.AddWithValue("@name", name_input.Text);
                 cmd.Parameters.AddWithValue("@mobile", mobile_input.Text);
-                cmd.Parameters.AddWithValue("@qualification", Qualification_drop_down.SelectedValue);
                 cmd.Parameters.AddWithValue("@email", email_input.Text);
-                cmd.Parameters.AddWithValue("@std", std);
-                cmd.Parameters.AddWithValue("@dept", dept);
+                cmd.Parameters.AddWithValue("@dept_id", dept_id);
                 cmd.Parameters.AddWithValue("@year", year);
                 cmd.Parameters.AddWithValue("@address", address_input.Text);
                 cmd.Parameters.AddWithValue("@dob", dob_input.Text);
                 cmd.Parameters.AddWithValue("@pswd", confirm_pswd_input.Text);
-
+                cmd.Parameters.Add("@sid", SqlDbType.Int);
+                cmd.Parameters["@sid"].Direction = ParameterDirection.Output;
                 con.Open();
                 int k = cmd.ExecuteNonQuery();
+                con.Close();
+                sid = Int16.Parse(cmd.Parameters["@sid"].Value.ToString());
                 if (k != 0)
                 {
+                    add_name_to_test(Convert.ToInt32(dept_id));
                     //Display success message.
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('User details saved sucessfully');window.location ='login.aspx';", true);
                 }
-                con.Close();
+                
             }
             else
             {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('User already registered');window.location ='registration.aspx';", true);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('email already registered');window.location ='registration.aspx';", true);
             }
 
 
         }
-
-        protected void upload_btn_Click(object sender, EventArgs e)
-        {
-            HttpPostedFile httpPostedFile = photo_upload.PostedFile;
-            string filename = Path.GetFileName(httpPostedFile.FileName);
-            string fileextension = Path.GetExtension(filename);
-            int filesize = httpPostedFile.ContentLength;
-
-            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".bmp" || fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png" || fileextension.ToLower() == ".jpeg")
-            {
-                Stream stream = httpPostedFile.InputStream;
-                BinaryReader binaryReader = new BinaryReader(stream);
-                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
-
-            }
-            else
-            {
-                Label1.Visible = true;
-                Label1.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
-                Label1.ForeColor = System.Drawing.Color.Red;
-
-            }
-        }
-        public Boolean check_user(String roll_no, SqlConnection con)
+        public Boolean check_email(String email, SqlConnection con)
         {
             Boolean userstatus;
-            String myqry;
-            String mycon = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\Dhaval Thummar\\Desktop\\D101\\App_Data\\User.mdf\";Integrated Security=True;Connect Timeout=30";
+            string myqry;
 
-            myqry = "Select uname from Login_info where uname='" + roll_no + "'";
-
-            SqlConnection c1 = con;
+            myqry = "Select uname from Login_info where uname='" + email + "'";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = myqry;
-            cmd.Connection = c1;
+            cmd.Connection = con;
 
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = cmd;
@@ -207,9 +97,56 @@ namespace e_Exam
             {
                 userstatus = true;
             }
-            c1.Close();
+            con.Close();
 
             return userstatus;
+        }
+        private void bind_department()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select * from Department order by dept_name", con);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            DropDownList1.DataSource = dt;
+            DropDownList1.DataTextField = "dept_name";
+            DropDownList1.DataValueField = "dept_id";
+            DropDownList1.DataBind();
+            DropDownList1.Items.Insert(0, new ListItem("--Select--", "none"));
+            DropDownList1.Items.Add(new ListItem("Other", "-1"));
+        }
+        private void add_name_to_test(int dept_id)
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select test_id from Test where dept_id = '" + dept_id + "'", con);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable t1 = new DataTable();
+            da.Fill(t1);
+
+            t1.Columns.Add(new DataColumn("student_id", typeof(int)));
+            for (int i = 0; i < t1.Rows.Count; i++)
+            {
+                t1.Rows[i]["student_id"] = sid;
+            }
+            using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+            {
+                //Set the database table name
+                sqlBulkCopy.DestinationTableName = "dbo.test_taken";
+
+                //[OPTIONAL]: Map the DataTable columns with that of the database table
+
+                sqlBulkCopy.ColumnMappings.Add("test_id", "Test_id");
+                sqlBulkCopy.ColumnMappings.Add("student_id", "student_id");
+                con.Open();
+                sqlBulkCopy.WriteToServer(t1);
+                con.Close();
+            }
         }
     }
 }

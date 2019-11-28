@@ -16,10 +16,13 @@
     <span class="auto-style1"><strong>VIEW TEST</strong></span><br />
     <center>
     <div class="div1">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-sm" DataKeyNames="test_id" DataSourceID="SqlDataSource1" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-sm" DataKeyNames="test_id" DataSourceID="SqlDataSource1" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" AllowPaging="True">
+      
             <Columns>
+                
                 <asp:BoundField DataField="test_id" HeaderText="Test ID" ReadOnly="True" SortExpression="test_id" ItemStyle-Width="5%">
                     <ItemStyle Width="5%"></ItemStyle>
+                 
                 </asp:BoundField>
                 <asp:BoundField DataField="name" HeaderText="Name" SortExpression="name" />
                 <asp:BoundField DataField="subject" HeaderText="Subject" SortExpression="subject" />
@@ -31,6 +34,7 @@
                     <ItemTemplate>
                         <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/test_details.aspx?tid=" + Eval("test_id")%>'>Details</asp:LinkButton>
                     </ItemTemplate>
+                   
                 </asp:TemplateField>
             </Columns>
             <EmptyDataRowStyle CssClass="alert alert-primary" VerticalAlign="Middle" />

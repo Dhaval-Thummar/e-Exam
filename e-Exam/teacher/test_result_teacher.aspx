@@ -21,7 +21,7 @@
     </asp:SqlDataSource>
     <div class="div1">
         <center>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-sm" DataKeyNames="test_id" DataSourceID="SqlDataSource1" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Width="576px">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="onrowcommand" CssClass="table table-striped table-sm" DataKeyNames="test_id" DataSourceID="SqlDataSource1" AllowSorting="True" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" Width="576px">
             <Columns>
                 <asp:BoundField DataField="test_id" HeaderText="Test ID" ReadOnly="True" SortExpression="test_id" ItemStyle-Width="5%">
                 </asp:BoundField>
@@ -30,7 +30,7 @@
                 <asp:BoundField DataField="total_marks" HeaderText="Total Marks" SortExpression="total_marks" />
                 <asp:TemplateField HeaderText="Details" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <asp:LinkButton ID="LinkButton1" runat="server" PostBackUrl='<%#"~/teacher/test_result_details.aspx?tid=" + Eval("test_id")%>'>Details</asp:LinkButton>   
+                        <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%#Eval("test_id") %>' >Details</asp:LinkButton>   
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

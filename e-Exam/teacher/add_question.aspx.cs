@@ -87,6 +87,7 @@ namespace e_Exam
                 //test_table
                 test_table.Columns.Add(new DataColumn("test_id", typeof(int)));
                 test_table.Columns.Add(new DataColumn("name", typeof(string)));
+                test_table.Columns.Add(new DataColumn("dept_id", typeof(int)));
                 test_table.Columns.Add(new DataColumn("subject", typeof(string)));
                 test_table.Columns.Add(new DataColumn("duration", typeof(int)));
                 test_table.Columns.Add(new DataColumn("sections", typeof(int)));
@@ -503,6 +504,7 @@ namespace e_Exam
             DataRow t1 = test_table.NewRow();
             t1["test_id"] = test_id;
             t1["name"] = test.name;
+            t1["dept_id"] = test.dept_id;
             t1["subject"] = test.subject;
             t1["duration"] = test.duration;
             t1["sections"] = test.sections;
@@ -598,6 +600,7 @@ namespace e_Exam
 
                     sqlBulkCopy.ColumnMappings.Add("test_id", "test_id");
                     sqlBulkCopy.ColumnMappings.Add("name", "name");
+                    sqlBulkCopy.ColumnMappings.Add("dept_id", "dept_id");
                     sqlBulkCopy.ColumnMappings.Add("subject", "subject");
                     sqlBulkCopy.ColumnMappings.Add("duration", "duration");
                     sqlBulkCopy.ColumnMappings.Add("sections", "sections");
@@ -673,12 +676,16 @@ namespace e_Exam
             }
             //test summary
             MultiView2.ActiveViewIndex = 2;
+
             test_id_lbl.Text = test_id.ToString();
             test_name_lbl.Text = test.name;
             no_of_q_lbl.Text = total_q.ToString();
             total_marks_lbl.Text = marks.ToString();
             duration_lbl.Text = test.duration.ToString();
             desc_lbl.Text = test.descripetion;
+
+            //Add records to test_taken table
+            add_test_taken(test.dept_id);
         }
 
         private void mcq_image_add(FileUpload img, DataRow row, string name)
@@ -701,6 +708,38 @@ namespace e_Exam
                 image_errror_lbl3.Text = "Only images (.jpg, .png, .bmp, .jpeg) can be uploaded";
                 image_errror_lbl3.ForeColor = System.Drawing.Color.Red;
                 return;
+            }
+        }
+
+        private void add_test_taken(int dept_id)
+        {
+
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select student_id from Student_info where dept_id = '" + dept_id + "'", con);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = cmd;
+            DataTable t1 = new DataTable();
+            da.Fill(t1);
+
+            t1.Columns.Add(new DataColumn("test_id", typeof(int)));
+            for (int i = 0; i < t1.Rows.Count; i++)
+            {
+                t1.Rows[i]["test_id"] = test_id;
+            }
+            using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+            {
+                //Set the database table name
+                sqlBulkCopy.DestinationTableName = "dbo.test_taken";
+
+                //[OPTIONAL]: Map the DataTable columns with that of the database table
+
+                sqlBulkCopy.ColumnMappings.Add("test_id", "Test_id");
+                sqlBulkCopy.ColumnMappings.Add("student_id", "student_id");
+                con.Open();
+                sqlBulkCopy.WriteToServer(t1);
+                con.Close();
             }
         }
     }

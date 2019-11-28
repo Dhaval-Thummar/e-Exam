@@ -7,7 +7,7 @@
         }
         .opt-image{
             height:200px;
-            width:200px;
+            width:250px;
         }
         .auto-style1 {
             font-size: xx-large;

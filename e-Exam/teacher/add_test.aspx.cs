@@ -21,23 +21,28 @@ namespace e_Exam
             }
             if(!IsPostBack)
             {
-                SqlConnection con = new SqlConnection();
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
-
-                SqlCommand cmd = new SqlCommand("select sub_name from Subject order by sub_name", con);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet dt = new DataSet();
-                da.Fill(dt);
-                sub_list.DataTextField = dt.Tables[0].Columns["sub_name"].ToString();
-                //sub_list.DataValueField = dt.Tables[0].Columns["sub_id"].ToString();
-                sub_list.DataSource = dt.Tables[0];
-                sub_list.DataBind();
-                sub_list.Items.Add(new ListItem("Other", "-1"));
-                sub_list.Items.Insert(0, new ListItem("--Select--", "none"));
+                bind_drop_down();
                 Session["section_no"] = 1;
             }
         }
 
+        protected void bind_drop_down()
+        {
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select * from Department order by dept_name", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet dt = new DataSet();
+            dt.Clear();
+            da.Fill(dt);
+            dept_list.DataTextField = dt.Tables[0].Columns["dept_name"].ToString();
+            dept_list.DataValueField = dt.Tables[0].Columns["dept_id"].ToString();
+            dept_list.DataSource = dt.Tables[0];
+            dept_list.DataBind();
+            dept_list.Items.Add(new ListItem("Other","-1"));
+            dept_list.Items.Insert(0, new ListItem("--Select--", "none"));
+
+        }
         protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
         {
             if(CheckBox1.Checked == true)
@@ -55,6 +60,7 @@ namespace e_Exam
         {
             Test t1 = new Test();
             t1.name = TextBox1.Text;
+            t1.dept_id = Int16.Parse(dept_list.SelectedValue);
             t1.subject = sub_list.Text;
             t1.has_duration = CheckBox1.Checked;
             if(t1.has_duration)
@@ -89,6 +95,22 @@ namespace e_Exam
             con.Close();
             result = (result == DBNull.Value) ? null : result;
             Session["subject_id"] = Convert.ToInt32(result);
+        }
+
+        protected void dept_list_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String dept = dept_list.Text;
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
+            SqlCommand cmd = new SqlCommand("select sub_name from Subject  where dept_id = (select dept_id from Department where dept_id="+ dept_list.SelectedValue +" ) order by sub_name", con);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataSet dt = new DataSet();
+            da.Fill(dt);
+            sub_list.DataTextField = dt.Tables[0].Columns["sub_name"].ToString();
+            sub_list.DataSource = dt.Tables[0];
+            sub_list.DataBind();
+            sub_list.Items.Add(new ListItem("Other", "-1"));
+            sub_list.Items.Insert(0, new ListItem("--Select--", "none"));
         }
     }
 }
