@@ -45,21 +45,21 @@ namespace e_Exam
             {
                 DataView dv = (DataView)SqlDataSource1.Select(DataSourceSelectArguments.Empty);
                 DataRowView drv = dv[0];
-                Label1.Text = drv["name"].ToString();
-                test_subject.Text = "Subject: " + drv["subject"].ToString();
+                Label1.Text = "Test name : " + drv["name"].ToString();
+                test_subject.Text = "Subject : " + drv["subject"].ToString();
                 if (drv["duration"].ToString().Equals("0"))
                 {
                     duration.Text = "No duration";
                 }
                 else
                 {
-                    duration.Text = "Duration: " + drv["duration"].ToString() + " min";
+                    duration.Text = "Duration : " + drv["duration"].ToString() + " min";
                 }
-                marks.Text = "Total Marks: " + drv["total_marks"].ToString();
-                nmarks.Text = "Negative Marks: " + drv["negative_marks"].ToString();
-                added_date.Text = "Added Date: " + drv["added_date"].ToString();
-                times_taken.Text = " times taken";
-                desc.Text = "Descriptoin: " + drv["description"].ToString();
+                marks.Text = "Total Marks : " + drv["total_marks"].ToString();
+                nmarks.Text = "Negative Marks : " + drv["negative_marks"].ToString();
+                added_date.Text = "Added Date : " + drv["added_date"].ToString();
+                
+                desc.Text = "Descriptoin : " + drv["description"].ToString();
             }
             catch (Exception)
             {
@@ -376,6 +376,11 @@ namespace e_Exam
             }
             check = 1;
             Response.Redirect(Request.RawUrl);
+        }
+
+        protected void MultiView1_ActiveViewChanged(object sender, EventArgs e)
+        {
+
         }
 
         protected void OnCancel(object sender, EventArgs e)

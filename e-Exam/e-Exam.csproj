@@ -17,7 +17,7 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44337</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -88,10 +88,6 @@
     <Content Include="teacher\add_test.aspx" />
     <Content Include="admin_dashboard1.aspx" />
     <Content Include="admin_login.aspx" />
-    <Content Include="App_Data\exam.mdf" />
-    <Content Include="App_Data\exam_log.ldf">
-      <DependentUpon>exam.mdf</DependentUpon>
-    </Content>
     <Content Include="App_LocalResources\bg4.jpg" />
     <Content Include="App_LocalResources\bg5.png" />
     <Content Include="App_LocalResources\lg1.jpg" />
@@ -142,6 +138,7 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="WebForm2.aspx" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -400,6 +397,8 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="NewFolder1\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>

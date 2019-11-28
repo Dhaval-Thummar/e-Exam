@@ -57,9 +57,6 @@
                 <asp:Panel ID="panel_index_warning" runat="server" Visible="false">
                     <div class="card-footer">
                         <br />
-                        <div class="alert alert-danger text-center">
-                            <asp:Label ID="lbl_indexwarning" runat="server" />
-                        </div>
                     </div>
                 </asp:Panel>
             </div>

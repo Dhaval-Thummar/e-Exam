@@ -20,7 +20,7 @@ namespace e_Exam
 
         protected void btn_login_Click(object sender, EventArgs e)
         {
-          
+
             SqlConnection con = new SqlConnection();
             con.ConnectionString = ConfigurationManager.ConnectionStrings["ExamDB"].ConnectionString;
             SqlDataAdapter da = new SqlDataAdapter();

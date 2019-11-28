@@ -44,10 +44,15 @@
         .auto-style7 {
             padding-left:20px;
         }
+        .auto-style8 {
+            font-size: xx-large;
+            color: #0099CC;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <br />
+    <center>
+    <strong><span class="auto-style8">ADD TEST</span></strong></center><br />
     <br />
     <asp:MultiView ID="MultiView2" runat="server">
         <asp:View ID="View2" runat="server">

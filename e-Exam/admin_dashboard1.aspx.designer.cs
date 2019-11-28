@@ -94,7 +94,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox6;
-
         /// <summary>
         /// Label6 control.
         /// </summary>
@@ -166,7 +165,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox4;
-
         /// <summary>
         /// Button2 control.
         /// </summary>
@@ -175,7 +173,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
-
         /// <summary>
         /// Label7 control.
         /// </summary>
@@ -184,7 +181,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label7;
-
         /// <summary>
         /// Label3 control.
         /// </summary>
@@ -193,7 +189,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label3;
-
         /// <summary>
         /// TextBox3 control.
         /// </summary>
@@ -202,7 +197,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TextBox3;
-
         /// <summary>
         /// RegularExpressionValidator1 control.
         /// </summary>
@@ -211,7 +205,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
-
         /// <summary>
         /// Label5 control.
         /// </summary>
@@ -283,7 +276,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button3;
-
         /// <summary>
         /// Button4 control.
         /// </summary>
@@ -292,7 +284,6 @@ namespace e_Exam
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button4;
-
         /// <summary>
         /// Label8 control.
         /// </summary>

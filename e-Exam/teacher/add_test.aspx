@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
         <style type="text/css">
         .table1 {
-            margin: 150px auto;
+            margin: 0px auto;
             width:50%;
         }
         .auto-style1 {
@@ -53,19 +53,27 @@
                 width: 75%;
                 padding-left: 35px;
             }
+            .auto-style10 {
+                font-size: xx-large;
+                color: #0099FF;
+            }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-        <div class="div1">
+    <div class="div1">
+            <center>
+            <strong><span class="auto-style10">ADD TEST</span></strong>
+            </center>    
         <table class="table1">
-        <tr>
-            <td class="auto-style4">
-                <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
+            
+            <tr>
+               <td class="auto-style4">
+                   <asp:Label ID="Label1" runat="server" Text="Test Name"></asp:Label>
+                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="*" ControlToValidate="TextBox1" Font-Bold="True" ForeColor="Red"></asp:RequiredFieldValidator>
                 
-            </td>
-            <td class="auto-style5">
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="80%"></asp:TextBox>
+               </td>
+               <td class="auto-style5">
+                   <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" Width="80%"></asp:TextBox>
                 
             </td>
         </tr>   
@@ -147,6 +155,6 @@
                    <asp:Button ID="test_next" runat="server" Text="next >>" class="btn btn-primary" OnClick="test_next_Click" />
                </td>
             </tr>
-            </table>
+        </table>
     </div>
 </asp:Content>
